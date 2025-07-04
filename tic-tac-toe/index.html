@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo da Velha Acessível</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <audio id="clickSound" src="plim.mp3" preload="auto"></audio>
+  <audio id="bgMusic" src="musica.mp3" preload="auto" loop></audio>
 
+  <div id="menuContainer">
+    <h1>Jogo da Velha Acessível</h1>
+
+    <div class="menu-section">
+      <h2>Velocidade da Varredura</h2>
+      <div class="menu-option" data-option="speed-slow" tabindex="0">Lenta</div>
+      <div class="menu-option" data-option="speed-medium" tabindex="0">Média</div>
+      <div class="menu-option" data-option="speed-fast" tabindex="0">Rápida</div>
+    </div>
+
+    <div class="menu-section">
+      <h2>Modo de Jogo</h2>
+      <div class="menu-option" data-option="mode-cpu-easy" tabindex="0">Humano x CPU (Fácil)</div>
+      <div class="menu-option" data-option="mode-cpu-medium" tabindex="0">Humano x CPU (Médio)</div>
+      <div class="menu-option" data-option="mode-cpu-hard" tabindex="0">Humano x CPU (Difícil)</div>
+      <div class="menu-option" data-option="mode-human-scan" tabindex="0">Humano x Humano (ambos com acionador)</div>
+      <div class="menu-option" data-option="mode-human-mixed" tabindex="0">Humano x Humano (um com acionador)</div>
+    </div>
+
+    <div class="menu-section">
+      <h2>Escolha seu Símbolo</h2>
+      <div class="menu-option" data-option="player-x" tabindex="0">Jogar como: X</div>
+      <div class="menu-option" data-option="player-o" tabindex="0">Jogar como: O</div>
+    </div>
+  </div>
+
+  <div id="gameContainer" style="display: none;">
+    <h2 id="statusText">Vez do jogador X</h2>
+
+    <div id="cellContainer">
+      <div class="cell" data-index="0" tabindex="0"></div>
+      <div class="cell" data-index="1" tabindex="0"></div>
+      <div class="cell" data-index="2" tabindex="0"></div>
+      <div class="cell" data-index="3" tabindex="0"></div>
+      <div class="cell" data-index="4" tabindex="0"></div>
+      <div class="cell" data-index="5" tabindex="0"></div>
+      <div class="cell" data-index="6" tabindex="0"></div>
+      <div class="cell" data-index="7" tabindex="0"></div>
+      <div class="cell" data-index="8" tabindex="0"></div>
+    </div>
+
+    <div id="buttonsContainer">
+      <button id="restartBtn" class="action-btn">🔄 Reiniciar</button>
+      <button id="backToMenuBtn" class="action-btn">⬅️ Menu</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

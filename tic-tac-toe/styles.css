@@ -1,0 +1,125 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 40px 20px;
+  text-align: center;
+  color: #333;
+}
+
+#menuContainer {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.menu-section {
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-section h2 {
+  font-size: 20px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.menu-option {
+  background-color: #f9f9f9;
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 18px;
+  margin: 6px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu-option:hover {
+  background-color: #e6f0ff;
+}
+
+.menu-option:focus {
+  outline: 3px solid #007bff;
+  background-color: #d0eaff;
+}
+
+#gameContainer {
+  display: none;
+}
+
+#cellContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.cell:focus {
+  outline: 3px solid #007bff;
+  background-color: #d0eaff;
+}
+
+.cell.winner {
+  background-color: #90ee90;
+  color: #000;
+  border: 3px solid #28a745;
+}
+
+#statusText {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333;
+} 
+#statusText {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#buttonsContainer {
+  margin-top: 20px;
+}
+
+.action-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #0056b3;
+}

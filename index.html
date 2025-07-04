@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogos Web Acessíveis</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <style>
+    :root {
+      --bs-body-bg: #f8f9fa;
+    }
 
+    .card:hover,
+    .card:focus-within {
+      transform: scale(1.02);
+      transition: transform 0.2s ease-in-out;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .card a {
+      text-decoration: none;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+    }
+
+    .card-img-top {
+      max-height: 160px;
+      object-fit: contain;
+      background-color: #f0f0f0;
+    }
+
+    .sr-only-focusable:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-dark py-3 text-white text-center">
+    <h1 class="mb-0">Jogos Web Acessíveis</h1>
+  </header>
+
+  <main class="container my-5" id="conteudo-principal">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <!-- Card Jogo da Velha -->
+      <div class="col">
+        <div class="card h-100" tabindex="0">
+          <a href="/tic-tac-toe" class="stretched-link" aria-label="Jogar Jogo da Velha">
+            <img src="https://cdn-icons-png.flaticon.com/512/786/786453.png" class="card-img-top" alt="Ícone do jogo da velha" />
+            <div class="card-body">
+              <h2 class="card-title">Jogo da Velha</h2>
+              <p class="card-text">Desafie seu raciocínio nesse clássico jogo de estratégia. Acessível para leitores de tela e teclado.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card Jump -->
+      <div class="col">
+        <div class="card h-100" tabindex="0">
+          <a href="/jump" class="stretched-link" aria-label="Jogar Jump">
+            <img src="https://cdn-icons-png.flaticon.com/512/861/861512.png" class="card-img-top" alt="Ícone do jogo de pular" />
+            <div class="card-body">
+              <h2 class="card-title">Jump</h2>
+              <p class="card-text">Salte os obstáculos com precisão! Jogo com suporte a teclado e contraste adequado.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-light text-center py-4">
+    <p class="mb-0">© 2025 Projeto Jogos Web Acessíveis. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

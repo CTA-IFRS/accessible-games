@@ -1,0 +1,47 @@
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#game-container {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 20px auto;
+  background-color: #222;
+  border: 2px solid #fff;
+  overflow: hidden;
+}
+
+.letter {
+  position: absolute;
+  font-size: 32px;
+  color: yellow;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#hit-zone {
+  position: absolute;
+  bottom: 100px;
+  height: 40px;
+  width: 100%;
+  background-color: rgba(0, 255, 0, 0.2);
+  border-top: 2px solid lime;
+  border-bottom: 2px solid lime;
+  z-index: 1;
+}
+
+#feedback {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+#typed-word span.correct {
+  color: lime;
+}
+#typed-word span.wrong {
+  color: red;
+}

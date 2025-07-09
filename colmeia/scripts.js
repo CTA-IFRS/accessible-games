@@ -1,4 +1,4 @@
-const palavras = ['teste'];
+const palavras = ['LIVRO', 'TESTE', 'ACESSIBILIDADE', 'CADEIRA', 'GATO'];
 let palavraAtual = '';
 let indexLetra = 0;
 let pontos = 0;
@@ -61,8 +61,9 @@ function iniciarLetra() {
 
 function mostrarLetra(acertou, letra = '') {
   const span = document.createElement('span');
-  span.textContent = letra;
+  span.textContent = letra.toUpperCase();
   span.classList.add(acertou ? 'correct' : 'wrong');
+  
   typedSpan.appendChild(span);
 }
 
@@ -70,7 +71,7 @@ document.addEventListener('keydown', (e) => {
   if (!letraAtual) return;
 
   const letraDigitada = e.key.toLowerCase();
-  const letraCerta = letraAtual.dataset.letra;
+  const letraCerta = letraAtual.dataset.letra.toLowerCase();
 
   // Ignora se a tecla não for uma letra (ex: shift, tab, etc)
   if (!/^[a-z]$/.test(letraDigitada)) return;

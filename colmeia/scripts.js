@@ -4,11 +4,20 @@ let indexLetra = 0;
 let pontos = 0;
 let letraAtual = null;
 let animacaoAtual = null;
+let velocidade = 1
 
 const container = document.getElementById('game-container');
 const hitZone = document.getElementById('hit-zone');
 const scoreSpan = document.getElementById('points');
 const typedSpan = document.getElementById('typed-word');
+
+const velocidadeInput = document.getElementById('velocidade');
+  velocidadeInput.addEventListener('input', () => {
+  velocidade = parseInt(velocidadeInput.value);
+});
+
+
+
 
 function novaRodada() {
   container.querySelectorAll('.letter').forEach(e => e.remove());
@@ -30,7 +39,6 @@ function criarLetra(letra) {
 
 function animarLetra(letraEl) {
   let top = 0;
-  const velocidade = 2;
   
   animacaoAtual = setInterval(() => {
     top += velocidade;

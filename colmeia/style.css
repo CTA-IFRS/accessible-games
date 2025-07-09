@@ -56,7 +56,7 @@ font-size: 4rem;
   font-size: 2rem;
 }
 
-#score{
+#score, label[for="velocidade"]{
   font-size: 1.5rem;
 }
 
@@ -66,4 +66,31 @@ font-size: 4rem;
 
 #typed-word span.wrong {
   color: red;
+}
+
+#velocidade {
+  width: 15rem;
+  margin-top: 0.5rem;
+  -webkit-appearance: none;
+  background: #444;
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#velocidade:hover {
+  background: #666;
+}
+
+#velocidade::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background: lime;
+  border: none;
+  box-shadow: 0 0 0.25rem lime;
+  transition: background 0.3s;
 }

@@ -10,6 +10,8 @@ const container = document.getElementById('game-container');
 const hitZone = document.getElementById('hit-zone');
 const scoreSpan = document.getElementById('points');
 const typedSpan = document.getElementById('typed-word');
+const somAcerto = new Audio('somAcerto.mp3');  
+const somErro = new Audio('somErro.mp3');
 
 const velocidadeInput = document.getElementById('velocidade');
   velocidadeInput.addEventListener('input', () => {
@@ -97,12 +99,15 @@ document.addEventListener('keydown', (e) => {
       pontos += 10;
       scoreSpan.textContent = pontos;
       mostrarLetra(true, letraDigitada);
+      somAcerto.play();
     } else {
+      somErro.play();
       mostrarLetra(false, letraDigitada); // erro dentro da zona
     }
   } else {
     // erro
     mostrarLetra(false, letraDigitada);
+    somErro.play();
   }
 
   clearInterval(animacaoAtual);

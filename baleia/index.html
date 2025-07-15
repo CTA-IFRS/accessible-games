@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Baleia Faminta</title>
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -54,39 +55,10 @@
         
         canvas {
             display: block;
-            background:  ('mar.jpg') bottom repeat-x;
+            background: url('mar.jpg') bottom repeat-x;
             background-size: cover;
         }
-        
-        .controls {
-            margin: 20px auto;
-            width: 300px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .action-btn {
-            padding: 15px;
-            font-size: 20px;
-            border: none;
-            background-color: #ff9800;
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s;
-        }
-        
-        .action-btn:focus {
-            background-color: #4caf50;
-            transform: scale(1.1);
-            outline: none;
-            box-shadow: 0 0 15px #4caf50;
-        }
-        
+
         .bubbles {
             position: absolute;
             width: 100%;
@@ -106,27 +78,36 @@
                 transform: translateY(-1000px);
             }
         }
+
+        
+        #velocidadeControl {
+            width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <h1>A Baleia Faminta</h1>
     
+   
+    <label for="velocidadeControl">Velocidade dos peixes:</label>
+    <input type="range" id="velocidadeControl" min="0.5" max="5" step="0.1" value="1">
+    <span id="velocidadeValor">1.0</span>
+
     <div id="gameInfo">
         <span>Pegue: </span>
         <span id="targetItem">🐟</span>
         <span id="score">Pontos: 0</span>
     </div>
     
+ 
     <div id="gameContainer">
         <div class="bubbles" id="bubbles"></div>
         <canvas id="gameCanvas" width="400" height="600"></canvas>
     </div>
-    
-    <div class="controls">
-        <button class="action-btn" data-action="left">←</button>
-        <button class="action-btn" data-action="right">→</button>
-    </div>
 
+     
     <script src="script.js"></script>
 </body>
 </html>

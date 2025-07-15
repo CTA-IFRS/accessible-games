@@ -9,20 +9,20 @@
 <body>
     <h1>Colméia</h1>
 
-    <div>
-        <label for="velocidade">Velocidade: </label>
-        <input type="range" id="velocidade" min="1" max="10" value="2">
-    </div>
-
     <div id="game-container">
 
         <div id="hit-zone"></div>
     
     </div>
 
-    <div id="feedback">Palavra: <span id="typed-word"></span></div>
-    <div id="score">Pontuação: <span id="points">0</span></div>
+    <div class="menu">
+        <div id="feedback">Palavra: <span id="typed-word"></span></div>
+        <div id="score">Pontuação: <span id="points">0</span></div>
 
+        <div>
+            <button id="BtnReturn" class="botao-retornar">Retornar ao menu</button>
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>

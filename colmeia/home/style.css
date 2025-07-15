@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+h1{
+    font-size: 5rem;
+}
+
+label[for=velocidade]{
+    font-size: 2rem;
+}
+
+.tela-inicial {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background-color: #111;
+    color: white;
+}
+
+.botao-iniciar {
+    background-color: lime;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.botao-iniciar:hover {
+    background-color: rgb(0, 200, 0);
+}
+
+#velocidade {
+    width: 20rem;
+}
+
+label {
+    font-size: 1.25rem;
+}

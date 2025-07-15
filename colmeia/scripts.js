@@ -4,7 +4,7 @@ let indexLetra = 0;
 let pontos = 0;
 let letraAtual = null;
 let animacaoAtual = null;
-let velocidade = 1
+let velocidade = parseInt(localStorage.getItem("velocidadeJogo")) || 2;
 
 const container = document.getElementById('game-container');
 const hitZone = document.getElementById('hit-zone');
@@ -12,13 +12,11 @@ const scoreSpan = document.getElementById('points');
 const typedSpan = document.getElementById('typed-word');
 const somAcerto = new Audio('somAcerto.mp3');  
 const somErro = new Audio('somErro.mp3');
+const retornarBtn = document.getElementById("BtnReturn");
 
-const velocidadeInput = document.getElementById('velocidade');
-  velocidadeInput.addEventListener('input', () => {
-  velocidade = parseInt(velocidadeInput.value);
+retornarBtn.addEventListener("click", () => {
+  window.location.href = "./home/index.html"; 
 });
-
-
 
 
 function novaRodada() {
@@ -50,6 +48,7 @@ function animarLetra(letraEl) {
       clearInterval(animacaoAtual);
       letraEl.remove();
       mostrarLetra(false, letraEl.dataset.letra); // não digitou = erro
+      somErro.play();
       letraAtual = null;
       indexLetra++;
       setTimeout(() => iniciarLetra(), 500);

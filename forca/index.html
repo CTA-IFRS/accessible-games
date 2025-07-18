@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jogo da Forca Acessível</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="config-container">
+    <h2>Configurações do jogo</h2>
+    <p>Velocidade da varredura:</p>
+    <div class="velocidade">
+      <button onclick="setVelocidade(1500)">Lenta</button>
+      <button onclick="setVelocidade(1000)">Média</button>
+      <button onclick="setVelocidade(500)">Rápida</button>
+    </div>
+    <button id="startGame" class="start-button">Iniciar Jogo</button>
+  </div>
+
+  <div id="jogo" style="display:none;">
+    <h1>Jogo da Forca</h1>
+    <p><strong>Dica:</strong> <span id="dica"></span></p>
+    <div id="palavraOculta" class="palavra"></div>
+    <div class="teclado" id="teclado"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -33,6 +33,9 @@
       object-fit: contain;
       background-color: #e9ecef;
       padding: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
     }
 
     main#conteudo-principal {
@@ -42,81 +45,98 @@
     footer {
       background-color: #e9ecef;
     }
+
+    .card-body {
+      text-align: center;
+    }
   </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
   <header class="bg-dark py-4 text-white text-center shadow-sm">
     <h1 class="mb-0">Jogos Web Acessíveis</h1>
   </header>
 
-  <main class="container my-5" id="conteudo-principal" role="main">
+  <main class="container my-5 mt-8 pt-4 flex-grow-1" id="conteudo-principal" role="main">
+  
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
       
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="tic-tac-toe/index.html" class="stretched-link" aria-label="Jogar Jogo da Velha">
-            <img src="imagens/jogo da velha.png" class="card-img-top" alt="Ícone do jogo da velha" />
-            <div class="card-body">
-              <h2 class="card-title">Jogo da Velha</h2>
-              <p class="card-text">Clássico jogo de estratégia, acessível para leitores de tela e teclado.</p>
+          <img src="imagens/jogo da velha.png" class="card-img-top" alt="Ícone do jogo da velha" />
+          <div class="card-body">
+            <h2 class="card-title">Jogo da Velha</h2>
+            <p class="card-text">Clássico jogo de estratégia! Acessível para leitores de tela e teclado.</p>
+            <div class="d-flex justify-content-center gap-2 mt-3" role="group" aria-label="Ações do Jogo da Velha">
+              <a href="tic-tac-toe/index.html" class="btn btn-primary" aria-label="Iniciar o Jogo da Velha">Iniciar</a>
+              <a href="tic-tac-toe/instrucoes.html" class="btn btn-outline-secondary" aria-label="Ver instruções do Jogo da Velha">Instruções</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="jump/index.html" class="stretched-link" aria-label="Jogar Jump">
-            <img src="imagens/jump.png" class="card-img-top" alt="Ícone do jogo de pular" />
-            <div class="card-body">
-              <h2 class="card-title">Jump</h2>
-              <p class="card-text">Salte obstáculos com precisão! Suporte a teclado e contraste adequado.</p>
+          <img src="imagens/jump.png" class="card-img-top" alt="Imagem do Jogo dos Saltos (Pedro pulando obstáculos)" />
+          <div class="card-body">
+            <h2 class="card-title">Jogo dos Saltos</h2>
+            <p class="card-text">Ajude Pedro a saltar obstáculos em diferentes modos e dificuldades!</p>
+            <div class="d-flex justify-content-center gap-2 mt-3" role="group" aria-label="Ações do Jogo dos Saltos">
+              <a href="jogo_pedro/index.html" class="btn btn-primary" aria-label="Iniciar o Jogo dos Saltos">Iniciar</a>
+              <a href="jogo_pedro/instrucoes.html" class="btn btn-outline-secondary" aria-label="Ver instruções do Jogo dos Saltos">Instruções</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="forca/index.html" class="stretched-link" aria-label="Jogar Jogo da Forca">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAACUCAMAAACtIJvYAAAAY1BMVEX///8AAADAwMDDw8P09PSoqKhdXV2goKDx8fFVVVWGhoZxcXHh4eEpKSnKysr8/PwfHx/p6enY2NgSEhIvLy+AgIA3NzeTk5M9PT1nZ2e5ubkaGhp4eHhPT0+ZmZmxsbFGRkbMl1+OAAAEwElEQVR4nO2ca5tzMBCG2TqWUofS8/b//8pXMtqGlAx2Qq/X82VdWdW7j5hMJjAMptB2MnN+ZY4dGi8d9nPzvLQ/1ExhMTdKQwXYtSyoCoufPr4Z2Jv5ZQecpTqJ4YVtRMYyFDGYS2jY7O9mbpqXNgzHNnx2+uZmEcROom9knG05YucuM5hjP3OjCPphQCsVSisVXisVXisVXisVXl9LZW3sP5YykUNQXcfnuV36nUyVXP6eyrEme0VAdZ3slZGe/Eo3Nl0s/Fo3OPrNH6Bd9YGcb10VVqGuwdirlLAs+m55XMaJQ929AbJY2nvgx1IwDYgMllPt49aYcAHclUdviFFtcbuOogrGQBFTjXOKmgqccodCkVKNdYqWCpwaM3kkpBrX0YmpxjtFSJWN7Oi0VOOd8s4OG0/3wSYmoRrjVGy/68C+esAZTqVKjT7JO5qCEHWyoVRjnApzEQpTUhxINcapGErmtzJKf8pHUSI61jAq5CXU1JYdfV//njjBfGRUzjBIKTt4hoLRSHX4cHBvet4+kYodu5Wnl6qgR06VysEgreLprveUklPBFzQUsZAaft5dE9WvTMXj17xUZ5mKncGZqfiiTLMT8e+clyo2pejLJpN+b2ygjwxsml2IZqUyp34qvoDlvwe/hC+QpjNTwbAePLOqhGc1p/7P0FMZISQwbpR4SQSLtrki89NABSGrGqGPj2f2p0qxdFBB13pr9xcVyOlURuoLUA5RpWiEzgcoGRYHzJq7Lqoqp2LBU1nl001FXlVbqYip+AEUMV0/Fcxyy0VRWUEdrQ7qffVRvSo6KLf0UFknIbarlku0UTmmKLVbOqggw7qwIghUZ66qAogOKnDqzOPVnW+rwpauXNT8raOoi3GLnqp26hXbtwi3qKks/wn1GnEQblFTvZwSxsFS6RYtleCUODrzmxvNoNstWioRSswZarc6sSipLEeEamQy4FbnmEhJFTagmvkVd2vfNa+gpEoyEaqV9TG38q5TSNqvzpeLUHts5aL2Pu+c7vzvGfJK9e1UEcutctzKiTYqXnc0zWN/kU8zVfR8gqV/UUIvFTiVYd3SQwVOPSJeLcp7S+36qMCp3DJSXj8ulG7poAKLjqxDhRnKLQ1UETgFI3HIC7a5wi16KsEpjoVxS8/qklm8cxZwa9frFjUVXH1HMUgh3CKmgkp70WwMH6xx3+MWLRX0qaIdzpVukVKBU0f5Hwl3K+t0izRvz6U+9RQ8hPeYgyrt+Wbu1qVrpKak8m4VVNfkKtz1VJRJ+1Xs9nzAcrtvUNKYIQ/QSoXX91IlaaWI3ZewZVspbo2PmArKvqJQ8xRaKk9+vh6xukBNZcnPmCyAyjjnu6akHGAOKsMKm6Jm+uKnz2bQSoXXSoXXSoXXSoXXSoXXSoXXSoUXgiopg6ZcKCd693Y7TH4st9V+h1pD3G4vO3NaBNVNytthWniS2uFmoVJqhyqHK7XfxlN9eI4eXmkkNcOt9JYv/4PvH0jNUypFsld2x7fAg6Hy/BF+hS21T/Cq6j/bpuonfCy73Q79LZba68l2u/3eeUPy116DM2ilwmvJVMt8g9kS3/bmLPTNeMt8i+Ay37i40LdTLvRNnst866mxvDfE/gOBc0hqkxZwPQAAAABJRU5ErkJggg==" class="card-img-top" alt="Ícone do jogo da Forca" />
-            <div class="card-body">
-              <h2 class="card-title">Jogo da Forca Acessível</h2>
-              <p class="card-text">Desafie-se tentando descobrir qual é a palavra oculta antes que esgotem as suas tentativas.</p>
+          <img src="imagens/forca.png" class="card-img-top" alt="Ícone do jogo da Forca" />
+          <div class="card-body">
+            <h2 class="card-title">Jogo da Forca</h2>
+            <p class="card-text">Desafie-se tentando descobrir qual é a palavra oculta antes que esgotem as suas tentativas.</p>
+            <div class="d-flex justify-content-center gap-2 mt-3" role="group" aria-label="Ações do Jogo da Forca">
+              <a href="forca/index.html" class="btn btn-primary" aria-label="Iniciar o Jogo da Forca">Iniciar</a>
+              <a href="forca/instrucoes.html" class="btn btn-outline-secondary" aria-label="Ver instruções do Jogo da Forca">Instruções</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="baleia/index.html" class="stretched-link" aria-label="Jogar A Baleia Faminta">
-            <img src="c:\Users\CTA - Sem senha\Downloads\baleia_azul-removebg-preview.png" class="card-img-top" alt="Ilustração de uma baleia azul" />
-            <div class="card-body">
-              <h2 class="card-title">A Baleia Faminta</h2>
-              <p class="card-text">Ajude a baleia a pegar os peixes certos e evitar os errados!</p>
+          <img src="imagens/baleia.png" class="card-img-top" alt="Ilustração de uma baleia azul" />
+          <div class="card-body">
+            <h2 class="card-title">A Baleia Faminta</h2>
+            <p class="card-text">Ajude a baleia a pegar os peixes certos e evitar os errados!</p>
+            <div class="d-flex justify-content-center gap-2 mt-3" role="group" aria-label="Ações do Jogo A Baleia Faminta">
+              <a href="baleia/index.html" class="btn btn-primary" aria-label="Iniciar o Jogo A Baleia Faminta">Iniciar</a>
+              <a href="baleia/instrucoes.html" class="btn btn-outline-secondary" aria-label="Ver instruções do Jogo A Baleia Faminta">Instruções</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="colmeia/jogo.html" class="stretched-link" aria-label="Jogar Colméia">
-            <img src="https://cdn.pixabay.com/photo/2018/03/08/15/23/bee-3203450_1280.jpg" class="card-img-top" alt="Ilustração de uma abelha em frente à colmeia" />
-            <div class="card-body">
-              <h2 class="card-title">Colméia</h2>
-              <p class="card-text">Ajude as abelhas a formar palavras e ganhar pontos.</p>
+          <img src="imagens/colmeia.png" class="card-img-top" alt="Ilustração de uma abelha em frente à colmeia" />
+          <div class="card-body">
+            <h2 class="card-title">Colméia</h2>
+            <p class="card-text">Ajude as abelhas a formar palavras e ganhar pontos.</p>
+            <div class="d-flex justify-content-center gap-2 mt-3" role="group" aria-label="Ações do Jogo Colméia">
+              <a href="colmeia/jogo.html" class="btn btn-primary" aria-label="Iniciar o Jogo Colméia">Iniciar</a>
+              <a href="colmeia/instrucoes.html" class="btn btn-outline-secondary" aria-label="Ver instruções do Jogo Colméia">Instruções</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
     </div>
   </main>
 
-  <footer class="text-center py-4 mt-auto">
-    <p class="mb-0">© 2025 Projeto Jogos Web Acessíveis. Todos os direitos reservados.</p>
+  <footer class="bg-dark text-white text-center py-3" role="contentinfo">
+    <div class="container">
+      <small>© 2025 Projeto Jogos Web Acessíveis. Todos os direitos reservados.</small>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

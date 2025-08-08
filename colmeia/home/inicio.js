@@ -20,27 +20,34 @@ function stopMenuScan() {
   if (scanInterval) clearInterval(scanInterval);
 }
 
+function initGame() {
+  const selected = allOptions[currentSelection];
+
+  if (selected.dataset.option) {
+
+    const opt = selected.dataset.option;
+    velocidadeSelecionada = opt.replace("speed-", "");
+
+
+    scanSpeed = velocidadeSelecionada === "slow" ? 2000 :
+                velocidadeSelecionada === "medium" ? 1000 : 500;
+
+    localStorage.setItem("velocidadeJogo", velocidadeSelecionada);
+    stopMenuScan();
+    window.location.href = "../jogo.html";
+
+  }
+
+}
+
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space" || e.code === "Enter") {
-    const selected = allOptions[currentSelection];
-
-    if (selected.dataset.option) {
-    
-      const opt = selected.dataset.option;
-      velocidadeSelecionada = opt.replace("speed-", "");
-
-    
-      scanSpeed = velocidadeSelecionada === "slow" ? 2000 :
-                  velocidadeSelecionada === "medium" ? 1000 : 500;
-
-      localStorage.setItem("velocidadeJogo", velocidadeSelecionada);
-      stopMenuScan();
-      window.location.href = "../jogo.html";
-
-      // startMenuScan(currentSelection);
-    
-    }
+    initGame();
   }
 });
+
+document.addEventListener("click", () => {
+  initGame();
+})
 
 startMenuScan();

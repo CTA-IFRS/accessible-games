@@ -1,6 +1,5 @@
 const menuOptions = document.querySelectorAll(".menu-option[data-option]");
-const iniciarBtn = document.getElementById("iniciarBtn");
-const allOptions = [...menuOptions, iniciarBtn];
+const allOptions = [...menuOptions];
 let currentSelection = 0;
 let scanSpeed = 800;
 let scanInterval = null;
@@ -34,13 +33,12 @@ document.addEventListener("keydown", (e) => {
       scanSpeed = velocidadeSelecionada === "slow" ? 2000 :
                   velocidadeSelecionada === "medium" ? 1000 : 500;
 
-    
-      startMenuScan(currentSelection);
-    } else if (selected.id === "iniciarBtn") {
-      
       localStorage.setItem("velocidadeJogo", velocidadeSelecionada);
       stopMenuScan();
       window.location.href = "../jogo.html";
+
+      // startMenuScan(currentSelection);
+    
     }
   }
 });

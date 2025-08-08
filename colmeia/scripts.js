@@ -4,7 +4,23 @@ let indexLetra = 0;
 let pontos = 0;
 let letraAtual = null;
 let animacaoAtual = null;
-let velocidade = parseInt(localStorage.getItem("velocidadeJogo")) || 2;
+
+const velocidadeSelecionada = localStorage.getItem("velocidadeJogo");
+
+let velocidade;
+switch (velocidadeSelecionada) {
+  case "slow":
+    velocidade = 2; // mais lento
+    break;
+  case "medium":
+    velocidade = 4; // intermediário
+    break;
+  case "fast":
+    velocidade = 8; // mais rápido
+    break;
+  default:
+    velocidade = 2; // padrão
+}
 
 const container = document.getElementById('game-container');
 const hitZone = document.getElementById('hit-zone');

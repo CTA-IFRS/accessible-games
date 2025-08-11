@@ -1,4 +1,4 @@
-// index.js
+
 
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("statusText");
@@ -8,6 +8,26 @@ const gameContainer = document.getElementById("gameContainer");
 const clickSound = document.getElementById("clickSound");
 const restartBtn = document.getElementById("restartBtn");
 const backToMenuBtn = document.getElementById("backToMenuBtn");
+
+function getNextSectionIndex(currentIndex) {
+  const sections = document.querySelectorAll('.menu-section');
+  const currentOption = menuOptions[currentIndex];
+  const currentSection = currentOption.closest('.menu-section');
+  
+  let currentSectionIndex = -1;
+  sections.forEach((section, index) => {
+    if (section === currentSection) {
+      currentSectionIndex = index;
+    }
+  });
+  
+  
+  if (currentSectionIndex === -1 || currentSectionIndex === sections.length - 1) {
+    return 0;
+  }
+  
+  return currentSectionIndex + 1;
+}
 
 const winConditions = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -85,7 +105,6 @@ function handleMenuClick() {
 
   if (selected.startsWith("speed")) {
     scanSpeed = selected === "speed-slow" ? 2000 : selected === "speed-medium" ? 1000 : 500;
-    startMenuScan(currentSelection);
   } else if (selected.startsWith("mode")) {
     isCpu = selected.includes("cpu");
     if (selected === "mode-cpu-easy") cpuLevel = "easy";
@@ -106,7 +125,23 @@ function handleMenuClick() {
     inMenu = false;
     stopMenuScan();
     setTimeout(startGame, 200);
+    return;
   }
+
+  const nextSectionIndex = getNextSectionIndex(currentSelection);
+  const nextSection = document.querySelectorAll('.menu-section')[nextSectionIndex];
+  const firstOptionInNextSection = nextSection.querySelector('.menu-option');
+ 
+  
+  let newIndex = 0;
+  menuOptions.forEach((option, index) => {
+    if (option === firstOptionInNextSection) {
+      newIndex = index;
+    }
+  });
+  
+
+  startMenuScan(newIndex);
 }
 
 function startGame() {

@@ -8,16 +8,20 @@
 
 </head>
 <body>
-  <div class="tela-inicial">
-    <h1>🐝 Colméia</h1>
 
-    <div>
-      <label for="velocidade">Velocidade:</label><br/>
-      <input type="range" id="velocidade" min="1" max="10" value="2" />
+    <div id="menuContainer">
+      <h1>Jogo da Colméia Acessível</h1>
+
+      <div class="menu-section">
+        <h2>Velocidade das Palavras</h2>
+        <div class="menu-option" data-option="speed-slow" tabindex="0">Lenta</div>
+        <div class="menu-option" data-option="speed-medium" tabindex="0">Média</div>
+        <div class="menu-option" data-option="speed-fast" tabindex="0">Rápida</div>
+        
+        <button id="iniciarBtn" class="menu-option">Jogar</button>
+      </div>
     </div>
 
-    <button class="botao-iniciar" id="iniciarBtn">Iniciar Jogo</button>
-  </div>
 
   <script src="inicio.js"></script>
 </body>

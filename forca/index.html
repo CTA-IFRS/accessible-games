@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca Acessível</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="config-container">
-    <h2>Configurações do jogo</h2>
-    <p>Velocidade da varredura:</p>
-    <div class="velocidade">
-      <button onclick="setVelocidade(1500)">Lenta</button>
-      <button onclick="setVelocidade(1000)">Média</button>
-      <button onclick="setVelocidade(500)">Rápida</button>
+  <!-- Menu Principal -->
+  <div id="menuContainer">
+    <h1>Jogo da Forca Acessível</h1>
+    
+    <div class="menu-section" id="speed-section">
+      <h2>Velocidade da Varredura</h2>
+      <ul class="menu-options" id="speed-options">
+        <li class="menu-option" data-speed="1500">Lenta</li>
+        <li class="menu-option selected" data-speed="1000">Média</li>
+        <li class="menu-option" data-speed="500">Rápida</li>
+      </ul>
     </div>
-    <button id="startGame" class="start-button">Iniciar Jogo</button>
+    
+    <div class="menu-section" id="difficulty-section">
+      <h2>Dificuldade</h2>
+      <ul class="menu-options" id="difficulty-options">
+        <li class="menu-option selected" data-difficulty="easy">Fácil</li>
+        <li class="menu-option" data-difficulty="medium">Médio</li>
+        <li class="menu-option" data-difficulty="hard">Difícil</li>
+      </ul>
+    </div>
+    
+    <button class="start-btn" id="start-btn">Iniciar Jogo</button>
   </div>
 
-  <div id="jogo" style="display:none;">
-    <h1>Jogo da Forca</h1>
-    <p><strong>Dica:</strong> <span id="dica"></span></p>
-    <div id="palavraOculta" class="palavra"></div>
-    <div class="teclado" id="teclado"></div>
+  <!-- Área do Jogo -->
+  <div class="game-container" id="game-container" style="display: none;">
+    
+    <!-- Container único para forca e palavra -->
+    <div class="forca-container">
+      <canvas id="hangman-canvas" width="200" height="250"></canvas>
+      <div class="word-display" id="word-display"></div>
+    </div>
+    
+    <!-- Teclado com mesma largura da forca-container -->
+    <div class="keyboard-container">
+      <div class="keyboard" id="keyboard"></div>
+    </div>
+
+    <div class="message" id="message"></div>
+    
+    <div class="button-container" id="button-container">
+      <button class="restart-btn" id="restart-btn">Jogar Novamente</button>
+      <button class="back-btn" id="back-btn">Voltar ao Menu</button>
+    </div>
   </div>
 
   <script src="script.js"></script>

@@ -1,6 +1,5 @@
 const menuOptions = document.querySelectorAll(".menu-option[data-option]");
-const iniciarBtn = document.getElementById("iniciarBtn");
-const allOptions = [...menuOptions, iniciarBtn];
+const allOptions = [...menuOptions];
 let currentSelection = 0;
 let scanSpeed = 800;
 let scanInterval = null;
@@ -21,28 +20,34 @@ function stopMenuScan() {
   if (scanInterval) clearInterval(scanInterval);
 }
 
+function initGame() {
+  const selected = allOptions[currentSelection];
+
+  if (selected.dataset.option) {
+
+    const opt = selected.dataset.option;
+    velocidadeSelecionada = opt.replace("speed-", "");
+
+
+    scanSpeed = velocidadeSelecionada === "slow" ? 2000 :
+                velocidadeSelecionada === "medium" ? 1000 : 500;
+
+    localStorage.setItem("velocidadeJogo", velocidadeSelecionada);
+    stopMenuScan();
+    window.location.href = "../jogo.html";
+
+  }
+
+}
+
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space" || e.code === "Enter") {
-    const selected = allOptions[currentSelection];
-
-    if (selected.dataset.option) {
-    
-      const opt = selected.dataset.option;
-      velocidadeSelecionada = opt.replace("speed-", "");
-
-    
-      scanSpeed = velocidadeSelecionada === "slow" ? 2000 :
-                  velocidadeSelecionada === "medium" ? 1000 : 500;
-
-    
-      startMenuScan(currentSelection);
-    } else if (selected.id === "iniciarBtn") {
-      
-      localStorage.setItem("velocidadeJogo", velocidadeSelecionada);
-      stopMenuScan();
-      window.location.href = "../jogo.html";
-    }
+    initGame();
   }
 });
+
+document.addEventListener("click", () => {
+  initGame();
+})
 
 startMenuScan();

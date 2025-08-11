@@ -4,6 +4,19 @@ let indexLetra = 0;
 let pontos = 0;
 let letraAtual = null;
 let animacaoAtual = null;
+let vidas = 3;
+const maxVidas = 3;
+let jogoAtivo = true;
+
+document.getElementById('retry').addEventListener('click', () => {
+  document.getElementById('game-over').style.display = 'none';
+  novaRodada();
+});
+
+document.getElementById('menu').addEventListener('click', () => {
+  window.location.href = "./home/index.html";
+});
+
 
 const velocidadeSelecionada = localStorage.getItem("velocidadeJogo");
 
@@ -36,10 +49,17 @@ retornarBtn.addEventListener("click", () => {
 
 
 function novaRodada() {
+  jogoAtivo = true;
+
   container.querySelectorAll('.letter').forEach(e => e.remove());
-  palavraAtual = palavras[Math.floor(Math.random() * palavras.length)];
+  pontos = 0;
+  scoreSpan.textContent = pontos;
+  vidas = maxVidas;
   indexLetra = 0;
   typedSpan.innerHTML = '';
+  palavraAtual = palavras[Math.floor(Math.random() * palavras.length)];
+  
+  atualizarVidas();
   iniciarLetra();
 }
 
@@ -56,6 +76,11 @@ function criarLetra(letra) {
 function animarLetra(letraEl) {
   let top = 0;
   
+  if (!jogoAtivo){
+      clearInterval(animacaoAtual);
+      return;
+  }
+
   animacaoAtual = setInterval(() => {
     top += velocidade;
     letraEl.style.top = top + 'px';
@@ -64,10 +89,14 @@ function animarLetra(letraEl) {
       clearInterval(animacaoAtual);
       letraEl.remove();
       mostrarLetra(false, letraEl.dataset.letra); // não digitou = erro
+      perderVidas();
       somErro.play();
       letraAtual = null;
       indexLetra++;
-      setTimeout(() => iniciarLetra(), 500);
+
+      if (jogoAtivo) { // só continuar se o jogo ainda estiver ativo
+        setTimeout(() => iniciarLetra(), 500);
+      }
     }
   }, 16);
 }
@@ -93,7 +122,7 @@ function mostrarLetra(acertou, letra = '') {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (!letraAtual) return;
+  if (!jogoAtivo || !letraAtual) return;
 
   const letraDigitada = e.key.toLowerCase();
   const letraCerta = letraAtual.dataset.letra.toLowerCase();
@@ -117,10 +146,12 @@ document.addEventListener('keydown', (e) => {
       somAcerto.play();
     } else {
       somErro.play();
+      perderVidas();
       mostrarLetra(false, letraDigitada); // erro dentro da zona
     }
   } else {
     // erro
+    perderVidas();
     mostrarLetra(false, letraDigitada);
     somErro.play();
   }
@@ -132,6 +163,31 @@ document.addEventListener('keydown', (e) => {
   iniciarLetra();
 });
 
+function mostrarMenuGameOver() {
+  jogoAtivo = false;
+  if (animacaoAtual) {
+    clearInterval(animacaoAtual);
+    animacaoAtual = null;
+  }
+  if (letraAtual) {
+    letraAtual.remove();
+    letraAtual = null;
+  }
+  document.getElementById('game-over').style.display = 'block';
+}
 
+function atualizarVidas(){
+  const coracao = '❤️';
+  document.getElementById('vidas').textContent = coracao.repeat(vidas);
+}
+
+function perderVidas(){
+  vidas--;
+  atualizarVidas();
+
+  if(vidas <= 0){
+    mostrarMenuGameOver();
+  }
+}
 
 novaRodada();

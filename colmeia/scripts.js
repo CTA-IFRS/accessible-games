@@ -10,6 +10,7 @@ let jogoAtivo = true;
 
 document.getElementById('retry').addEventListener('click', () => {
   document.getElementById('game-over').style.display = 'none';
+  pontos = 0;
   novaRodada();
 });
 
@@ -52,7 +53,6 @@ function novaRodada() {
   jogoAtivo = true;
 
   container.querySelectorAll('.letter').forEach(e => e.remove());
-  pontos = 0;
   scoreSpan.textContent = pontos;
   vidas = maxVidas;
   indexLetra = 0;

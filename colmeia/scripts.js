@@ -182,6 +182,13 @@ document.addEventListener('mousedown', (e) => {
   // Botão esquerdo do mouse (0 é o botão esquerdo)
   if (e.button !== 0) return;
 
+   // Se estiver no menu de game over
+  if (!jogoAtivo && allOptions.length > 0) {
+    allOptions[currentSelection].click();
+    return;
+  }
+
+
   if (!jogoAtivo || !letraAtual) return;
 
   const letraCerta = letraAtual.dataset.letra.toLowerCase();

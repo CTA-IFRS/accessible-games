@@ -2,82 +2,356 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jogos Web Acessíveis</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
   <style>
-    :root {
-      --bs-body-bg: #f8f9fa;
+    body {
+      background-color: #f8f9fa;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      padding: 2rem 0;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 2rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 0.8rem 0;
+      text-align: center;
+    }
+
+    .card {
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: transform 0.25s ease-in-out;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card:hover,
     .card:focus-within {
       transform: scale(1.02);
-      transition: transform 0.2s ease-in-out;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
-
-    .card a {
-      text-decoration: none;
-    }
-
-    .card-title {
-      font-size: 1.5rem;
+      z-index: 2;
     }
 
     .card-img-top {
-      max-height: 160px;
+      max-height: 150px;
       object-fit: contain;
-      background-color: #f0f0f0;
+      background-color: #e9ecef;
+      padding: 0.9rem;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
     }
 
-    .sr-only-focusable:focus {
-      position: static;
-      width: auto;
-      height: auto;
-      margin: 0;
-      overflow: visible;
-      clip: auto;
+    .card-body {
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0;
+    }
+
+    .d-flex.justify-content-center.gap-2.mt-3 {
+      justify-content: center !important;
+    }
+
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.45rem 1.1rem;
+    }
+
+    .row {
+      max-width: 1024px;
+      width: 100%;
     }
   </style>
 </head>
-<body>
-  <header class="bg-dark py-3 text-white text-center">
+
+<body class="d-flex flex-column min-vh-100">
+  <header>
     <h1 class="mb-0">Jogos Web Acessíveis</h1>
   </header>
 
-  <main class="container my-5" id="conteudo-principal">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-      <!-- Card Jogo da Velha -->
+  <main class="container flex-grow-1" id="conteudo-principal" role="main">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="tic-tac-toe/index.html" class="stretched-link" aria-label="Jogar Jogo da Velha">
-            <img src="https://cdn-icons-png.flaticon.com/512/786/786453.png" class="card-img-top" alt="Ícone do jogo da velha" />
-            <div class="card-body">
-              <h2 class="card-title">Jogo da Velha</h2>
-              <p class="card-text">Desafie seu raciocínio nesse clássico jogo de estratégia. Acessível para leitores de tela e teclado.</p>
+          <img src="imagens/jogo da velha.png" class="card-img-top" alt="Ícone do jogo da velha" />
+          <div class="card-body">
+            <h2 class="card-title">Jogo da Velha</h2>
+            <p class="card-text">Clássico jogo de estratégia! Acessível para leitores de tela e teclado.</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="tic-tac-toe/index.html" class="btn btn-primary">Iniciar</a>
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesVelha">
+                Instruções
+              </button>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
-      <!-- Card Jump -->
       <div class="col">
         <div class="card h-100" tabindex="0">
-          <a href="jump/index.html" class="stretched-link" aria-label="Jogar Jump">
-            <img src="https://cdn-icons-png.flaticon.com/512/861/861512.png" class="card-img-top" alt="Ícone do jogo de pular" />
-            <div class="card-body">
-              <h2 class="card-title">Jump</h2>
-              <p class="card-text">Salte os obstáculos com precisão! Jogo com suporte a teclado e contraste adequado.</p>
+          <img src="imagens/jump.png" class="card-img-top" alt="Imagem do Jogo dos Saltos (Pedro pulando obstáculos)" />
+          <div class="card-body">
+            <h2 class="card-title">Jogo dos Saltos</h2>
+            <p class="card-text">Ajude Pedro a saltar obstáculos em diferentes modos e dificuldades!</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="jogo_pedro/index.html" class="btn btn-primary">Iniciar</a>
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesSaltos">
+                Instruções
+              </button>
             </div>
-          </a>
+          </div>
         </div>
       </div>
+
+      <div class="col">
+        <div class="card h-100" tabindex="0">
+          <img src="imagens/forca.png" class="card-img-top" alt="Ícone do jogo da Forca" />
+          <div class="card-body">
+            <h2 class="card-title">Jogo da Forca</h2>
+            <p class="card-text">Descubra a palavra antes de esgotar suas tentativas.</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="forca/index.html" class="btn btn-primary">Iniciar</a>
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesForca">
+                Instruções
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100" tabindex="0">
+          <img src="imagens/baleia.png" class="card-img-top" alt="Ilustração de uma baleia azul" />
+          <div class="card-body">
+            <h2 class="card-title">A Baleia Faminta</h2>
+            <p class="card-text">Ajude a baleia a pegar os peixes certos e evitar os errados!</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="baleia/index.html" class="btn btn-primary">Iniciar</a>
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesBaleia">
+                Instruções
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100" tabindex="0">
+          <img src="imagens/colmeia.png" class="card-img-top" alt="Ilustração de uma abelha em frente à colmeia" />
+          <div class="card-body">
+            <h2 class="card-title">Colméia</h2>
+            <p class="card-text">Ajude as abelhas a formar palavras e ganhar pontos.</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="colmeia/jogo.html" class="btn btn-primary">Iniciar</a>
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesColmeia">
+                Instruções
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
-  <footer class="bg-light text-center py-4">
-    <p class="mb-0">© 2025 Projeto Jogos Web Acessíveis. Todos os direitos reservados.</p>
+
+
+  <div class="modal fade" id="modalInstrucoesVelha" tabindex="-1" aria-labelledby="modalInstrucoesVelhaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInstrucoesVelhaLabel">Instruções - Jogo da Velha</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Marque três símbolos iguais em linha, coluna ou diagonal para vencer o jogo da velha!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalInstrucoesSaltos" tabindex="-1" aria-labelledby="modalInstrucoesSaltosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInstrucoesSaltosLabel">Instruções - Jogo dos Saltos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Use as setas para saltar obstáculos e ajude Pedro a completar o percurso.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalInstrucoesForca" tabindex="-1" aria-labelledby="modalInstrucoesForcaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInstrucoesForcaLabel">Instruções - Jogo da Forca</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Tente adivinhar a palavra antes que o boneco da forca seja completo.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalInstrucoesBaleia" tabindex="-1" aria-labelledby="modalInstrucoesBaleiaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInstrucoesBaleiaLabel">Instruções - A Baleia Faminta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Ajude a baleia a pegar os peixes corretos e evite os obstáculos para ganhar pontos.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalInstrucoesColmeia" tabindex="-1" aria-labelledby="modalInstrucoesColmeiaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInstrucoesColmeiaLabel">Instruções - Colméia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Forme palavras com as letras disponíveis para ajudar as abelhas e ganhar pontos.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer role="contentinfo" style="background-color: white; border-top: 1px solid #dee2e6; padding-top: 1.5rem; padding-bottom: 0; color: #212529; font-family: Arial, sans-serif; line-height: 1.5;">
+  <div class="container d-flex flex-column align-items-center" style="flex-grow: 1; padding-bottom: 0;">
+    <div class="row align-items-center justify-content-center g-4 w-100" style="margin-bottom: 0;">
+      
+      <div class="col-md-6 col-lg-5 text-center text-md-start">
+        <h2 class="mb-3 fs-4" style="font-weight: 600;">Entre em contato</h2>
+        <p style="margin-bottom: 1.25rem;">
+          Para conhecer mais sobre os trabalhos e projetos desenvolvidos pelo CTA acesse nosso site ou redes sociais disponíveis na lista abaixo.
+        </p>
+        <nav aria-label="Redes sociais e contatos do CTA">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0" style="padding-left: 0; margin-bottom: 0;">
+    <li>
+    <a href="mailto:cta@ifrs.edu.br" class="text-decoration-none d-flex align-items-center gap-2" style="color: #212529;">
+      <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l7.707 6.707a1 1 0 0 0 1.414 0L20 8v10H4z"/>
+      </svg>
+      <span>cta@ifrs.edu.br</span>
+    </a>
+  </li>
+    <a href="https://cta.ifrs.edu.br/" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-flex align-items-center gap-2" style="color: #212529;">
+      
+      <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17.93V20h-2v-.07a8.012 8.012 0 0 1-4.48-1.77l1.42-1.42a6 6 0 0 0 7.12-7.12l1.42-1.42A8.01 8.01 0 0 1 13 19.93z"></path>
+      </svg>
+      <span>cta.ifrs.edu.br</span>
+    </a>
+  </li>
+  <li>
+    <a href="https://instagram.com/ctaifrs" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-flex align-items-center gap-2" style="color: #212529;">
+      
+      <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+      </svg>
+      <span>instagram.com/ctaifrs</span>
+    </a>
+  </li>
+  <li>
+    <a href="https://youtube.com/cta-ifrs" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-flex align-items-center gap-2" style="color: #212529;">
+    
+      <svg aria-hidden="true" focusable="false" width="19" height="1" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M10 15l5.19-3L10 9v6zm12-3c0-6.63-5.37-12-12-12S-2 5.37-2 12s5.37 12 12 12 12-5.37 12-12zM22 12c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8 8 3.58 8 8z"/>
+      </svg>
+      <span>youtube.com/cta-ifrs</span>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.facebook.com/ctaifrs/" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-flex align-items-center gap-2" style="color: #212529;">
+      
+      <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.987h-2.54v-2.89h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.462h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z"/>
+      </svg>
+      <span>facebook.com/ctaifrs</span>
+    </a>
+  </li>
+</ul>
+    </nav>
+  </div>
+
+  <div class="col-md-6 col-lg-7 d-flex justify-content-center align-items-center gap-4 mt-4 mt-md-0">
+      <div style="padding: 5px; width: 300px; flex-shrink: 0;">
+        <img src="imagens/cta.png" alt="Logo do CTA - Centro Tecnológico de Acessibilidade" class="img-fluid" style="width: 100%; height: auto;">
+      </div>
+      <div style="padding: 5px; width: 300px; flex-shrink: 0;">
+        <img src="imagens/ifrs.png" alt="Logo do Instituto Federal do Rio Grande do Sul" class="img-fluid" style="width: 100%; height: auto;">
+      </div>
+    </div>
+    </div>
+    </div>
+    <div style="background-color:  #e9ecef; width: 100%; padding: 0.5rem 1rem;">
+      <p class="text-center small" style="color: rgb(5, 5, 5); margin: 0;">
+        © 2025 Projeto Jogos Web Acessíveis. Todos os direitos reservados.
+      </p>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

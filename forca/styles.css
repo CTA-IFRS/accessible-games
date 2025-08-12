@@ -1,0 +1,218 @@
+body { 
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 40px 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  #menuContainer {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  /* Containers */
+  .menu-section, .forca-container, .keyboard-container {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu-section h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  /* Lista de opções */
+  .menu-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-option {
+    background-color: #f9f9f9;
+    border: 2px solid #333;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 18px;
+    margin: 6px 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .menu-option:hover {
+    background-color: #e6f0ff;
+  }
+  
+  .menu-option:focus {
+    outline: 3px solid #007bff;
+    background-color: #d0eaff;
+  }
+  
+  .menu-option.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+  }
+  
+  /* Botões principais */
+  .start-btn,
+  .back-btn,
+  .restart-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: calc(100% - 20px);
+  }
+  
+  .button-container {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .start-btn:hover,
+  .back-btn:hover,
+  .restart-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .start-btn:focus,
+  .back-btn:focus,
+  .restart-btn:focus {
+    outline: 3px solid #007bff;
+    background-color: #0056b3;
+  }
+  
+  /* Área da palavra */
+  .word-display {
+    font-size: 24px;
+    letter-spacing: 8px;
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Forca container */
+  .forca-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* Teclado com largura igual à forca-container */
+  .keyboard-container {
+    max-width: 500px;
+    margin: 0 auto 25px;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Layout das teclas */
+  .keyboard {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  
+  .key {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    font-size: 18px;
+    background-color: #f9f9f9;
+    border: 2px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .key:hover {
+    background-color: #e6f0ff;
+  }
+  
+  .key:focus {
+    outline: 3px solid #007bff;
+    background-color: #d0eaff;
+  }
+  
+  .key.used {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .key.correct {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .key.wrong {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Mensagem de vitória/derrota */
+  .message {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .message.win {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .message.lose {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Canvas */
+  #hangman-canvas {
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+    border: none;
+  }
+  
+  /* Foco automático (varredura) */
+  .menu-option.focused,
+  .key.focused,
+  .start-btn.focused,
+  .back-btn.focused,
+  .restart-btn.focused {
+    outline: 3px solid #ffc107;
+    background-color: #fff3cd;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  #game-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  

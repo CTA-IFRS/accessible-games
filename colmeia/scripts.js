@@ -178,6 +178,41 @@ document.addEventListener('keydown', (e) => {
   iniciarLetra();
 });
 
+document.addEventListener('mousedown', (e) => {
+  // Botão esquerdo do mouse (0 é o botão esquerdo)
+  if (e.button !== 0) return;
+
+  if (!jogoAtivo || !letraAtual) return;
+
+  const letraCerta = letraAtual.dataset.letra.toLowerCase();
+
+  const letraTop = letraAtual.offsetTop;
+  const letraBottom = letraTop + letraAtual.offsetHeight;
+  const hitTop = hitZone.offsetTop;
+  const hitBottom = hitTop + hitZone.offsetHeight;
+
+  const dentroZona = letraBottom > hitTop && letraTop < hitBottom;
+
+  if (dentroZona) {
+    // Conta como acerto
+    pontos += 10;
+    scoreSpan.textContent = pontos;
+    mostrarLetra(true, letraCerta);
+    somAcerto.play();
+  } else {
+    // Conta como erro
+    perderVidas();
+    mostrarLetra(false, letraCerta);
+    somErro.play();
+  }
+
+  clearInterval(animacaoAtual);
+  letraAtual.remove();
+  letraAtual = null;
+  indexLetra++;
+  iniciarLetra();
+});
+
 function mostrarMenuGameOver() {
   jogoAtivo = false;
   if (animacaoAtual) {

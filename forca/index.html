@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Menu Principal -->
+
   <div id="menuContainer">
     <h1>Jogo da Forca Acessível</h1>
     
@@ -15,7 +15,7 @@
       <h2>Velocidade da Varredura</h2>
       <ul class="menu-options" id="speed-options">
         <li class="menu-option" data-speed="1500">Lenta</li>
-        <li class="menu-option selected" data-speed="1000">Média</li>
+        <li class="menu-option" data-speed="1000">Média</li>
         <li class="menu-option" data-speed="500">Rápida</li>
       </ul>
     </div>
@@ -23,25 +23,23 @@
     <div class="menu-section" id="difficulty-section">
       <h2>Dificuldade</h2>
       <ul class="menu-options" id="difficulty-options">
-        <li class="menu-option selected" data-difficulty="easy">Fácil</li>
+        <li class="menu-option" data-difficulty="easy">Fácil</li>
         <li class="menu-option" data-difficulty="medium">Médio</li>
         <li class="menu-option" data-difficulty="hard">Difícil</li>
       </ul>
     </div>
     
-    <button class="start-btn" id="start-btn">Iniciar Jogo</button>
+    <button class="start-btn" id="start-btn" style="display: none;">Iniciar Jogo</button>
   </div>
 
-  <!-- Área do Jogo -->
   <div class="game-container" id="game-container" style="display: none;">
     
-    <!-- Container único para forca e palavra -->
+
     <div class="forca-container">
       <canvas id="hangman-canvas" width="200" height="250"></canvas>
       <div class="word-display" id="word-display"></div>
     </div>
     
-    <!-- Teclado com mesma largura da forca-container -->
     <div class="keyboard-container">
       <div class="keyboard" id="keyboard"></div>
     </div>

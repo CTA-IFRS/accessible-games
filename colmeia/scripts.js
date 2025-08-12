@@ -8,6 +8,27 @@ let vidas = 3;
 const maxVidas = 3;
 let jogoAtivo = true;
 
+let scanInterval;
+let scanSpeed = 1000; 
+let currentSelection = 0;
+let allOptions = [];
+
+function startMenuScan(startIndex = 0) {
+  let index = startIndex;
+  stopMenuScan();
+  scanInterval = setInterval(() => {
+    allOptions.forEach(opt => opt.blur());
+    allOptions[index].focus();
+    currentSelection = index;
+    index = (index + 1) % allOptions.length;
+  }, scanSpeed);
+}
+
+function stopMenuScan() {
+  if (scanInterval) clearInterval(scanInterval);
+}
+
+
 document.getElementById('retry').addEventListener('click', () => {
   document.getElementById('game-over').style.display = 'none';
   pontos = 0;
@@ -42,12 +63,6 @@ const scoreSpan = document.getElementById('points');
 const typedSpan = document.getElementById('typed-word');
 const somAcerto = new Audio('somAcerto.mp3');  
 const somErro = new Audio('somErro.mp3');
-const retornarBtn = document.getElementById("BtnReturn");
-
-retornarBtn.addEventListener("click", () => {
-  window.location.href = "./home/index.html"; 
-});
-
 
 function novaRodada() {
   jogoAtivo = true;
@@ -174,6 +189,10 @@ function mostrarMenuGameOver() {
     letraAtual = null;
   }
   document.getElementById('game-over').style.display = 'block';
+
+  allOptions = document.querySelectorAll('#retry, #menu');
+
+  startMenuScan();
 }
 
 function atualizarVidas(){

@@ -8,8 +8,30 @@ let vidas = 3;
 const maxVidas = 3;
 let jogoAtivo = true;
 
+let scanInterval;
+let scanSpeed = 1000; 
+let currentSelection = 0;
+let allOptions = [];
+
+function startMenuScan(startIndex = 0) {
+  let index = startIndex;
+  stopMenuScan();
+  scanInterval = setInterval(() => {
+    allOptions.forEach(opt => opt.blur());
+    allOptions[index].focus();
+    currentSelection = index;
+    index = (index + 1) % allOptions.length;
+  }, scanSpeed);
+}
+
+function stopMenuScan() {
+  if (scanInterval) clearInterval(scanInterval);
+}
+
+
 document.getElementById('retry').addEventListener('click', () => {
   document.getElementById('game-over').style.display = 'none';
+  pontos = 0;
   novaRodada();
 });
 
@@ -41,18 +63,11 @@ const scoreSpan = document.getElementById('points');
 const typedSpan = document.getElementById('typed-word');
 const somAcerto = new Audio('somAcerto.mp3');  
 const somErro = new Audio('somErro.mp3');
-const retornarBtn = document.getElementById("BtnReturn");
-
-retornarBtn.addEventListener("click", () => {
-  window.location.href = "./home/index.html"; 
-});
-
 
 function novaRodada() {
   jogoAtivo = true;
 
   container.querySelectorAll('.letter').forEach(e => e.remove());
-  pontos = 0;
   scoreSpan.textContent = pontos;
   vidas = maxVidas;
   indexLetra = 0;
@@ -163,6 +178,48 @@ document.addEventListener('keydown', (e) => {
   iniciarLetra();
 });
 
+document.addEventListener('mousedown', (e) => {
+  // Botão esquerdo do mouse (0 é o botão esquerdo)
+  if (e.button !== 0) return;
+
+   // Se estiver no menu de game over
+  if (!jogoAtivo && allOptions.length > 0) {
+    allOptions[currentSelection].click();
+    return;
+  }
+
+
+  if (!jogoAtivo || !letraAtual) return;
+
+  const letraCerta = letraAtual.dataset.letra.toLowerCase();
+
+  const letraTop = letraAtual.offsetTop;
+  const letraBottom = letraTop + letraAtual.offsetHeight;
+  const hitTop = hitZone.offsetTop;
+  const hitBottom = hitTop + hitZone.offsetHeight;
+
+  const dentroZona = letraBottom > hitTop && letraTop < hitBottom;
+
+  if (dentroZona) {
+    // Conta como acerto
+    pontos += 10;
+    scoreSpan.textContent = pontos;
+    mostrarLetra(true, letraCerta);
+    somAcerto.play();
+  } else {
+    // Conta como erro
+    perderVidas();
+    mostrarLetra(false, letraCerta);
+    somErro.play();
+  }
+
+  clearInterval(animacaoAtual);
+  letraAtual.remove();
+  letraAtual = null;
+  indexLetra++;
+  iniciarLetra();
+});
+
 function mostrarMenuGameOver() {
   jogoAtivo = false;
   if (animacaoAtual) {
@@ -174,6 +231,10 @@ function mostrarMenuGameOver() {
     letraAtual = null;
   }
   document.getElementById('game-over').style.display = 'block';
+
+  allOptions = document.querySelectorAll('#retry, #menu');
+
+  startMenuScan();
 }
 
 function atualizarVidas(){

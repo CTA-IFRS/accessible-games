@@ -190,6 +190,19 @@ body {
     background-color: #dc3545;
     color: white;
   }
+  .menu-option.focused {
+    outline: 3px solid #ffc107;
+    background-color: #fff3cd;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .menu-option.selected.focused {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+    outline: 3px solid #ffc107;
+  }
   
   /* Canvas */
   #hangman-canvas {

@@ -14,7 +14,6 @@
       flex-direction: column;
       min-height: 100vh;
     }
-   
     .high-contrast {
       background-color: #000000 !important; 
       color: #ffffff !important; 
@@ -36,7 +35,6 @@
       color: #ffffff !important;
       border-bottom: 2px solid #ffffff !important; 
     }
-
 
     .high-contrast a {
       color: #ffffff !important;
@@ -62,7 +60,8 @@
 
     .high-contrast .card,
     .high-contrast .modal-content {
-      border: 1px solid #ffffff !important;
+      border: none !important; 
+      box-shadow: none !important;
     }
 
     .high-contrast table,
@@ -80,16 +79,6 @@
       fill: #ffffff !important;
       stroke: #ffffff !important;
     }
-
-    .high-contrast footer {
-      border: none !important;
-    }
-
-    .high-contrast footer p {
-      background-color: #000000 !important;
-      color: #ffffff !important;
-    }
-
 
     header {
       background-color: #ffffff;
@@ -174,6 +163,17 @@
       max-width: 1024px;
       width: 100%;
     }
+  
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus,
+    select:focus,
+    .card:focus {
+      outline: 3px solid #FFD700;
+      outline-offset: 3px; 
+    }
+
   </style>
 </head>
 
@@ -182,7 +182,7 @@
      style="background-color:#d6d6d6;color:#000;display:flex;gap:1rem;justify-content:flex-start;align-items:center;padding:0.4rem 1rem;font-size:0.7rem;">
   
   <a href="#conteudo-principal" accesskey="1"
-     aria-label="Ir para o conteúdo principal (atalho Alt+1)"
+     aria-label="Ir para o conteúdo principal"
      style="color:#000;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;">
     Ir para o conteúdo
     <span aria-hidden="true"
@@ -192,7 +192,7 @@
   </a>
 
   <a href="#menu-principal" accesskey="2"
-     aria-label="Ir para o menu principal (atalho Alt+2)"
+     aria-label="Ir para o menu principal"
      style="color:#000;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;">
     Ir para o menu
     <span aria-hidden="true"
@@ -203,6 +203,7 @@
 
   <a href="#" class="alt-contrast" accesskey="3"
      aria-label="Ativar alto contraste (atalho Alt+3)"
+     aria-label="Ativar alto contraste"
      style="margin-left:auto;color:#000;text-decoration:none;">
     Alto contraste
   </a>
@@ -437,13 +438,14 @@
   </div>
 
   <div class="col-md-6 col-lg-7 d-flex justify-content-center align-items-center gap-4 mt-4 mt-md-0">
-      <div style="padding: 5px; width: 300px; flex-shrink: 0;">
-        <img src="imagens/cta.png" alt="Logo do CTA - Centro Tecnológico de Acessibilidade" class="img-fluid" style="width: 100%; height: auto;">
-      </div>
-      <div style="padding: 5px; width: 300px; flex-shrink: 0;">
-        <img src="imagens/ifrs.png" alt="Logo do Instituto Federal do Rio Grande do Sul" class="img-fluid" style="width: 100%; height: auto;">
-      </div>
-    </div>
+  <div class="logo-container">
+    <img src="imagens/logo-cta.png" alt="Logo do CTA - Centro Tecnológico de Acessibilidade" class="logo-img img-fluid">
+  </div>
+  <div class="logo-container">
+    <img src="imagens/logo-ifrs.jpg" alt="Logo do Instituto Federal do Rio Grande do Sul" class="logo-img img-fluid">
+  </div>
+</div>
+
     </div>
     </div>
     <div style="background-color:  #e9ecef; width: 100%; padding: 0.5rem 1rem;">

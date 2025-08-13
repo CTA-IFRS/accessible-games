@@ -9,15 +9,16 @@
 <body>
     <h1>Colméia</h1>
 
-    <div id="game-over" style="display:none; text-align:center;">
-        <h2>Você perdeu!</h2>
-        <button id="retry" class="btn-menu">Tentar de novo</button>
-        <button id="menu" class="btn-menu">Voltar para o menu</button>
-    </div>
-
-
     <div id="game-container">
         <div id="vidas">❤️❤️❤️</div>
+        
+        <div id="game-over" style="display:none; text-align:center;">
+            <h2>Você perdeu!</h2>
+            <button id="retry" class="btn-menu">Tentar de novo</button>
+            <button id="menu" class="btn-menu">Voltar para o menu</button>
+        </div>
+
+
         <div id="hit-zone"></div>
     
     </div>
@@ -25,10 +26,6 @@
     <div class="menu">
         <div id="feedback">Palavra: <span id="typed-word"></span></div>
         <div id="score">Pontuação: <span id="points">0</span></div>
-
-        <div>
-            <button id="BtnReturn" class="botao-retornar">Retornar ao menu</button>
-        </div>
     </div>
 
     <script src="scripts.js"></script>

@@ -28,6 +28,11 @@ function stopMenuScan() {
   if (scanInterval) clearInterval(scanInterval);
 }
 
+function falarTexto(texto) {
+  const utterance = new SpeechSynthesisUtterance(texto);
+  utterance.lang = 'pt-BR'; // Português Brasil
+  speechSynthesis.speak(utterance);
+}
 
 document.getElementById('retry').addEventListener('click', () => {
   document.getElementById('game-over').style.display = 'none';
@@ -118,6 +123,8 @@ function animarLetra(letraEl) {
 
 function iniciarLetra() {
   if (indexLetra >= palavraAtual.length) {
+    falarTexto(palavraAtual);
+    
     setTimeout(novaRodada, 2000);
     return;
   }
@@ -125,6 +132,7 @@ function iniciarLetra() {
   const letra = palavraAtual[indexLetra];
   const letraEl = criarLetra(letra);
   letraAtual = letraEl;
+  falarTexto(letra);
   animarLetra(letraEl);
 }
 

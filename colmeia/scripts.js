@@ -30,6 +30,9 @@ function stopMenuScan() {
 
 function falarTexto(texto) {
   const utterance = new SpeechSynthesisUtterance(texto);
+  utterance.volume = 1.0;
+  // utterance.pitch = 1.0; // tom normal (0 a 2)
+  // utterance.rate = 1.0;  // velocidade normal (0.1 a 10)
   utterance.lang = 'pt-BR'; // Português Brasil
   speechSynthesis.speak(utterance);
 }
@@ -66,8 +69,10 @@ const container = document.getElementById('game-container');
 const hitZone = document.getElementById('hit-zone');
 const scoreSpan = document.getElementById('points');
 const typedSpan = document.getElementById('typed-word');
-const somAcerto = new Audio('somAcerto.mp3');  
+const somAcerto = new Audio('somAcerto.mp3');
+somAcerto.volume = 0.1;  
 const somErro = new Audio('somErro.mp3');
+somErro.volume = 0.1;
 
 function novaRodada() {
   jogoAtivo = true;

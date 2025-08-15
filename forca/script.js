@@ -65,39 +65,40 @@ document.addEventListener('DOMContentLoaded', function() {
   const autoFocus = new AutoFocus([], focusSpeed);
 
   function initMenu() {
-    // Remove todas as seleções existentes
+    // Remove seleções
     speedOptions.forEach(opt => opt.classList.remove('selected'));
     difficultyOptions.forEach(opt => opt.classList.remove('selected'));
 
-    // Configura os event listeners para as opções de velocidade
+    // Começa varredura apenas na velocidade
+    autoFocus.setElements([...speedOptions]);
+    autoFocus.start();
+
+    // Ao clicar na velocidade → muda para dificuldade
     speedOptions.forEach(option => {
       option.addEventListener('click', function () {
         speedOptions.forEach(opt => opt.classList.remove('selected'));
         this.classList.add('selected');
         focusSpeed = parseInt(this.getAttribute('data-speed'));
         autoFocus.setSpeed(focusSpeed);
-        autoFocus.advanceFocus();
+
+        // Agora varre apenas dificuldade
+        autoFocus.setElements([...difficultyOptions]);
+        autoFocus.start();
       });
     });
 
-    // Configura os event listeners para as opções de dificuldade
+    // Ao clicar na dificuldade → inicia jogo
     difficultyOptions.forEach(option => {
       option.addEventListener('click', function () {
         difficultyOptions.forEach(opt => opt.classList.remove('selected'));
         this.classList.add('selected');
         difficulty = this.getAttribute('data-difficulty');
-        startGame(); // Inicia o jogo imediatamente após qualquer seleção
+        startGame();
       });
     });
 
-    startBtn.style.display = 'none';
-
-    const menuFocusElements = [...speedOptions, ...difficultyOptions];
-    autoFocus.setElements(menuFocusElements);
-    autoFocus.start();
-
     document.addEventListener('click', function (e) {
-      if (!menuFocusElements.includes(e.target) && autoFocus.currentFocusedElement) {
+      if (autoFocus.currentFocusedElement && !autoFocus.elements.includes(e.target)) {
         autoFocus.currentFocusedElement.click();
       }
     });

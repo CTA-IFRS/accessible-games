@@ -41,22 +41,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
 
-    // ==== MODO VARREDURA ====
+    // ====== MODO VARREDURA ======
     let scanInterval = null;
     let scanIndex = 0;
     let scanElements = [];
     let scanning = false;
+    let scanContainer = null;
+
+    function visibleButtons(container) {
+        if (!container) return [];
+        const all = Array.from(container.querySelectorAll('button:not([disabled])'));
+        return all.filter(btn => btn.offsetParent !== null);
+    }
 
     function startScanning(containerSelector) {
         stopScanning();
-        const container = document.querySelector(containerSelector);
-        if (!container) return;
-        scanElements = Array.from(container.querySelectorAll('button'));
+
+        scanContainer = document.querySelector(containerSelector);
+        if (!scanContainer) return;
+
+        scanElements = visibleButtons(scanContainer);
         if (scanElements.length === 0) return;
+
         scanIndex = 0;
         scanning = true;
         highlightScanItem();
+
         scanInterval = setInterval(() => {
+            const currentList = visibleButtons(scanContainer);
+            if (currentList.length === 0) {
+                stopScanning();
+                return;
+            }
+            scanElements = currentList;
             scanIndex = (scanIndex + 1) % scanElements.length;
             highlightScanItem();
         }, 1500);
@@ -69,42 +86,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         removeHighlight();
         scanning = false;
+        scanContainer = null;
     }
 
     function highlightScanItem() {
         removeHighlight();
-        if (scanElements[scanIndex]) {
-            scanElements[scanIndex].classList.add('scan-highlight');
-            scanElements[scanIndex].focus();
+        const current = scanElements[scanIndex];
+        if (current) {
+            current.classList.add('scan-highlight', 'scan-hover');
+            current.setAttribute('aria-current', 'true');
+            if (typeof current.focus === 'function') {
+                current.focus({ preventScroll: true });
+            }
         }
     }
 
     function removeHighlight() {
-        scanElements.forEach(el => el.classList.remove('scan-highlight'));
+        scanElements.forEach(el => {
+            el.classList.remove('scan-highlight', 'scan-hover');
+            el.removeAttribute('aria-current');
+        });
     }
 
-    function activateScanItem() {
-        if (scanning && scanElements[scanIndex]) {
-            scanElements[scanIndex].click();
+    // Clique global: aciona o botão em destaque
+    document.addEventListener('click', (e) => {
+        if (!scanning) return;
+        if (!e.isTrusted) return;
+
+        const current = scanElements[scanIndex];
+        if (!current) return;
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        if (typeof current.focus === 'function') {
+            current.focus({ preventScroll: true });
         }
-    }
+        current.classList.add('pressed-by-scan');
+        current.click();
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            activateScanItem();
+        setTimeout(() => current.classList.remove('pressed-by-scan'), 150);
+    }, true);
+
+    (function injectScanStyles() {
+        const style = document.createElement('style');
+        style.innerHTML = `
+        .scan-highlight {
+            outline: 3px solid #007bff !important;
+            box-shadow: 0 0 0 4px rgba(0,123,255,0.15) !important;
         }
-    });
+        button.scan-hover {
+            background: #f0f0f0 !important;
+        }
+        button.pressed-by-scan {
+            transform: scale(0.98);
+        }`;
+        document.head.appendChild(style);
+    })();
 
-    const style = document.createElement('style');
-    style.innerHTML = `
-    .scan-highlight {
-        outline: 3px solid #007bff !important;
-        background-color: #e9f3ff !important;
-    }
-    `;
-    document.head.appendChild(style);
-
+    // ====== DIFICULDADES ======
     const difficultySettings = {
         easy:    { speed: 5,  gravity: 0.4 },
         medium:  { speed: 8,  gravity: 0.5 },
@@ -119,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setMode(mode);
             document.querySelector('.gameboard').style.display = 'flex';
             startScreen.style.display = 'none';
+            stopScanning();
             initGame();
         });
     });
@@ -226,11 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
         gameOverSound.currentTime = 0;
         gameOverSound.play();
         gameOverScreen.style.display = 'flex';
-        startScanning('.game-over-screen');
         const gameScreen = document.querySelector('.game-screen');
         if (gameScreen) gameScreen.style.display = 'none';
         finalScore.textContent = `Pontuação: ${score}`;
         highScoreText.textContent = `Recorde: ${highScore}`;
+        startScanning('.game-over-screen');
     }
 
     function resetGame() {
@@ -259,6 +300,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('click', (event) => {
+        if (scanning) return;
+
         if (
             event.target.tagName === 'BUTTON' ||
             event.target.closest('button') ||
@@ -269,7 +312,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         jump();
-        startScanning('#start-screen');
+
+        if (startScreen && startScreen.style.display !== 'none') {
+            startScanning('#start-screen');
+        }
     });
 
     window.toggleFullScreen = function () {
@@ -284,6 +330,12 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', () => {
         document.querySelector('.gameboard').style.display = 'block';
         startScreen.style.display = 'none';
+        stopScanning();
         initGame();
     });
+
+    // Inicia varredura na tela inicial automaticamente
+    if (startScreen && startScreen.style.display !== 'none') {
+        startScanning('#start-screen');
+    }
 });

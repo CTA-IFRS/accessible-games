@@ -13,9 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const highScoreText = document.getElementById('high-score');
     const rankingList = document.getElementById('ranking-list');
 
-    const configScreen = document.getElementById('game-config-screen');
     const startScreen = document.getElementById('start-screen');
     const startButton = document.getElementById('start-button');
+
+    // Botões Game Over
+    const playAgainBtn = document.getElementById('play-again-btn');
+    const goHomeBtn = document.getElementById('go-home-btn');
 
     // Sounds
     const jumpSound = new Audio("sounds/jump.mp3");
@@ -46,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let scanIndex = 0;
     let scanElements = [];
     let scanning = false;
+    let clickLock = false;
 
     function startScanning(containerSelector) {
         stopScanning();
@@ -105,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
+    // Dificuldades
     const difficultySettings = {
         easy:    { speed: 5,  gravity: 0.4 },
         medium:  { speed: 8,  gravity: 0.5 },
@@ -119,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setMode(mode);
             document.querySelector('.gameboard').style.display = 'flex';
             startScreen.style.display = 'none';
+            stopScanning();
             initGame();
         });
     });
@@ -148,6 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gameOverScreen.style.display = 'none';
         enemy.style.display = 'block';
         startGameLoop();
+        clickLock = true;
+        setTimeout(() => clickLock = false, 300);
     }
 
     function startGameLoop() {
@@ -177,9 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
             heroRect.left + padding < enemyRect.right - padding &&
             heroRect.bottom - padding > enemyRect.top + padding &&
             heroRect.top + padding < enemyRect.bottom - padding;
-        if (isColliding) {
-            handleCollision();
-        }
+        if (isColliding) handleCollision();
+
         if (isJumping) {
             heroY += jumpVelocity;
             jumpVelocity -= gravity;
@@ -215,9 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         enemyX = window.innerWidth;
-        if (lives <= 0) {
-            gameOver();
-        }
+        if (lives <= 0) gameOver();
     }
 
     function gameOver() {
@@ -227,17 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gameOverSound.play();
         gameOverScreen.style.display = 'flex';
         startScanning('.game-over-screen');
-        const gameScreen = document.querySelector('.game-screen');
-        if (gameScreen) gameScreen.style.display = 'none';
         finalScore.textContent = `Pontuação: ${score}`;
         highScoreText.textContent = `Recorde: ${highScore}`;
-    }
-
-    function resetGame() {
-        if (!gameRunning) {
-            cancelAnimationFrame(animationId);
-            initGame();
-        }
     }
 
     function updateScore() {
@@ -259,18 +255,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('click', (event) => {
-        if (
-            event.target.tagName === 'BUTTON' ||
-            event.target.closest('button') ||
-            event.target.closest('.menu-panel') ||
-            event.target.closest('.game-over-screen') ||
-            event.target.closest('#start-screen')
-        ) {
-            return;
+        const isMenuScreen = startScreen.style.display !== 'none' || gameOverScreen.style.display !== 'none';
+        if (clickLock) return;
+        if (isMenuScreen) {
+            if (!event.target.closest('button')) activateScanItem();
+        } else {
+            jump();
         }
-        jump();
-        startScanning('#start-screen');
     });
+
+    // Função para reiniciar o jogo (Jogar de Novo)
+    if (playAgainBtn) {
+        playAgainBtn.addEventListener('click', () => {
+            stopScanning();
+            initGame();
+        });
+    }
+
+    // Função para voltar ao menu inicial
+    if (goHomeBtn) {
+        goHomeBtn.addEventListener('click', () => {
+            stopScanning();
+            document.querySelector('.gameboard').style.display = 'none';
+            gameOverScreen.style.display = 'none';
+            startScreen.style.display = 'flex';
+            startScanning('#start-screen');
+        });
+    }
+
+    // Inicia varredura no menu inicial
+    startScanning('#start-screen');
 
     window.toggleFullScreen = function () {
         if (!document.fullscreenElement) {
@@ -281,9 +295,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.querySelector('.gameboard').style.display = 'none';
-    startButton.addEventListener('click', () => {
-        document.querySelector('.gameboard').style.display = 'block';
-        startScreen.style.display = 'none';
-        initGame();
-    });
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            document.querySelector('.gameboard').style.display = 'block';
+            startScreen.style.display = 'none';
+            stopScanning();
+            initGame();
+        });
+    }
 });

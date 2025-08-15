@@ -3,55 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Baleia Faminta - Acessível</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>A Baleia Faminta</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #1a6fc9, #0d47a1);
+            margin: 0;
+            padding: 20px;
+            color: white;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        #gameInfo {
+            margin: 15px 0;
+            font-size: 22px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        #targetItem {
+            font-size: 28px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4caf50;
+            margin-left: 20px;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        canvas {
+            display: block;
+            background: url('mar.jpg') bottom repeat-x;
+            background-size: cover;
+        }
+
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            to {
+                transform: translateY(-1000px);
+            }
+        }
+
+        
+        #velocidadeControl {
+            width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    <h1>A Baleia Faminta</h1>
+    
+   
+    <label for="velocidadeControl">Velocidade dos peixes:</label>
+    <input type="range" id="velocidadeControl" min="0.5" max="5" step="0.1" value="1">
+    <span id="velocidadeValor">1.0</span>
 
-<div id="menuPrincipal">
-    <div class="menu-container">
-        <h1>A Baleia Faminta</h1>
-        
-        <div class="menu-section" data-group="speed">
-            <h2>Velocidade dos Peixes</h2>
-            <div class="menu-option" data-speed="1.5">Lenta</div>
-            <div class="menu-option" data-speed="2.5">Média</div>
-            <div class="menu-option" data-speed="4">Rápida</div>
-        </div>
-
-        <div class="menu-section" data-group="mode">
-            <h2>Modo de Jogo</h2>
-            <div class="menu-option" data-mode="easy">Fácil</div>
-            <div class="menu-option" data-mode="medium">Médio</div>
-            <div class="menu-option" data-mode="hard">Difícil</div>
-        </div>
-    </div>
-</div>
-
-<div id="gameArea">
     <div id="gameInfo">
-        <div class="game-info-item">
-            <span>Pegue:</span>
-            <span id="targetItem">🐟</span>
-        </div>
-        <div class="game-info-item">
-            <span>Próximo:</span>
-            <span id="nextItem">🐠</span>
-        </div>
-        <div class="game-info-item">
-            <span>Pontos:</span>
-            <span id="score">0</span>
-        </div>
-        <div class="game-info-item">
-            <span>Vidas:</span>
-            <span id="lives">3</span>
-        </div>
+        <span>Pegue: </span>
+        <span id="targetItem">🐟</span>
+        <span id="score">Pontos: 0</span>
     </div>
+    
+ 
     <div id="gameContainer">
+        <div class="bubbles" id="bubbles"></div>
         <canvas id="gameCanvas" width="400" height="600"></canvas>
     </div>
-</div>
 
-<script src="script.js"></script>
+     
+    <script src="script.js"></script>
 </body>
 </html>

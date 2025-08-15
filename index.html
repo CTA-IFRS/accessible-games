@@ -165,14 +165,15 @@
     }
   
     a:focus,
-    button:focus,
-    input:focus,
-    textarea:focus,
-    select:focus,
-    .card:focus {
-      outline: 3px solid #FFD700;
-      outline-offset: 3px; 
-    }
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.card:focus-within,
+.btn:focus { /* Adicionado o seletor .btn:focus */
+  outline: 3px solid #FFD700;
+  outline-offset: 3px;
+}
 
   </style>
 </head>
@@ -202,7 +203,7 @@
   </a>
 
   <a href="#" class="alt-contrast" accesskey="3"
-     aria-label="Ativar alto contraste (atalho Alt+3)"
+     aria-label="Ativar alto contraste"
      aria-label="Ativar alto contraste"
      style="margin-left:auto;color:#000;text-decoration:none;">
     Alto contraste

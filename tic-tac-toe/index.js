@@ -1,5 +1,3 @@
-
-
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("statusText");
 const menuOptions = document.querySelectorAll(".menu-option");
@@ -8,26 +6,6 @@ const gameContainer = document.getElementById("gameContainer");
 const clickSound = document.getElementById("clickSound");
 const restartBtn = document.getElementById("restartBtn");
 const backToMenuBtn = document.getElementById("backToMenuBtn");
-
-function getNextSectionIndex(currentIndex) {
-  const sections = document.querySelectorAll('.menu-section');
-  const currentOption = menuOptions[currentIndex];
-  const currentSection = currentOption.closest('.menu-section');
-  
-  let currentSectionIndex = -1;
-  sections.forEach((section, index) => {
-    if (section === currentSection) {
-      currentSectionIndex = index;
-    }
-  });
-  
-  
-  if (currentSectionIndex === -1 || currentSectionIndex === sections.length - 1) {
-    return 0;
-  }
-  
-  return currentSectionIndex + 1;
-}
 
 const winConditions = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -49,6 +27,8 @@ let menuScanInterval = null;
 let gameScanInterval = null;
 let endButtons = [restartBtn, backToMenuBtn];
 
+let currentSectionIndex = 0;
+
 function playSound() {
   if (clickSound) {
     clickSound.currentTime = 0;
@@ -56,14 +36,20 @@ function playSound() {
   }
 }
 
-function startMenuScan(startFrom = currentSelection) {
-  let index = startFrom;
+// ===== VARREDURA DO MENU =====
+function startMenuScan(startFrom = 0) {
   stopMenuScan();
+  const sections = document.querySelectorAll('.menu-section');
+  const section = sections[currentSectionIndex];
+  const options = section.querySelectorAll('.menu-option');
+  if (!options.length) return;
+
+  let index = startFrom;
   menuScanInterval = setInterval(() => {
-    menuOptions.forEach(opt => opt.blur());
-    menuOptions[index].focus();
+    options.forEach(opt => opt.blur());
+    options[index].focus();
     currentSelection = index;
-    index = (index + 1) % menuOptions.length;
+    index = (index + 1) % options.length;
   }, scanSpeed);
 }
 
@@ -71,6 +57,7 @@ function stopMenuScan() {
   if (menuScanInterval) clearInterval(menuScanInterval);
 }
 
+// ===== VARREDURA DO JOGO =====
 function startGameScan() {
   stopGameScan();
   const focusableIndexes = options.map((v, i) => v === "" ? i : null).filter(i => i !== null);
@@ -100,16 +87,33 @@ function stopGameScan() {
   if (gameScanInterval) clearInterval(gameScanInterval);
 }
 
-function handleMenuClick() {
-  const selected = menuOptions[currentSelection].dataset.option;
+function resetMenuSelection() {
+  const allOptions = document.querySelectorAll('.menu-option');
+  allOptions.forEach(opt => opt.classList.remove('selected'));
+}
 
+// ===== CLIQUES DE MENU =====
+function handleMenuClick() {
+  const sections = document.querySelectorAll('.menu-section');
+  const section = sections[currentSectionIndex];
+  const options = section.querySelectorAll('.menu-option');
+  const selected = options[currentSelection]?.dataset.option;
+  if (!selected) return;
+
+  options.forEach(opt => opt.classList.remove('selected'));
+
+  options[currentSelection].classList.add('selected');
+
+  // ===== TRATA OPÇÕES =====
   if (selected.startsWith("speed")) {
-    scanSpeed = selected === "speed-slow" ? 2000 : selected === "speed-medium" ? 1000 : 500;
+    scanSpeed = selected === "speed-slow" ? 2000 :
+                selected === "speed-medium" ? 1000 : 500;
   } else if (selected.startsWith("mode")) {
     isCpu = selected.includes("cpu");
     if (selected === "mode-cpu-easy") cpuLevel = "easy";
     if (selected === "mode-cpu-medium") cpuLevel = "medium";
     if (selected === "mode-cpu-hard") cpuLevel = "hard";
+
     player1Scan = true;
     player2Scan = false;
     if (selected === "mode-human-scan") {
@@ -121,29 +125,21 @@ function handleMenuClick() {
       player2Scan = false;
     }
   } else if (selected.startsWith("player")) {
-    currentPlayer = selected === "player-x" ? "X" : "O";
+    // última seção → inicia o jogo
     inMenu = false;
     stopMenuScan();
     setTimeout(startGame, 200);
     return;
   }
 
-  const nextSectionIndex = getNextSectionIndex(currentSelection);
-  const nextSection = document.querySelectorAll('.menu-section')[nextSectionIndex];
-  const firstOptionInNextSection = nextSection.querySelector('.menu-option');
- 
-  
-  let newIndex = 0;
-  menuOptions.forEach((option, index) => {
-    if (option === firstOptionInNextSection) {
-      newIndex = index;
-    }
-  });
-  
-
-  startMenuScan(newIndex);
+  if (currentSectionIndex < sections.length - 1) {
+    currentSectionIndex++;
+    stopMenuScan();
+    startMenuScan(0); // começa do primeiro item da próxima seção
+  }
 }
 
+// ===== JOGO =====
 function startGame() {
   options = Array(9).fill("");
   cells.forEach(cell => {
@@ -316,9 +312,12 @@ backToMenuBtn.addEventListener("click", backToMenu);
 function backToMenu() {
   stopGameScan();
   inMenu = true;
+  currentSectionIndex = 0;
+    resetMenuSelection(); 
   menuContainer.style.display = "block";
   gameContainer.style.display = "none";
   startMenuScan();
 }
 
+// começa varredura já no menu
 startMenuScan();

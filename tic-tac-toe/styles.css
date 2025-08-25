@@ -43,6 +43,12 @@ h1 {
   transition: background-color 0.2s;
 }
 
+.menu-option.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
 .menu-option:hover {
   background-color: #e6f0ff;
 }

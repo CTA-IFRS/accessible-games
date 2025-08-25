@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const btnPlayAgain = document.getElementById('btnPlayAgain');
+    
+    btnPlayAgain.addEventListener('click', function (){
+        stopScanning();
+        gameOverScreen.style.display = 'none';
+        initGame();
+    });
+    
     // Characters
     const hero = document.querySelector('.hero');
     const enemy = document.querySelector('.enemy');
@@ -147,6 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
         heroY = 25;
         isJumping = false;
         updateScore();
+
+            
+        // Mostra novamente a tela de jogo
+        const gameScreen = document.querySelector('.game-screen');
+        if (gameScreen) gameScreen.style.display = 'block';
+
         gameOverScreen.style.display = 'none';
         enemy.style.display = 'block';
         startGameLoop();

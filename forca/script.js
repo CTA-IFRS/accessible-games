@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     drawHangmanBase();
     updateWordDisplay();
     message.textContent = '';
+    message.className = '';
 
     createKeyboard();
     autoFocus.setElements([...document.querySelectorAll('.key')]);

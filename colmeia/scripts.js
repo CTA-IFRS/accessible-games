@@ -37,17 +37,6 @@ function falarTexto(texto) {
   speechSynthesis.speak(utterance);
 }
 
-document.getElementById('retry').addEventListener('click', () => {
-  document.getElementById('game-over').style.display = 'none';
-  pontos = 0;
-  novaRodada();
-});
-
-document.getElementById('menu').addEventListener('click', () => {
-  window.location.href = "./home/index.html";
-});
-
-
 const velocidadeSelecionada = localStorage.getItem("velocidadeJogo");
 
 let velocidade;
@@ -243,12 +232,41 @@ function mostrarMenuGameOver() {
     letraAtual.remove();
     letraAtual = null;
   }
-  document.getElementById('game-over').style.display = 'block';
 
+  const overlay = document.createElement("div");
+  overlay.id = "gameOverMenu";
+  overlay.innerHTML = `
+    <div class="game-over-content">
+      <h2>Game Over</h2>
+      <div id="retry" class="game-over-option" data-action="restart" tabindex="0">Reiniciar Jogo</div>
+      <div id="menu" class="game-over-option" data-action="menu" tabindex="0">Voltar ao Menu</div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // pega as opções
   allOptions = document.querySelectorAll('#retry, #menu');
+
+  // adiciona listener
+  allOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      executarAcao(option.dataset.action);
+    });
+  });
 
   startMenuScan();
 }
+
+function executarAcao(action) {
+  if (action === "restart") {
+    document.getElementById("gameOverMenu")?.remove();
+    pontos = 0;
+    novaRodada();
+  } else if (action === "menu") {
+    window.location.href = "./home/index.html";
+  }
+}
+
 
 function atualizarVidas(){
   const coracao = '❤️';

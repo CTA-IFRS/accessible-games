@@ -81,12 +81,23 @@ body {
     width: calc(100% - 20px);
   }
   
-  .button-container {
-    display: none;
+  #button-container {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centraliza */
+    z-index: 10; /* garante que fica acima */
+
+    display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
+
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
-  
   .start-btn:hover,
   .back-btn:hover,
   .restart-btn:hover {
@@ -229,4 +240,3 @@ body {
     max-width: 600px;
     margin: 0 auto;
   }
-  

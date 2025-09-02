@@ -6,6 +6,8 @@ const gameContainer = document.getElementById("gameContainer");
 const clickSound = document.getElementById("clickSound");
 const restartBtn = document.getElementById("restartBtn");
 const backToMenuBtn = document.getElementById("backToMenuBtn");
+const gameover = document.getElementById("buttonsContainer");
+const vencedor = document.getElementById("vencedor");
 
 const winConditions = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -60,6 +62,7 @@ function stopMenuScan() {
 // ===== VARREDURA DO JOGO =====
 function startGameScan() {
   stopGameScan();
+  gameover.style.display = 'none'
   const focusableIndexes = options.map((v, i) => v === "" ? i : null).filter(i => i !== null);
   if (focusableIndexes.length === 0) return;
   let currentScan = 0;
@@ -182,7 +185,8 @@ function handleGameClick() {
   const win = checkWinner();
   if (win) {
     win.forEach(i => cells[i].classList.add("winner"));
-    statusText.textContent = `Jogador ${currentPlayer} venceu!`;
+    vencedor.innerText = `Jogador ${currentPlayer} venceu!`;
+    gameover.style.display = 'block'
     running = false;
     startEndButtonScan();
     return;

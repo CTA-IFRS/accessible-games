@@ -60,7 +60,7 @@ h1 {
   color: #333;
 }
 
-#score, label[for="velocidade"] {
+#score {
   font-size: 1.5rem;
   color: #000;
 }
@@ -71,33 +71,6 @@ h1 {
 
 #typed-word span.wrong {
   color: red;
-}
-
-#velocidade {
-  width: 15rem;
-  margin-top: 0.5rem;
-  -webkit-appearance: none;
-  background: #ddd;
-  height: 0.5rem;
-  border-radius: 0.25rem;
-  outline: none;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-#velocidade:hover {
-  background: #ccc;
-}
-
-#velocidade::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 1.5rem;
-  width: 1.5rem;
-  border-radius: 50%;
-  background: #007bff;
-  border: none;
-  box-shadow: 0 0 0.25rem #007bff;
-  transition: background 0.3s;
 }
 
 .btn-menu{

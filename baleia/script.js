@@ -323,7 +323,7 @@ function restartGame() {
 function backToMenu() {
     hideGameOverMenu();
     document.getElementById("gameArea").style.display = "none";
-    document.getElementById("menuPrincipal").style.display = "block";
+    document.getElementById("menuPrincipal").style.display = "flex";
     gameOver = false;
     score = 0;
     vidas = 3;
@@ -370,7 +370,7 @@ function restartGame() {
 function backToMenu() {
     hideGameOverMenu();
     document.getElementById("gameArea").style.display = "none";
-    document.getElementById("menuPrincipal").style.display = "block";
+    document.getElementById("menuPrincipal").style.display = "flex";
     gameOver = false;
     score = 0;
     vidas = 3;

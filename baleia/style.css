@@ -11,7 +11,8 @@ body {
 }
 
 .menu-container {
-    max-width: 600px;
+    width: 100%;
+    max-width: 400px;
     margin: 20px auto;
     background-color: white;
     padding: 20px;
@@ -24,6 +25,7 @@ body {
     text-align: left;
     border-bottom: 1px solid #eee;
     padding-bottom: 20px;
+    text-align: center;
 }
 .menu-section:last-child {
     border-bottom: none;
@@ -32,20 +34,20 @@ body {
 }
 
 .menu-section h2 {
-    color: #0d47a1;
+    color: #007bff;
     margin-bottom: 15px;
-    font-size: 1.2em;
+    font-size: 24px;
 }
 
 .menu-option {
     padding: 12px 15px;
     margin: 8px 0;
     background-color: #f5f5f5;
-    border: 1px solid #ccc;
+    border: 2px solid #333;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 1em;
+    font-size: 18px;
     position: relative;
 }
 
@@ -59,9 +61,20 @@ body {
     color: white;
 }
 
+#menuPrincipal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* centraliza na horizontal */
+    align-items: center;      /* centraliza na vertical */
+    min-height: 100vh;        /* ocupa a tela inteira */
+    padding: 20px;            /* espaço para não colar nas bordas em telas pequenas */
+    box-sizing: border-box;
+}
+
+
 #menuPrincipal h1 {
-    color: #0d47a1;
-    margin-bottom: 30px;
+    color: #000;
+    margin-bottom: 15px;
 }
 
 #gameArea {

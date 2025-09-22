@@ -23,7 +23,8 @@ h1 {
   color: #007bff;
 }
 
-#game-container {
+#gameContainer {
+  display: none;
   position: relative;
   width: 31.25rem;
   height: 37.5rem;
@@ -43,7 +44,7 @@ h1 {
   transform: translateX(-50%);
 }
 
-#hit-zone {
+#hitZone {
   position: absolute;
   bottom: 6.25rem;
   height: 4.5rem;
@@ -65,11 +66,11 @@ h1 {
   color: #000;
 }
 
-#typed-word span.correct {
+#typedWord span.correct {
   color: lime;
 }
 
-#typed-word span.wrong {
+#typedWord span.wrong {
   color: red;
 }
 
@@ -149,4 +150,94 @@ h2{
 #menu:focus, #retry:focus {
     outline: 2px solid #007bff;
     background: #e9f3ff;
+}
+
+
+
+label[for=velocidade]{
+    font-size: 2rem;
+}
+
+.tela-inicial {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background-color: #111;
+    color: white;
+}
+
+.botao-iniciar {
+    background-color: lime;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.botao-iniciar:hover {
+    background-color: rgb(0, 200, 0);
+}
+
+#velocidade {
+    width: 20rem;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
+#menuContainer {
+  display: block;
+  align-items: center;
+  max-width: 400px !important;
+  margin: 0 auto;
+}
+
+#menuContainer h1{
+  margin-bottom: 2rem;
+}
+
+.menu-section {
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-section h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 1.2rem;
+}
+
+.menu-option {
+  text-align:center ;
+  background-color: #f9f9f9;
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 18px;
+  margin: 6px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu-option:hover {
+  background-color: #e6f0ff;
+}
+
+.menu-option:focus {
+  outline: 3px solid #007bff;
+  background-color: #d0eaff;
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Colméia</title>
+  </head>
+  
+  <body>
+    <div id="menuContainer">
+      <h1>Jogo da Colméia Acessível</h1>
+
+      <div class="menu-section">
+        <h2>Escolha a dificuldade</h2>
+        
+        <button class="menu-option" data-option="speed-slow">Fácil</button>
+        <button class="menu-option" data-option="speed-medium">Médio</button>
+        <button class="menu-option" data-option="speed-fast">Dificíl</button>
+      </div>
+    </div>
+
+    <div id="gameContainer">
+      <div id="vidas">❤️❤️❤️</div>
+      
+      <div id="hitZone"></div>
+      
+      <div class="menu">
+        <div id="feedback">
+          <h3>Palavra: <span id="typedWord"></span></h3>
+        </div>
+        
+        <div id="score">
+          <h3>Pontuação: <span id="points">0</span></h3>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/scripts.js" defer></script>
+  </body>
+</html>

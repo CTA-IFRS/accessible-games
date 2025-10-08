@@ -12,49 +12,170 @@ $(document).ready(function () {
   let scanInterval = null;
   let velocidadeSelecionada = "medium";
 
-  function startMenuScan(startIndex = 0) {
+  /* Menu navigation scan */
+  function startMenuScan(startIndex = 0) 
+  {
     let index = startIndex;
+    
     stopMenuScan();
+    
     scanInterval = setInterval(() => {
       $(allOptions).blur();
       $(allOptions[index]).focus();
       currentSelection = index;
       index = (index + 1) % allOptions.length;
     }, scanSpeed);
-  }
-  function stopMenuScan() {
-    if (scanInterval) clearInterval(scanInterval);
+
+    $(document).on("keydown.initGame", function (e) 
+    {
+      if (e.code === "Space" || e.code === "Enter") 
+      {
+        initGame();
+      }
+    });
   }
 
-  function initGame() {
+  function stopMenuScan() 
+  {
+    if (scanInterval) clearInterval(scanInterval);
+    $(document).off(".initGame");
+  }
+
+  function initGame() 
+  {
     const selected = $(allOptions[currentSelection]);
-    if (selected.data("option")) {
+
+    if (selected.data("option")) 
+    {
       const opt = selected.data("option");
+
       velocidadeSelecionada = opt.replace("speed-", "");
       scanSpeed =
         velocidadeSelecionada === "slow" ? 2000 :
         velocidadeSelecionada === "medium" ? 1000 : 500;
-      stopMenuScan();
+
       $menuContainer.hide();
-      $(document).off(".initGame");
+      
+      stopMenuScan();
       novaRodada();
     }
   }
 
-  $(document).on("keydown.initGame", function (e) {
-    if (e.code === "Space" || e.code === "Enter") {
-      initGame();
-    }
-  });
-  $(document).on("click.initGame", function () {
-    initGame();
-  });
-
   startMenuScan();
 
-  // ---------------------------------------------------------
-  // game state
-  const palavras = ["LIVRO", "ACESSIBILIDADE", "CADEIRA", "GATO"];
+  /* Settings Modal */
+  const $settingsBtn = $(`
+    <button id="settingsBtn" class="settings-btn" title="Configurações">
+      <span style="font-size:1.2em;">&#9881; Configurações</span>
+    </button>
+  `);
+  $(".menu-section").after($settingsBtn);
+
+  const $settingsModal = $(`
+    <div id="settingsModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h3>Gerenciar Palavras</h3>
+
+        <div>
+          <h4>Adicionar Palavra:</h4>
+          <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:80%;" />
+          <button id="addWordBtn">Adicionar</button>
+        </div>
+
+        <div>
+          <h4>Palavras Atuais:</h4>
+          <ul id="wordsList"></ul>
+        </div>
+
+        <span class="close" style="float:right;cursor:pointer;">&times; Fechar</span>
+      </div>
+    </div>
+  `);
+  $("body").append($settingsModal);
+
+  // Local Storage helpers
+  function getSavedWords() 
+  {
+    const saved = localStorage.getItem("palavras");
+
+    try 
+    {
+      return saved ? JSON.parse(saved) : [];
+    } 
+    catch
+    {
+      return [];
+    }
+  }
+
+  function saveWords(words) 
+  {
+    localStorage.setItem("palavras", JSON.stringify(words));
+  }
+
+  let palavras = getSavedWords();
+  if (!palavras.length) 
+  {
+    palavras = ["IFRS", "ACESSIBILIDADE", "CTA"];
+
+    saveWords(palavras);
+  }
+
+  $settingsBtn.on("click", () => {
+    stopMenuScan();
+    updateWordsList();
+
+    $settingsModal.show();
+
+    $("#newWordInput").val("").focus();
+  });
+
+  $settingsModal.find(".close").on("click", () => {
+    $settingsModal.hide()
+    startMenuScan();
+  });
+
+  $(window).on("click", (e) => {
+    if ($(e.target).is("#settingsModal")) $settingsModal.hide();
+  });
+
+  // Add word
+  $("#addWordBtn").on("click", function () 
+  {
+    const word = $("#newWordInput").val().trim().toUpperCase();
+
+    if (word && !palavras.includes(word)) 
+    {
+      palavras.push(word);
+
+      saveWords(palavras);
+      updateWordsList();
+
+      $("#newWordInput").val("").focus();
+    }
+  });
+
+  function updateWordsList() 
+  {
+    const $list = $("#wordsList");
+    $list.empty();
+
+    palavras.forEach((w, i) => 
+    {
+      const $li = $(`<li>${w} <button data-i="${i}" style="margin-left:8px;">Remover</button></li>`);
+
+      $li.find("button").on("click", function () 
+      {
+        palavras.splice($(this).data("i"), 1);
+        saveWords(palavras);
+        updateWordsList();
+      });
+      
+      $list.append($li);
+    });
+  }
+
+  /* Game Logic */
   let palavraAtual = "";
   let indexLetra = 0;
   let pontos = 0;
@@ -75,39 +196,52 @@ $(document).ready(function () {
   let keyPressed = false;
   let mousePressed = false;
 
-  function falarTexto(texto) {
+  function falarTexto(texto) 
+  {
     const utterance = new SpeechSynthesisUtterance(texto);
     utterance.volume = 1.0;
     utterance.lang = "pt-BR";
+
     speechSynthesis.speak(utterance);
   }
 
   // limpa tudo que pode causar execução dupla
-  function limparEstado() {
-    if (animacaoAtual) {
+  function limparEstado() 
+  {
+    if (animacaoAtual) 
+    {
       clearInterval(animacaoAtual);
       animacaoAtual = null;
     }
-    if (proximoTimeout) {
+
+    if (proximoTimeout) 
+    {
       clearTimeout(proximoTimeout);
       proximoTimeout = null;
     }
-    if (letraAtual) {
+
+    if (letraAtual) 
+    {
       $(letraAtual).remove();
       letraAtual = null;
     }
+
     $gameContainer.find(".letter").remove();
   }
 
-  function novaRodada() {
+  function novaRodada() 
+  {
     // cancela qualquer timeout anterior
-    if (proximoTimeout) {
+    if (proximoTimeout) 
+    {
       clearTimeout(proximoTimeout);
       proximoTimeout = null;
     }
+
     limparEstado();
 
-    switch (velocidadeSelecionada) {
+    switch (velocidadeSelecionada) 
+    {
       case "slow": velocidade = 1; break;
       case "medium": velocidade = 3; break;
       case "fast": velocidade = 5; break;
@@ -130,36 +264,46 @@ $(document).ready(function () {
     iniciarLetra();
   }
 
-  function criarLetra(letra) {
+  function criarLetra(letra) 
+  {
     const $div = $("<div>")
       .addClass("letter")
       .text(letra)
       .attr("data-letra", letra)
       .css("top", "0px");
+
     $gameContainer.append($div);
+
     return $div;
   }
 
-  function animarLetra($letraEl) {
+  function animarLetra($letraEl) 
+  {
     let top = 0;
-    // garante que qualquer animação anterior foi limpa
-    if (animacaoAtual) {
+
+    if (animacaoAtual) 
+    {
       clearInterval(animacaoAtual);
       animacaoAtual = null;
     }
 
-    animacaoAtual = setInterval(() => {
-      if (!jogoAtivo) {
+    animacaoAtual = setInterval(() => 
+    {
+      if (!jogoAtivo) 
+      {
         clearInterval(animacaoAtual);
+
         animacaoAtual = null;
         $letraEl.remove();
+
         return;
       }
 
       top += velocidade;
       $letraEl.css("top", top + "px");
 
-      if (top > $gameContainer.height()) {
+      if (top > $gameContainer.height()) 
+      {
         clearInterval(animacaoAtual);
         animacaoAtual = null;
         $letraEl.remove();
@@ -172,39 +316,45 @@ $(document).ready(function () {
         letraAtual = null;
         indexLetra++;
 
-        if (jogoAtivo) {
-          // agenda a próxima letra (controlado por proximoTimeout)
+        if (jogoAtivo) 
+        {
           proximoTimeout = setTimeout(() => iniciarLetra(), 500);
         }
       }
     }, 16);
   }
 
-  function iniciarLetra() {
+  function iniciarLetra() 
+  {
     if (!jogoAtivo) return;
 
-    // evita timeouts antigos dispararem paralelo
-    if (proximoTimeout) {
+    if (proximoTimeout) 
+    {
       clearTimeout(proximoTimeout);
       proximoTimeout = null;
     }
 
-    // garante que não exista letra/intervalo pendente
-    if (animacaoAtual) {
+    if (animacaoAtual) 
+    {
       clearInterval(animacaoAtual);
       animacaoAtual = null;
     }
-    if (letraAtual) {
+
+    if (letraAtual) 
+    {
       $(letraAtual).remove();
       letraAtual = null;
     }
 
-    if (indexLetra >= palavraAtual.length) {
+    if (indexLetra >= palavraAtual.length) 
+    {
       falarTexto(palavraAtual);
-      // armazena timeout para podermos cancelar se o jogador errar durante o delay
-      proximoTimeout = setTimeout(() => {
+
+      proximoTimeout = setTimeout(() => 
+      {
         if (jogoAtivo) novaRodada();
       }, 2000);
+
       return;
     }
 
@@ -216,71 +366,36 @@ $(document).ready(function () {
     animarLetra($letraEl);
   }
 
-  function mostrarLetra(acertou, letra = "") {
+  function mostrarLetra(acertou, letra = "") 
+  {
     const $span = $("<span>")
       .text(letra.toUpperCase())
       .addClass(acertou ? "correct" : "wrong");
+
     $typedSpan.append($span);
   }
 
-  function atualizarVidas() {
+  function atualizarVidas() 
+  {
     const coracao = "❤️";
+
     $("#vidas").text(coracao.repeat(vidas));
   }
 
-  function perderVidas() {
+  function perderVidas() 
+  {
     vidas--;
+
     atualizarVidas();
-    if (vidas <= 0) {
+
+    if (vidas <= 0) 
+    {
       mostrarMenuGameOver();
     }
   }
 
-  function mostrarMenuGameOver() {
-    jogoAtivo = false;
-
-    // limpa intervals/timeouts e letras na tela
-    limparEstado();
-
-    // zera flags para evitar input preso
-    keyPressed = false;
-    mousePressed = false;
-
-    const $overlay = $(`
-      <div id="gameOverMenu">
-        <div class="game-over-content">
-          <h2>Game Over</h2>
-          <div id="retry" class="game-over-option" data-action="restart" tabindex="0">Reiniciar Jogo</div>
-          <div id="menu" class="game-over-option" data-action="menu" tabindex="0">Voltar ao Menu</div>
-        </div>
-      </div>
-    `);
-
-    $("body").append($overlay);
-
-    $menuOptions = $("#retry, #menu");
-    allOptions = $menuOptions.toArray();
-
-    $menuOptions.on("click", function () {
-      executarAcao($(this).data("action"));
-    });
-
-    startMenuScan();
-  }
-
-  function executarAcao(action) {
-    if (action === "restart") {
-      $("#gameOverMenu").remove();
-      pontos = 0;
-      novaRodada();
-    } else if (action === "menu") {
-      window.location.href = "index.html";
-    }
-  }
-
-  // ---------------------------------------------------------
-  // INPUT HANDLERS (ligados apenas 1 vez)
-  $(document).on("keydown.game", function (e) {
+  $(document).on("keydown.game", function (e) 
+  {
     // Proteções
     if (!jogoAtivo) return;            // só processa durante o jogo
     if (keyPressed) return;            // evita repetição por tecla segurada
@@ -290,7 +405,8 @@ $(document).ready(function () {
 
     keyPressed = true; // bloqueia até keyup
 
-    if (!letraAtual) {
+    if (!letraAtual) 
+    {
       // se não há letra atual, libera a flag para não travar
       keyPressed = false;
       return;
@@ -303,24 +419,35 @@ $(document).ready(function () {
     const hitBottom = hitTop + $hitZone.outerHeight();
     const dentroZona = letraBottom > hitTop && letraTop < hitBottom;
 
-    if (dentroZona && letraDigitada === letraCerta) {
+    if (dentroZona && letraDigitada === letraCerta) 
+    {
       pontos += 10;
       somAcerto.play();
       $scoreSpan.text(pontos);
+
       mostrarLetra(true, letraDigitada);
-    } else {
-      pontos -= 5;
+    } 
+    else
+    {
+      if (pontos > 5)
+        pontos -= 5;
+
+      $scoreSpan.text(pontos);
       somErro.play();
+
       perderVidas();
       mostrarLetra(false, letraDigitada);
     }
 
     // interrompe animação e prepara próxima letra de forma única
-    if (animacaoAtual) {
+    if (animacaoAtual) 
+    {
       clearInterval(animacaoAtual);
       animacaoAtual = null;
     }
-    if (letraAtual) {
+
+    if (letraAtual) 
+    {
       $(letraAtual).remove();
       letraAtual = null;
     }
@@ -329,69 +456,70 @@ $(document).ready(function () {
     iniciarLetra();
   });
 
-  $(document).on("keyup.game", function () {
+  $(document).on("keyup.game", function () 
+  {
     keyPressed = false;
   });
 
-  $(document).on("mousedown.game", function (e) {
-    if (e.button !== 0) return;
-    if (mousePressed) return;
+  /* game over menu */
+  function mostrarMenuGameOver() 
+  {
+    $(document).off(".game");
 
-    mousePressed = true;
+    jogoAtivo = false;
 
-    // se estiver no menu (jogo não ativo) permite selecionar opções
-    if (!jogoAtivo && allOptions.length > 0) {
-      // dispara o clique sobre a opção atual (mantém comportamento antigo)
-      $(allOptions[currentSelection]).click();
-      // libera a flag logo em seguida (em caso de navegação sem reload)
-      setTimeout(() => { mousePressed = false; }, 0);
-      return;
-    }
+    // limpa intervals/timeouts e letras na tela
+    limparEstado();
 
-    if (!jogoAtivo) {
-      mousePressed = false;
-      return;
-    }
-
-    if (!letraAtual) {
-      mousePressed = false;
-      return;
-    }
-
-    const letraCerta = $(letraAtual).data("letra").toLowerCase();
-    const letraTop = $(letraAtual).position().top;
-    const letraBottom = letraTop + $(letraAtual).outerHeight();
-    const hitTop = $hitZone.position().top;
-    const hitBottom = hitTop + $hitZone.outerHeight();
-    const dentroZona = letraBottom > hitTop && letraTop < hitBottom;
-
-    if (dentroZona) {
-      pontos += 10;
-      somAcerto.play();
-      $scoreSpan.text(pontos);
-      mostrarLetra(true, letraCerta);
-    } else {
-      pontos -= 5;
-      somErro.play();
-      perderVidas();
-      mostrarLetra(false, letraCerta);
-    }
-
-    if (animacaoAtual) {
-      clearInterval(animacaoAtual);
-      animacaoAtual = null;
-    }
-    if (letraAtual) {
-      $(letraAtual).remove();
-      letraAtual = null;
-    }
-
-    indexLetra++;
-    iniciarLetra();
-  });
-
-  $(document).on("mouseup.game", function () {
+    // zera flags para evitar input preso
+    keyPressed = false;
     mousePressed = false;
-  });
 
+    const $overlay = $(`
+      <div id="gameOverMenu">
+        <div class="game-over-content">
+          <h3>Game Over</h3>
+          <div id="retry" class="game-over-option" data-action="restart" tabindex="0">Reiniciar Jogo</div>
+          <div id="menu" class="game-over-option" data-action="menu" tabindex="0">Voltar ao Menu</div>
+        </div>
+      </div>
+    `);
+
+    $("body").append($overlay);
+
+    $menuOptions = $("#retry, #menu");
+    allOptions = $menuOptions.toArray();
+
+    $menuOptions.on("keydown", function (e) 
+    {
+      if (e.code === "Space" || e.code === "Enter") 
+      {
+        executarAcao($(this).data("action"));
+      }
+    });
+
+    $menuOptions.on("click", function () 
+    {
+      executarAcao($(this).data("action"));
+    });
+
+    startMenuScan();
+  }
+
+  function executarAcao(action) 
+  {
+    if (action === "restart") 
+    {
+      $("#gameOverMenu").remove();
+
+      pontos = 0;
+      $scoreSpan.text(pontos);
+
+      novaRodada();
+    } 
+    else if (action === "menu") 
+    {
+      window.location.href = "index.html";
+    }
+  }
 });

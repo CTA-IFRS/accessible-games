@@ -1,181 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Jogos Web Acessíveis</title>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-
-  <style>
-    body {
-      background-color: #f8f9fa;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    .high-contrast {
-      background-color: #000000 !important; 
-      color: #ffffff !important; 
-    }
-
-    .high-contrast header,
-    .high-contrast footer,
-    .high-contrast main,
-    .high-contrast .card,
-    .high-contrast .modal-content,
-    .high-contrast .skip-links {
-      background-color: #000000 !important;
-      color: #ffffff !important;
-      border-color: #ffffff !important;
-    }
-
-    .high-contrast .skip-links {
-      background-color: #000000 !important;
-      color: #ffffff !important;
-      border-bottom: 2px solid #ffffff !important; 
-    }
-
-    .high-contrast a {
-      color: #ffffff !important;
-      text-decoration: underline;
-    }
-
-    .high-contrast .btn {
-      background-color: #ffffff !important;
-      color: #000000 !important;
-      border-color: #ffffff !important;
-    }
-
-    .high-contrast .btn-outline-secondary {
-      background-color: transparent !important;
-      color: #ffffff !important;
-      border-color: #ffffff !important;
-    }
-
-    .high-contrast .card-title,
-    .high-contrast .card-text {
-      color: #ffffff !important;
-    }
-
-    .high-contrast .card,
-    .high-contrast .modal-content {
-      border: none !important; 
-      box-shadow: none !important;
-    }
-
-    .high-contrast table,
-    .high-contrast th,
-    .high-contrast td {
-      border: 1px solid #ffffff !important;
-    }
-
-    .high-contrast ul,
-    .high-contrast ol {
-      color: #ffffff !important;
-    }
-
-    .high-contrast svg {
-      fill: #ffffff !important;
-      stroke: #ffffff !important;
-    }
-
-    header {
-      background-color: #ffffff;
-      color: rgb(0, 0, 0);
-      padding: 2rem 0;
-      text-align: center;
-      border-bottom: 1px solid #dee2e6;
-    }
-
-    main {
-      flex-grow: 1;
-      padding: 2rem 0;
-      display: flex;
-      justify-content: center;
-    }
-
-    footer {
-      background-color: #212529;
-      color: white;
-      padding: 0.8rem 0;
-      text-align: center;
-    }
-
-    .card {
-      height: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      transition: transform 0.25s ease-in-out;
-      max-width: 320px;
-      margin-left: auto;
-      margin-right: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card:hover,
-    .card:focus-within {
-      transform: scale(1.02);
-      z-index: 2;
-    }
-
-    .card-img-top {
-      max-height: 150px;
-      object-fit: contain;
-      background-color: #e9ecef;
-      padding: 0.9rem;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-    }
-
-    .card-body {
-      padding: 1.2rem 1.5rem;
-      text-align: center;
-    }
-
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-text {
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
-      margin-bottom: 0;
-    }
-
-    .d-flex.justify-content-center.gap-2.mt-3 {
-      justify-content: center !important;
-    }
-
-    .btn {
-      font-size: 0.9rem;
-      padding: 0.45rem 1.1rem;
-    }
-
-    .row {
-      max-width: 1024px;
-      width: 100%;
-    }
-  
-    a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus,
-.card:focus-within,
-.btn:focus { /* Adicionado o seletor .btn:focus */
-  outline: 3px solid #FFD700;
-  outline-offset: 3px;
-}
-
-  </style>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -288,7 +121,7 @@ select:focus,
             <h2 class="card-title">Colmeia</h2>
             <p class="card-text">Ajude as abelhas a formar palavras e ganhar pontos.</p>
             <div class="d-flex justify-content-center gap-2 mt-3">
-              <a href="colmeia/jogo.html" class="btn btn-primary">Iniciar</a>
+              <a href="colmeia/index.html" class="btn btn-primary">Iniciar</a>
               <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesColmeia">
                 Instruções
               </button>
@@ -460,16 +293,7 @@ select:focus,
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const contrastToggle = document.querySelector('.alt-contrast');
-
-      contrastToggle.addEventListener('click', function(event) {
-        event.preventDefault(); 
-        document.body.classList.toggle('high-contrast'); 
-      });
-    });
-  </script>
+  <script src="js/main.js"></script>
 
 </body>
 </html>

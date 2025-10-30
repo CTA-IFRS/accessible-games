@@ -61,15 +61,20 @@ $(document).ready(function () {
     }
   }
 
-  startMenuScan();
-
   /* Settings Modal */
-  const $settingsBtn = $(`
-    <button id="settingsBtn" class="settings-btn" title="Configurações">
-      <span style="font-size:1.2em;">&#9881; Configurações</span>
-    </button>
+  const $settings = $(`
+    <div class="menu-section settings-section">
+      <button id="settingsBtn" class="settings-btn" title="Configurações">
+        <span style="font-size:1.2em;">&#9881; Configurações</span>
+      </button>
+
+      <label id="autoScanLabel">
+        <input type="checkbox" id="autoScanToggle" />
+        Verredura Automática do Menu
+      </label>
+    </div>
   `);
-  $(".menu-section").after($settingsBtn);
+  $(".menu-section").after($settings);
 
   const $settingsModal = $(`
     <div id="settingsModal" class="modal" style="display:none;">
@@ -92,6 +97,26 @@ $(document).ready(function () {
     </div>
   `);
   $("body").append($settingsModal);
+
+  $("#autoScanToggle").on("change", function () {
+    if (this.checked) {
+      $menuOptions.attr("tabindex", "-1").off("click.initGame");
+      startMenuScan();
+    } else {
+      stopMenuScan();
+      $menuOptions.attr("tabindex", "0").on("click.initGame", function () {
+        currentSelection = allOptions.indexOf(this);
+        initGame();
+      });
+      $menuOptions.blur();
+    }
+  });
+
+  stopMenuScan();
+  $menuOptions.attr("tabindex", "0").on("click.initGame", function () {
+    currentSelection = allOptions.indexOf(this);
+    initGame();
+  });
 
   // Local Storage helpers
   function getSavedWords() 
@@ -121,7 +146,7 @@ $(document).ready(function () {
     saveWords(palavras);
   }
 
-  $settingsBtn.on("click", () => {
+  $("#settingsBtn").on("click", () => {
     stopMenuScan();
     updateWordsList();
 
@@ -132,7 +157,9 @@ $(document).ready(function () {
 
   $settingsModal.find(".close").on("click", () => {
     $settingsModal.hide()
-    startMenuScan();
+    
+    if ($("#autoScanToggle").is(":checked"))
+      startMenuScan();
   });
 
   $(window).on("click", (e) => {
@@ -162,7 +189,7 @@ $(document).ready(function () {
 
     palavras.forEach((w, i) => 
     {
-      const $li = $(`<li>${w} <button data-i="${i}" style="margin-left:8px;">Remover</button></li>`);
+      const $li = $(`<li>${w} <button data-i="${i}" class="removeButton" >Remover</button></li>`);
 
       $li.find("button").on("click", function () 
       {
@@ -479,8 +506,8 @@ $(document).ready(function () {
       <div id="gameOverMenu">
         <div class="game-over-content">
           <h3>Game Over</h3>
-          <div id="retry" class="game-over-option" data-action="restart" tabindex="0">Reiniciar Jogo</div>
-          <div id="menu" class="game-over-option" data-action="menu" tabindex="0">Voltar ao Menu</div>
+          <button id="retry" class="game-over-option" data-action="restart" tabindex="0">Reiniciar Jogo</button>
+          <button id="menu" class="game-over-option" data-action="menu" tabindex="0">Voltar ao Menu</button>
         </div>
       </div>
     `);
@@ -503,7 +530,8 @@ $(document).ready(function () {
       executarAcao($(this).data("action"));
     });
 
-    startMenuScan();
+    if ($("#autoScanToggle").is(":checked"))
+      startMenuScan();
   }
 
   function executarAcao(action) 

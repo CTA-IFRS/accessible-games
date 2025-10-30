@@ -112,6 +112,13 @@ h2{
   padding: 10px;
 }
 
+#autoScanLabel{
+  padding: 10px;
+  background-color: #eee;
+  border: #8d8b8b 1px solid;
+  font-size: 1.2em !important;
+}
+
 #gameOverMenu,
 #settingsModal {
     position: fixed;
@@ -125,6 +132,30 @@ h2{
     justify-content: center;
     align-items: center;
     z-index: 1000;
+}
+
+#settingsModal .modal-content {
+    max-width: 500px;
+}
+
+#settingsModal .modal-content div{
+  padding: 5px;
+  border: #333 1px solid;
+}
+
+#settingsModal .modal-content div h4{
+  margin-bottom: 10px;
+}
+
+#settingsModal .modal-content div ul li{ 
+  display: flex;
+}
+
+
+#gameOverMenu button:hover,
+#gameOverMenu button:focus
+{
+    background-color: #e0e0e0;
 }
 
 .game-over-content,
@@ -214,7 +245,7 @@ label {
 #menuContainer {
   display: block;
   align-items: center;
-  max-width: 400px !important;
+  max-width: 550px !important;
   margin: 0 auto;
 }
 

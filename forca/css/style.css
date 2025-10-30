@@ -10,7 +10,7 @@ body {
   }
   
   #menuContainer {
-    max-width: 400px;
+    max-width: 550px;
     margin: 0 auto;
   }
   
@@ -243,3 +243,46 @@ body {
   z-index: 10; /* acima do overlay */
   box-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
+
+  #settingsBtn {
+  padding: 10px;
+}
+
+#autoScanLabel{
+  padding: 10px;
+  background-color: #eee;
+  border: #8d8b8b 1px solid;
+  font-size: 1.2em !important;
+}
+
+#gameOverMenu,
+#settingsModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#settingsModal .modal-content {
+    max-width: 500px;
+}
+
+#settingsModal .modal-content div{
+  padding: 5px;
+  border: #333 1px solid;
+}
+
+#settingsModal .modal-content div h4{
+  margin-bottom: 10px;
+}
+
+#settingsModal .modal-content div ul li{ 
+  display: flex;
+}

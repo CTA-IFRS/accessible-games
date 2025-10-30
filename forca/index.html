@@ -1,57 +1,63 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo da Forca Acessível</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div id="menuContainer">
-    <h1>Jogo da Forca Acessível</h1>
+    <link rel="stylesheet" href="css/style.css" />
     
-    <div class="menu-section" id="speed-section">
-      <h2>Velocidade da Varredura</h2>
-      <ul class="menu-options" id="speed-options">
-        <li class="menu-option" data-speed="1500">Lenta</li>
-        <li class="menu-option" data-speed="1000">Média</li>
-        <li class="menu-option" data-speed="500">Rápida</li>
-      </ul>
-    </div>
-    
-    <div class="menu-section" id="difficulty-section">
-      <h2>Dificuldade</h2>
-      <ul class="menu-options" id="difficulty-options">
-        <li class="menu-option" data-difficulty="easy">Fácil</li>
-        <li class="menu-option" data-difficulty="medium">Médio</li>
-        <li class="menu-option" data-difficulty="hard">Difícil</li>
-      </ul>
-    </div>
-    
-    <button class="start-btn" id="start-btn" style="display: none;">Iniciar Jogo</button>
-  </div>
+    <title>Jogo da Forca Acessível</title>
+  </head>
 
-  <div class="game-container" id="game-container" style="display: none;">
-    <div class="forca-container">
-      <canvas id="hangman-canvas" width="200" height="250"></canvas>
-      <div class="word-display" id="word-display"></div>
-    </div>
-    
-    <div class="keyboard-container">
-      <div class="keyboard" id="keyboard"></div>
-    </div>
-    
-    <div class="button-container" id="button-container">
-      <div id="modal">
-        <div class="message" id="message"></div>
+  <body>
+    <div id="menuContainer">
+      <h1>Jogo da Forca Acessível</h1>
+      
+      <div id="menu">
+        <div class="menu-section" id="speed-section">
+          <h2>Velocidade da Varredura</h2>
 
-        <button class="restart-btn" id="restart-btn">Jogar Novamente</button>
-        <button class="back-btn" id="back-btn">Voltar ao Menu</button>
+          <ul class="menu-options" id="speed-options">
+            <li><button class="menu-option" data-speed="1500">Lenta</button></li>
+            <li class="menu-option" data-speed="1000">Média</li>
+            <li class="menu-option" data-speed="500">Rápida</li>
+          </ul>
+        </div>
+        
+        <div class="menu-section" id="difficulty-section">
+          <h2>Dificuldade</h2>
+
+          <ul class="menu-options" id="difficulty-options">
+            <li class="menu-option" data-difficulty="easy">Fácil</li>
+            <li class="menu-option" data-difficulty="medium">Médio</li>
+            <li class="menu-option" data-difficulty="hard">Difícil</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <div class="game-container" id="game-container" style="display: none;">
+      <div class="forca-container">
+        <canvas id="hangman-canvas" width="200" height="250"></canvas>
+        <div class="word-display" id="word-display"></div>
+      </div>
+      
+      <div class="keyboard-container">
+        <div class="keyboard" id="keyboard"></div>
+      </div>
+      
+      <div class="button-container" id="button-container">
+        <div id="modal">
+          <div class="message" id="message"></div>
+
+          <button class="restart-btn" id="restart-btn">Jogar Novamente</button>
+          <button class="back-btn" id="back-btn">Voltar ao Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/scripts.js" defer></script>
+  </body>
 </html>

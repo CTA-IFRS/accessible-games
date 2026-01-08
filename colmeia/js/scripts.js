@@ -140,7 +140,7 @@ $(document).ready(function () {
   // Local Storage helpers
   function getSavedWords() 
   {
-    const saved = localStorage.getItem("palavras");
+    const saved = localStorage.getItem("palavrasColmeia");
 
     try 
     {
@@ -154,7 +154,7 @@ $(document).ready(function () {
 
   function saveWords(words) 
   {
-    localStorage.setItem("palavras", JSON.stringify(words));
+    localStorage.setItem("palavrasColmeia", JSON.stringify(words));
   }
 
   let palavras = getSavedWords();

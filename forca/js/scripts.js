@@ -87,7 +87,13 @@ $(document).ready(function () {
 
           <div>
             <h5>Adicionar Palavra:</h5>
-            <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:80%;" />
+            <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:95%;" />
+            <input type="text" id="newURLWordInput" placeholder="Digite a URL da palavra..." style="width:95%;" />
+            <select id="difficultySelect" style="width:80%;">
+              <option value="easy">Fácil</option>
+              <option value="medium">Médio</option>
+              <option value="hard">Difícil</option>
+            </select>
             <button id="addWordBtn">Adicionar</button>
           </div>
 
@@ -142,7 +148,7 @@ $(document).ready(function () {
   // Local Storage helpers
   function getSavedWords() 
   {
-    const saved = localStorage.getItem("palavras");
+    const saved = localStorage.getItem("palavrasForca");
 
     try 
     {
@@ -156,13 +162,13 @@ $(document).ready(function () {
 
   function saveWords(words) 
   {
-    localStorage.setItem("palavras", JSON.stringify(words));
+    localStorage.setItem("palavrasForca", JSON.stringify(words));
   }
 
   let palavras = getSavedWords();
   if (!palavras.length) 
   {
-    saveWords(wordLists.hard);
+    //saveWords(wordLists.hard);
   }
 
   $("#settingsBtn").on("click", () => {
@@ -189,15 +195,18 @@ $(document).ready(function () {
   $("#addWordBtn").on("click", function () 
   {
     const word = $("#newWordInput").val().trim().toUpperCase();
+    const url = $("#newURLWordInput").val().trim();
+    const difficulty = $("#difficultySelect").val();
 
-    if (word && !palavras.includes(word)) 
+    if (word && !palavras.some(w => w.word === word)) 
     {
-      palavras.push(word);
+      palavras.push({ word, url, difficulty });
 
       saveWords(palavras);
       updateWordsList();
 
       $("#newWordInput").val("").focus();
+      $("#newURLWordInput").val("");
     }
   });
 
@@ -206,18 +215,37 @@ $(document).ready(function () {
     const $list = $("#wordsList");
     $list.empty();
 
-    palavras.forEach((w, i) => 
-    {
-      const $li = $(`<li>${w} <button data-i="${i}" class="removeButton" >Remover</button></li>`);
+    console.log(palavras);
 
-      $li.find("button").on("click", function () 
+    const difficulties = { easy: [], medium: [], hard: [] };
+    
+    palavras.forEach((w) => {
+      const difficulty = w.difficulty || 'easy';
+      difficulties[difficulty].push(w);
+    });
+
+    Object.entries(difficulties).forEach(([difficulty, words]) =>
+    {
+      if (words.length > 0)
       {
-        palavras.splice($(this).data("i"), 1);
-        saveWords(palavras);
-        updateWordsList();
-      });
-      
-      $list.append($li);
+        const $category = $(`<li><strong>${difficulty.toUpperCase()}</strong><ul class="words-by-difficulty"></ul></li>`);
+        const $subList = $category.find('.words-by-difficulty');
+
+        words.forEach((w, i) => {
+          const imgHtml = w.url ? `<img src="${w.url}" alt="${w.word}" style="max-width:50px;max-height:50px;margin-right:10px;">` : '';
+          const $wordLi = $(`<li>${imgHtml}<span>${w.word}</span> <button data-word="${w.word}" class="removeButton">Remover</button></li>`);
+
+          $wordLi.find("button").on("click", function () {
+            palavras = palavras.filter(item => item.word !== $(this).data("word"));
+            saveWords(palavras);
+            updateWordsList();
+          });
+
+          $subList.append($wordLi);
+        });
+
+        $list.append($category);
+      }
     });
   }
 
@@ -245,17 +273,25 @@ $(document).ready(function () {
     $menuContainer.hide();
     $gameContainer.show();
 
-    words = wordLists[difficulty];
+    words = getSavedWords().filter(w => w.difficulty === difficulty).map(w => w.word);
 
-    if (words.length === 0)
-    {
-      words = wordLists[difficulty] = getSavedWords();
+    if (words.length === 0) {
+      palavras = getSavedWords().filter(w => w.difficulty === difficulty).map(w => w.word);
     }
-
     selectedWord = words[Math.floor(Math.random() * words.length)];
-    wordLists[difficulty] = words.filter(word => word !== selectedWord);
+    words = words.filter(word => word !== selectedWord); // Remove the selected word from the array
     displayedWord = Array(selectedWord.length).fill('_');
     wrongGuesses = 0;
+
+    const $wordImage = $('#word-image');
+
+    // Update the word display and image
+    const wordData = palavras.find(w => w.word === selectedWord);
+    if (wordData && wordData.url) {
+      $wordImage.html(`<img src="${wordData.url}" alt="${wordData.word}" style="max-width:50px;max-height:50px;">`);
+    } else {
+      $wordImage.empty(); // Clear the image if there is no URL
+    }
 
     ctx.clearRect(0, 0, $canvas[0].width, $canvas[0].height);
 

@@ -35,7 +35,7 @@ label {
 #gameContainer {
   display: none;
   position: relative;
-  width: 31.25rem;
+  width: 40rem;
   margin: 1.25rem auto;
   background-color: #f9f9f9;
   border: 2px solid #ccc;
@@ -191,31 +191,49 @@ label {
 
 /* Área da palavra */
   .word-display {
+    width: 70%;
     font-size: 24px;
     letter-spacing: 8px;
     text-align: center;
     margin-top: 20px;
-    padding: 15px;
+    padding: 20px;
     border: 2px solid #333;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    float: left;
+  }
+
+  #word-image
+  {
+    width: 20%;
+    max-width: 200px;
+    margin: 10px auto;
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #fff;
+    float: right;
   }
   
   /* Forca container */
   .forca-container {
-    max-width: 500px;
-    margin: 0 auto;
+    width: 90%;
+     margin: 10px auto 10px auto;
+    display: table;
   }
   
   /* Teclado com largura igual à forca-container */
   .keyboard-container {
-    max-width: 500px;
-    margin: 0 auto 25px;
+    width: 90%;
+    margin: 10px auto 10px auto;
     background-color: #ffffff;
     border: 2px solid #ccc;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: table;
   }
   
   /* Layout das teclas */

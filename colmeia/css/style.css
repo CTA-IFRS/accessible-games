@@ -23,6 +23,15 @@ h1 {
   color: #007bff;
 }
 
+h2{
+  font-size: 4rem;
+  margin-top: 2rem;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
 #gameContainer {
   display: none;
   position: relative;
@@ -61,6 +70,11 @@ h1 {
   color: #333;
 }
 
+#vidas{
+  display: flex;
+  justify-content: flex-start;
+}
+
 #score {
   font-size: 1.5rem;
   color: #000;
@@ -74,38 +88,10 @@ h1 {
   color: red;
 }
 
-.btn-menu{
-    margin-top: .3rem;
-    background-color: #007bff;
-    border: none;
-    padding: 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #fff;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-    text-decoration: none;
-}
-
-h2{
-  font-size: 4rem;
-  margin-top: 2rem;
-}
-
-.btn-menu:hover {
-  background-color: #015ec2;
-}
-
 .menu {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-#vidas{
-  display: flex;
-  justify-content: flex-start;
 }
 
 #settingsBtn {
@@ -150,7 +136,6 @@ h2{
 #settingsModal .modal-content div ul li{ 
   display: flex;
 }
-
 
 #gameOverMenu button:hover,
 #gameOverMenu button:focus
@@ -198,48 +183,6 @@ h2{
 #menu:focus, #retry:focus {
     outline: 2px solid #007bff;
     background: #e9f3ff;
-}
-
-
-
-label[for=velocidade]{
-    font-size: 2rem;
-}
-
-.tela-inicial {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    background-color: #111;
-    color: white;
-}
-
-.botao-iniciar {
-    background-color: lime;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-
-.botao-iniciar:hover {
-    background-color: rgb(0, 200, 0);
-}
-
-#velocidade {
-    width: 20rem;
-}
-
-label {
-    font-size: 1.25rem;
 }
 
 #menuContainer {

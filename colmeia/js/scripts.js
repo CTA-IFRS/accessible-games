@@ -79,24 +79,43 @@ $(document).ready(function () {
   const $settingsModal = $(`
     <div id="settingsModal" class="modal" style="display:none;">
       <div class="modal-content">
-        <h3>Gerenciar Palavras</h3>
-
+        <h3>Configurações</h3>
         <div>
-          <h4>Adicionar Palavra:</h4>
-          <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:80%;" />
-          <button id="addWordBtn">Adicionar</button>
+          <h4>Gerenciar Palavras</h4>
+
+          <div>
+            <h5>Adicionar Palavra:</h5>
+            <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:80%;" />
+            <button id="addWordBtn">Adicionar</button>
+          </div>
+
+          <div>
+            <h5>Palavras Atuais:</h5>
+            <ul id="wordsList"></ul>
+          </div>
         </div>
 
         <div>
-          <h4>Palavras Atuais:</h4>
-          <ul id="wordsList"></ul>
+          <h4>Velocidade de Verredura:</h4>
+
+          <select id="scanSpeedSelect">
+            <option value="slow">Lenta</option>
+            <option value="medium" selected>Média</option>
+            <option value="fast">Rápida</option>
+          </select>
         </div>
 
         <span class="close" style="float:right;cursor:pointer;">&times; Fechar</span>
-      </div>
+      </div>  
     </div>
   `);
   $("body").append($settingsModal);
+
+  $("#scanSpeedSelect").on("change", function () {
+    const selectedSpeed = $(this).val();
+    scanSpeed = selectedSpeed === "slow" ? 2000 :
+                selectedSpeed === "medium" ? 1000 : 500;
+  });
 
   $("#autoScanToggle").on("change", function () {
     if (this.checked) {

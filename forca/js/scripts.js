@@ -6,118 +6,61 @@ $(document).ready(function () {
   };
 
   const $menuContainer = $('#menuContainer');
-  const $gameContainer = $('#game-container');
+  const $gameContainer = $('#gameContainer');
   const $canvas = $('#hangman-canvas');
   const ctx = $canvas[0].getContext('2d');
   const $wordDisplay = $('#word-display');
   const $keyboard = $('#keyboard');
-  const $message = $('#message');
-  const $backBtn = $('#back-btn');
-  const $restartBtn = $('#restart-btn');
-  const $buttonContainer = $('#button-container');
-  const $startBtn = $('#start-btn');
-  const $speedOptions = $('#speed-options .menu-option');
-  const $difficultyOptions = $('#difficulty-options .menu-option');
 
-  let words = [];
-  let selectedWord = '';
-  let displayedWord = [];
-  let wrongGuesses = 0;
-  const maxWrongGuesses = 6;
-  let gameActive = false;
-  let focusSpeed = 1000;
-  let difficulty = "easy";
+  let $menuOptions = $(".menu-option[data-option]");
+  let allOptions = $menuOptions.toArray();
+  let currentSelection = 0;
+  let scanSpeed = 800;
+  let scanInterval = null;
+  let difficulty = 'easy';
 
-  class AutoFocus {
-    constructor(elements, speed) {
-      this.elements = elements;
-      this.speed = speed;
-      this.currentIndex = -1;
-      this.interval = null;
-      this.$currentFocusedElement = null;
-    }
-    start() {
-      this.stop();
-      this.interval = setInterval(() => this.advanceFocus(), this.speed);
-    }
-    stop() {
-      if (this.interval) clearInterval(this.interval);
-      this.interval = null;
-    }
-    advanceFocus() {
-      if (this.$currentFocusedElement) {
-        this.$currentFocusedElement.removeClass('focused');
+  /* Menu navigation scan */
+  function startMenuScan(startIndex = 0) 
+  {
+    let index = startIndex;
+    
+    stopMenuScan();
+    
+    scanInterval = setInterval(() => {
+      $(allOptions).blur();
+      $(allOptions[index]).focus();
+      currentSelection = index;
+      index = (index + 1) % allOptions.length;
+    }, scanSpeed);
+
+    $(document).on("keydown.initGame", function (e) 
+    {
+      if (e.code === "Space" || e.code === "Enter") 
+      {
+        initGame();
       }
-      this.currentIndex = (this.currentIndex + 1) % this.elements.length;
-      this.$currentFocusedElement = $(this.elements[this.currentIndex]);
-      this.$currentFocusedElement.addClass('focused');
-    }
-    setElements(newElements) {
-      this.elements = newElements;
-      this.currentIndex = -1;
-    }
-    setSpeed(newSpeed) {
-      this.speed = newSpeed;
-      if (this.interval) this.start();
-    }
+    });
   }
 
-  const autoFocus = new AutoFocus([], focusSpeed);
+  function stopMenuScan() 
+  {
+    if (scanInterval) clearInterval(scanInterval);
+    $(document).off(".initGame");
+  }
 
-  function initMenu() {
+  function initGame() 
+  {
+    const selected = $(allOptions[currentSelection]);
 
-    $('#speed-section').show();
-    $('#difficulty-section').hide();
+    if (selected.data("option")) 
+    {
+      difficulty = selected.data("option");
 
-    // When a speed is selected, show difficulty section
-    $speedOptions.off('click.showDifficulty').on('click.showDifficulty', function () {
-      $('#difficulty-section').show();
-      $('#speed-section').hide();      
-    });
-
-    // When a difficulty is selected, show start button
-    $difficultyOptions.off('click.showStart').on('click.showStart', function () {
-      $('#difficulty-section').hide();
-      $('#speed-section').hide(); 
-
+      $menuContainer.hide();
+      
+      stopMenuScan();
       startGame();
-    });
-
-
-    /*
-    $speedOptions.removeClass('selected');
-    $difficultyOptions.removeClass('selected');
-
-    autoFocus.setElements($speedOptions.toArray());
-    autoFocus.start();
-
-    // Speed options click
-    $speedOptions.off('click').on('click', function () {
-      $speedOptions.removeClass('selected');
-      $(this).addClass('selected');
-      focusSpeed = parseInt($(this).data('speed'));
-      autoFocus.setSpeed(focusSpeed);
-
-      // Switch focus to difficulty options
-      autoFocus.setElements($difficultyOptions.toArray());
-      autoFocus.start();
-    });
-
-    // Difficulty options click
-    $difficultyOptions.off('click').on('click', function () {
-      $difficultyOptions.removeClass('selected');
-      $(this).addClass('selected');
-      difficulty = $(this).data('difficulty');
-      startGame();
-    });
-
-    $(document).off('click.menu').on('click.menu', function (e) {
-      if (autoFocus.$currentFocusedElement &&
-          !autoFocus.elements.includes(e.target)) {
-        autoFocus.$currentFocusedElement.trigger('click');
-      }
-    });
-    */
+    }
   }
 
   /* Settings Modal */
@@ -133,54 +76,199 @@ $(document).ready(function () {
       </label>
     </div>
   `);
-  $("#menu").after($settings);
+  $(".menu-section").after($settings);
 
   const $settingsModal = $(`
     <div id="settingsModal" class="modal" style="display:none;">
       <div class="modal-content">
-        <h3>Gerenciar Palavras</h3>
-
+        <h3>Configurações</h3>
         <div>
-          <h4>Adicionar Palavra:</h4>
-          <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:80%;" />
-          <button id="addWordBtn">Adicionar</button>
+          <h4>Gerenciar Palavras</h4>
+
+          <div>
+            <h5>Adicionar Palavra:</h5>
+            <input type="text" id="newWordInput" placeholder="Digite uma palavra..." maxlength="20" style="width:80%;" />
+            <button id="addWordBtn">Adicionar</button>
+          </div>
+
+          <div>
+            <h5>Palavras Atuais:</h5>
+            <ul id="wordsList"></ul>
+          </div>
         </div>
 
         <div>
-          <h4>Palavras Atuais:</h4>
-          <ul id="wordsList"></ul>
+          <h4>Velocidade de Verredura:</h4>
+
+          <select id="scanSpeedSelect">
+            <option value="slow">Lenta</option>
+            <option value="medium" selected>Média</option>
+            <option value="fast">Rápida</option>
+          </select>
         </div>
 
         <span class="close" style="float:right;cursor:pointer;">&times; Fechar</span>
-      </div>
+      </div>  
     </div>
   `);
   $("body").append($settingsModal);
 
-  function startGame() {
+  $("#scanSpeedSelect").on("change", function () {
+    const selectedSpeed = $(this).val();
+    scanSpeed = selectedSpeed === "slow" ? 2000 :
+                selectedSpeed === "medium" ? 1000 : 500;
+  });
+
+  $("#autoScanToggle").on("change", function () {
+    if (this.checked) {
+      $menuOptions.attr("tabindex", "-1").off("click.initGame");
+      startMenuScan();
+    } else {
+      stopMenuScan();
+      $menuOptions.attr("tabindex", "0").on("click.initGame", function () {
+        currentSelection = allOptions.indexOf(this);
+        initGame();
+      });
+      $menuOptions.blur();
+    }
+  });
+
+  stopMenuScan();
+  $menuOptions.attr("tabindex", "0").on("click.initGame", function () {
+    currentSelection = allOptions.indexOf(this);
+    initGame();
+  });
+
+  // Local Storage helpers
+  function getSavedWords() 
+  {
+    const saved = localStorage.getItem("palavras");
+
+    try 
+    {
+      return saved ? JSON.parse(saved) : [];
+    } 
+    catch
+    {
+      return [];
+    }
+  }
+
+  function saveWords(words) 
+  {
+    localStorage.setItem("palavras", JSON.stringify(words));
+  }
+
+  let palavras = getSavedWords();
+  if (!palavras.length) 
+  {
+    saveWords(wordLists.hard);
+  }
+
+  $("#settingsBtn").on("click", () => {
+    stopMenuScan();
+    updateWordsList();
+
+    $settingsModal.show();
+
+    $("#newWordInput").val("").focus();
+  });
+
+  $settingsModal.find(".close").on("click", () => {
+    $settingsModal.hide()
+    
+    if ($("#autoScanToggle").is(":checked"))
+      startMenuScan();
+  });
+
+  $(window).on("click", (e) => {
+    if ($(e.target).is("#settingsModal")) $settingsModal.hide();
+  });
+
+  // Add word
+  $("#addWordBtn").on("click", function () 
+  {
+    const word = $("#newWordInput").val().trim().toUpperCase();
+
+    if (word && !palavras.includes(word)) 
+    {
+      palavras.push(word);
+
+      saveWords(palavras);
+      updateWordsList();
+
+      $("#newWordInput").val("").focus();
+    }
+  });
+
+  function updateWordsList() 
+  {
+    const $list = $("#wordsList");
+    $list.empty();
+
+    palavras.forEach((w, i) => 
+    {
+      const $li = $(`<li>${w} <button data-i="${i}" class="removeButton" >Remover</button></li>`);
+
+      $li.find("button").on("click", function () 
+      {
+        palavras.splice($(this).data("i"), 1);
+        saveWords(palavras);
+        updateWordsList();
+      });
+      
+      $list.append($li);
+    });
+  }
+
+  /* Game Logic */
+  let words = [];
+  let selectedWord = '';
+  let displayedWord = [];
+  let wrongGuesses = 0;
+  const maxWrongGuesses = 6;
+  let gameActive = false;
+  
+  const somAcerto = new Audio("assets/sounds/somAcerto.mp3");
+  somAcerto.volume = 0.1;
+  
+  const somErro = new Audio("assets/sounds/somErro.mp3");
+  somErro.volume = 0.1;
+
+  const somCorreto = new Audio("assets/sounds/somCorreto.mp3");
+  somCorreto.volume = 0.4;
+
+  function startGame()
+  {
     gameActive = true;
+
     $menuContainer.hide();
     $gameContainer.show();
-    $buttonContainer.hide();
 
     words = wordLists[difficulty];
+
+    if (words.length === 0)
+    {
+      words = wordLists[difficulty] = getSavedWords();
+    }
+
     selectedWord = words[Math.floor(Math.random() * words.length)];
+    wordLists[difficulty] = words.filter(word => word !== selectedWord);
     displayedWord = Array(selectedWord.length).fill('_');
     wrongGuesses = 0;
 
     ctx.clearRect(0, 0, $canvas[0].width, $canvas[0].height);
+
     drawHangmanBase();
     updateWordDisplay();
-    $message.text('').removeClass();
-
     createKeyboard();
-    autoFocus.setElements($('.key').toArray());
-    autoFocus.start();
   }
 
-  function drawHangmanBase() {
+  function drawHangmanBase()
+  {
     ctx.lineWidth = 3;
     ctx.strokeStyle = '#333';
+
     ctx.beginPath();
     ctx.moveTo(20, 230); ctx.lineTo(100, 230); ctx.stroke();
     ctx.moveTo(60, 230); ctx.lineTo(60, 30); ctx.stroke();
@@ -188,10 +276,13 @@ $(document).ready(function () {
     ctx.moveTo(160, 30); ctx.lineTo(160, 60); ctx.stroke();
   }
 
-  function drawHangmanPart(part) {
+  function drawHangmanPart(part)
+  {
     ctx.lineWidth = 3;
     ctx.strokeStyle = '#333';
-    switch (part) {
+
+    switch (part)
+    {
       case 1: ctx.beginPath(); ctx.arc(160, 80, 20, 0, Math.PI * 2); ctx.stroke(); break;
       case 2: ctx.beginPath(); ctx.moveTo(160, 100); ctx.lineTo(160, 160); ctx.stroke(); break;
       case 3: ctx.beginPath(); ctx.moveTo(160, 120); ctx.lineTo(130, 140); ctx.stroke(); break;
@@ -201,12 +292,15 @@ $(document).ready(function () {
     }
   }
 
-  function updateWordDisplay() {
+  function updateWordDisplay()
+  {
     $wordDisplay.text(displayedWord.join(' '));
   }
 
-  function createKeyboard() {
+  function createKeyboard()
+  {
     $keyboard.empty();
+
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(letter => {
       const $key = $('<button>')
         .addClass('key')
@@ -214,61 +308,135 @@ $(document).ready(function () {
         .on('click', () => handleGuess(letter, $key));
       $keyboard.append($key);
     });
+
+    $menuOptions = $(".key");
+    allOptions = $menuOptions.toArray();
+
+    $menuOptions.on("keydown", function (e) 
+    {
+      if (e.code === "Space" || e.code === "Enter") 
+      {
+        handleGuess($(this).text(), $(this));
+      }
+    });
+
+    $menuOptions.on("click", function () 
+    {
+      handleGuess($(this).text(), $(this));
+    });
+
+    if ($("#autoScanToggle").is(":checked"))
+      startMenuScan();
   }
 
-  function handleGuess(letter, $keyElement) {
+  function handleGuess(letter, $keyElement)
+  {
     if (!gameActive || $keyElement.prop('disabled')) return;
     $keyElement.prop('disabled', true);
 
-    if (selectedWord.includes(letter)) {
-      for (let i = 0; i < selectedWord.length; i++) {
+    falarTexto(letter)
+
+    if (selectedWord.includes(letter))
+    {
+      for (let i = 0; i < selectedWord.length; i++)
+      {
         if (selectedWord[i] === letter) displayedWord[i] = letter;
       }
+
       $keyElement.addClass('correct');
+      somAcerto.play();
+
       updateWordDisplay();
-      if (!displayedWord.includes('_')) endGame(true);
-    } else {
+
+      if (!displayedWord.includes('_'))
+      {
+        somCorreto.play();
+        falarTexto(selectedWord);
+        endGame(true);
+      }
+    }
+    else
+    {
       wrongGuesses++;
+
       drawHangmanPart(wrongGuesses);
+
       $keyElement.addClass('wrong');
+      somErro.play();
+
       if (wrongGuesses >= maxWrongGuesses) endGame(false);
     }
   }
 
-  function endGame(win) {
-    gameActive = false;
-    autoFocus.stop();
-    $message
-      .text(win ? `Parabéns! Você venceu! A palavra era: ${selectedWord}`
-                : `Fim de jogo! A palavra era: ${selectedWord}`)
-      .attr('class', win ? 'message win' : 'message lose');
-    $buttonContainer.css('display', 'flex');
-    $('.key').prop('disabled', true);
-    autoFocus.setElements([$restartBtn[0], $backBtn[0]]);
-    autoFocus.start();
+  function endGame(win)
+  {
+    if (!win)
+    {
+      mostrarMenuGameOver();
+    }
+    else
+    {
+      startGame();
+    }
   }
 
-  $backBtn.on('click', function () {
+  function falarTexto(texto) 
+  {
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.volume = 1.0;
+    utterance.lang = "pt-BR";
+
+    speechSynthesis.speak(utterance);
+  }
+
+  /* game over menu */
+  function mostrarMenuGameOver() 
+  {
     gameActive = false;
-    autoFocus.stop();
-    $gameContainer.hide();
-    $menuContainer.show();
-    $buttonContainer.hide();
-    initMenu();
-  });
 
-  $restartBtn.on('click', function () {
-    startGame();
-  });
+    const $overlay = $(`
+      <div id="gameOverMenu">
+        <div class="game-over-content">
+          <h3>Game Over</h3>
+          <button id="retry" class="game-over-option" data-action="restart" tabindex="0">Reiniciar Jogo</button>
+          <button id="menu" class="game-over-option" data-action="menu" tabindex="0">Voltar ao Menu</button>
+        </div>
+      </div>
+    `);
 
-  $(document).on('keydown', function (e) {
-    if (e.code === 'Space' || e.code === 'Enter') {
-      if (autoFocus.$currentFocusedElement) {
-        autoFocus.$currentFocusedElement.trigger('click');
-        e.preventDefault();
+    $("body").append($overlay);
+
+    $menuOptions = $("#retry, #menu");
+    allOptions = $menuOptions.toArray();
+
+    $menuOptions.on("keydown", function (e) 
+    {
+      if (e.code === "Space" || e.code === "Enter") 
+      {
+        executarAcao($(this).data("action"));
       }
-    }
-  });
+    });
 
-  initMenu();
+    $menuOptions.on("click", function () 
+    {
+      executarAcao($(this).data("action"));
+    });
+
+    if ($("#autoScanToggle").is(":checked"))
+      startMenuScan();
+  }
+
+  function executarAcao(action) 
+  {
+    if (action === "restart") 
+    {
+      $("#gameOverMenu").remove();
+
+      startGame();
+    } 
+    else if (action === "menu") 
+    {
+      window.location.href = "index.html";
+    }
+  }
 });

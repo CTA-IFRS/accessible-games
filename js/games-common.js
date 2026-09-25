@@ -137,7 +137,7 @@
     };
     window.showGameOver = function (message) {
       stopScan(); let $overlay = $('#gameOverMenu');
-      if (!$overlay.length) $overlay = $('<div id="gameOverMenu" role="dialog" aria-modal="true"><div class="game-over-content"><h2>Fim de jogo</h2><p class="game-over-message"></p><button class="game-over-option" data-action="restart">Jogar novamente</button><button class="game-over-option" data-action="menu">Voltar ao menu</button></div></div>').appendTo('body');
+      if (!$overlay.length) $overlay = $('<div id="gameOverMenu" role="dialog" aria-modal="true"><div class="game-over-content"><h2>Fim de jogo</h2><p class="game-over-message"></p><button class="game-over-option" data-action="restart">Jogar novamente</button><button class="game-over-option" data-action="menu">Voltar ao menu</button></div></div>').appendTo('.game-monitor-screen');
       setVisible($main, false);
       setVisible($('.game-over-screen'), false);
       $overlay.attr('aria-labelledby', 'gameOverTitle');

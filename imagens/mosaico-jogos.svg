@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" role="img" aria-labelledby="title desc">
+<title id="title">Mosaico dos jogos da plataforma</title><desc id="desc">Cinco quadros ilustram jogo da velha, saltos, forca, baleia faminta e colmeia.</desc>
+<rect width="560" height="420" rx="24" fill="#e8f5fb"/>
+<g stroke="#fff" stroke-width="8">
+<rect x="10" y="10" width="215" height="195" rx="20" fill="#c7ecf4"/>
+<rect x="233" y="10" width="317" height="195" rx="20" fill="#dff1d5"/>
+<rect x="10" y="213" width="168" height="197" rx="20" fill="#fff1c8"/>
+<rect x="186" y="213" width="177" height="197" rx="20" fill="#d9ecfc"/>
+<rect x="371" y="213" width="179" height="197" rx="20" fill="#fce4c5"/>
+</g>
+<g fill="none" stroke="#075b7a" stroke-width="10" stroke-linecap="round">
+<path d="M81 42v132m68-132v132M42 86h148M42 148h148"/>
+<path d="M53 48l18 20m0-20L53 68M160 103l19 20m0-20-19 20"/>
+<circle cx="116" cy="116" r="16"/><circle cx="55" cy="168" r="12"/>
+</g>
+<path d="M246 162h291" stroke="#438b55" stroke-width="9" stroke-linecap="round"/>
+<path d="M245 157c55-11 83-19 123-9 43 11 64-13 91-18 25-4 52 0 78 12" fill="none" stroke="#92c67a" stroke-width="11"/>
+<g fill="#075b7a"><circle cx="327" cy="71" r="15"/><path d="M311 90h31l16 33h-14l-11-18-17 18-22 9-5-12 20-12z"/><path d="M333 111l-22 43h-17l24-49z"/></g>
+<rect x="472" y="134" width="25" height="28" rx="4" fill="#dd7652"/><path d="M479 134v-16" stroke="#dd7652" stroke-width="5"/>
+<g stroke="#8a5b24" stroke-width="6" fill="none" stroke-linecap="round"><path d="M52 254h88M96 254v78M65 272h62"/><path d="M126 272v39"/></g>
+<circle cx="126" cy="324" r="13" fill="#f0bc73"/><path d="M126 337v30m0 7-18 16m18-16 18 16m-18-35-16 10m16-10 16 10" stroke="#8a5b24" stroke-width="5" stroke-linecap="round"/>
+<g fill="#087ea3"><path d="M204 315c28-32 73-35 104-11l35-15-8 35 8 35-34-14c-31 22-75 16-105-18z"/><path d="M207 320c-10-5-19-5-23 7 7 3 15 4 23 0z"/></g>
+<circle cx="237" cy="311" r="4" fill="#fff"/><path d="M266 339q18 13 37-1" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+<g fill="#f6ca4b" stroke="#8a5b24" stroke-width="4"><path d="M404 310l27-16 27 16v31l-27 16-27-16z"/><path d="M458 310l27-16 27 16v31l-27 16-27-16z"/><path d="M431 357l27-16 27 16v31l-27 16-27-16z"/></g>
+<g fill="#202b35"><ellipse cx="452" cy="274" rx="15" ry="10"/><path d="M437 272l-11-13m36 13 11-13" fill="none" stroke="#202b35" stroke-width="4"/></g><path d="M445 266v16m8-16v16" stroke="#f6ca4b" stroke-width="4"/>
+</svg>

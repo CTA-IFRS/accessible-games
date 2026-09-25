@@ -1,148 +1,138 @@
-* {
-  padding: 0;
+/* O palco ocupa apenas a área jogável; menus, janelas e monitor usam os estilos compartilhados. */
+#hiveGame.game-main:not([hidden]) {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: max(30rem, calc(100dvh - 19rem));
   margin: 0;
-  box-sizing: border-box;
+  padding: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 50% 0%, #e6deff 0, #f5f8fd 42%, #e6eff9 100%);
 }
-
-html, body {
-  height: 100%;
-}
-
-body {
-  background-color: #fff;
-  color: #000;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-
-body.game-page { text-align: left; }
-
-label {
-    font-size: 1.25rem;
-}
-
-#hiveGame { position: relative; width: min(100%, 31.25rem); height: 37.5rem; padding: 1rem; overflow: hidden; background: #f9f9f9; border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,.1); }
-
-.letter {
+#hiveGame::before {
+  content: '';
   position: absolute;
-  font-size: 4rem;
-  color: #007bff;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), #7184ba24 25%);
+}
+#hiveGame::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24%;
+  pointer-events: none;
+  background: linear-gradient(transparent, #bbcbe846);
+}
+#hiveGame .stage-lights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .5;
+  background: linear-gradient(105deg, transparent 16%, #f5d7ff7a 30%, transparent 44%),
+              linear-gradient(75deg, transparent 56%, #ccddff9c 70%, transparent 84%);
+}
+#hiveGame .hive-hud {
+  position: absolute;
+  z-index: 3;
+  top: clamp(1rem, 3vw, 2rem);
+  left: clamp(1rem, 3vw, 3rem);
+  right: clamp(1rem, 3vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: start;
+  gap: clamp(1rem, 4vw, 4rem);
+  color: #183454;
+}
+#hiveGame .hud-label {
+  display: block;
+  margin-bottom: .25rem;
+  color: #485e80;
+  font-size: .77rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+#hiveGame #typedWord {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .08em;
+  min-height: 2.4rem;
+  font-size: clamp(1.3rem, 2.5vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+#hiveGame #typedWord span.correct { color: #126b5b; }
+#hiveGame #typedWord span.wrong { color: #bd3157; text-decoration: underline; }
+#hiveGame #points { font-size: clamp(1.5rem, 2.4vw, 2.2rem); line-height: 1; }
+#hiveGame #vidas { min-width: 5rem; font-size: clamp(1.2rem, 2vw, 1.8rem); white-space: nowrap; }
+#hiveGame .stage-center { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+#hiveGame .stage-center-mark { color: #725caf1a; font-size: min(38vw, 22rem); line-height: 1; transform: rotate(-13deg); }
+#hiveGame .letter {
+  position: absolute;
+  z-index: 2;
   left: 50%;
+  width: clamp(5rem, 9vw, 8rem);
+  height: clamp(5rem, 9vw, 8rem);
+  display: grid;
+  place-items: center;
+  border: 3px solid #273966;
+  border-radius: 50%;
+  background: #fff;
+  color: #25396b;
+  font-size: clamp(3.1rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 .55rem 0 #c6a4e5, 0 1rem 2rem #3a376044;
   transform: translateX(-50%);
 }
-
-#hitZone {
+#hiveGame #hitZone {
   position: absolute;
-  bottom: 6.25rem;
-  height: 4.5rem;
-  width: 100%;
-  background-color: rgba(0, 123, 255, 0.1);
-  border-top: 2px solid #007bff;
-  border-bottom: 2px solid #007bff;
   z-index: 1;
-}
-
-#feedback {
-  margin-top: 0.625rem;
-  font-size: 2rem;
-  color: #333;
-}
-
-#vidas{
+  bottom: clamp(4.5rem, 11vh, 7rem);
+  left: 0;
+  width: 100%;
+  height: clamp(5.5rem, 12vh, 7.5rem);
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  border-top: 4px solid #913ab3;
+  border-bottom: 4px solid #913ab3;
+  background: #ae66cf30;
+  box-shadow: 0 0 2rem #ac55cb44, inset 0 0 2rem #ac55cb25;
 }
-
-#score {
-  font-size: 1.5rem;
-  color: #000;
+#hiveGame #hitZone span {
+  padding: .3rem .8rem;
+  border-radius: 999px;
+  background: #f6e7fc;
+  color: #6e277f;
+  font-size: clamp(.85rem, 1.4vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: .14em;
 }
-
-#typedWord span.correct {
-  color: lime;
+#hiveGame .stage-tip {
+  position: absolute;
+  z-index: 2;
+  right: clamp(1rem, 3vw, 3rem);
+  bottom: 1.3rem;
+  margin: 0;
+  color: #40577a;
+  font-size: .9rem;
 }
-
-#typedWord span.wrong {
-  color: red;
+.high-contrast #hiveGame .hud-label,
+.high-contrast #hiveGame .stage-tip,
+.high-contrast #hiveGame #points,
+.high-contrast #hiveGame #hitZone span { color: #fff!important; }
+.high-contrast #hiveGame .letter { color: #000!important; background: #ff0!important; border-color: #fff!important; box-shadow: none!important; }
+.high-contrast #hiveGame #hitZone { border-color: #ff0!important; background: #222!important; }
+@media (max-width: 640px) {
+  #hiveGame.game-main:not([hidden]) { height: max(28rem, calc(100dvh - 13rem)); }
+  #hiveGame .hive-hud { grid-template-columns: minmax(0, 1fr) auto; gap: .4rem 1rem; }
+  #hiveGame .lives-group { grid-column: 2; }
+  #hiveGame #score { grid-column: 2; grid-row: 1; }
+  #hiveGame #feedback { grid-row: 1 / span 2; }
+  #hiveGame .stage-tip { left: 1rem; right: 1rem; text-align: center; }
 }
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-#settingsBtn {
-  padding: 10px;
-}
-
-#autoScanLabel{
-  padding: 10px;
-  background-color: #eee;
-  border: #8d8b8b 1px solid;
-  font-size: 1.2em !important;
-}
-
-#settingsModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-#settingsModal .modal-content {
-    max-width: 500px;
-}
-
-#settingsModal .modal-content div{
-  padding: 5px;
-  border: #333 1px solid;
-}
-
-#settingsModal .modal-content div h4{
-  margin-bottom: 10px;
-}
-
-#settingsModal .modal-content div ul li{ 
-  display: flex;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.modal-content h3 {
-    color: #d32f2f;
-    margin-top: 0;
-    font-size: 2em;
-}
-
-.modal-content  div {
-  display: block;
-  margin: 10px;
-}
-
-.modal-content  div ul {
-  list-style: none;
-}
-
-
-#menu:focus, #retry:focus {
-    outline: 2px solid #007bff;
-    background: #e9f3ff;
-}
-
-/* The game shell and shared menus are styled by games-common.css. */
-

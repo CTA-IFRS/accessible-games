@@ -39,3 +39,8 @@ body.game-page {
 }
 .high-contrast .game-monitor, .high-contrast .game-monitor-screen { background:#000!important; border-color:#fff!important; box-shadow:none!important; }
 .high-contrast .game-site-brand, .high-contrast .game-monitor-chin, .high-contrast .game-monitor-screen .game-header h1 { color:#fff!important; }
+
+/* Nestes jogos, a partida ocupa toda a área útil da tela do monitor. */
+.game-page-playfield .game-monitor-screen .gameboard.game-main:not([hidden]),
+.game-page-playfield .game-monitor-screen #gameArea:not([hidden]) { display:block; width:100%; }
+.game-page-playfield .game-monitor-screen .game-screen { width:100%; max-width:none; }

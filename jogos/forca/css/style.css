@@ -21,7 +21,7 @@ label {
     font-size: 1.25rem;
 }
 
-#hangmanGame { width: min(100%, 40rem); padding: 1rem; background: #f9f9f9; border: 2px solid #ccc; border-radius: 10px; }
+#hangmanGame { width: min(100%, 40rem); padding: 1rem; }
 #word-image:empty { display: none; }
 #word-image:not(:empty) { width: 20%; }
 #word-image img { max-width: 100% !important; max-height: 8rem !important; object-fit: contain; }

@@ -7,6 +7,16 @@ $(function ()
     const canvas = $("#gameCanvas")[0];
     const ctx = canvas.getContext("2d");
     let baleia = { x: 170, y: 500, size: 60, speed: 4 };
+    function resizeCanvas() {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+        const container = document.getElementById("gameContainer");
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+        baleia.x = Math.max(0, Math.min(canvas.width - baleia.size, baleia.x * canvas.width / oldWidth));
+        baleia.y = canvas.height - 100;
+    }
+    window.addEventListener("resize", resizeCanvas);
     let peixes = [];
     let score = 0;
     let vidas = 3;
@@ -198,6 +208,7 @@ $(function ()
     /* --- INICIAR JOGO --- */
     function startGame() {
         $("#gameArea").prop('hidden', false);
+        resizeCanvas();
         gameActive = true;
         movingLeft = false;
         movingRight = false;

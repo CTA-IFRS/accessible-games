@@ -86,3 +86,25 @@ canvas {
 
 /* Shared game shell and menu rules live in games-common.css. */
 
+.game-monitor-screen #gameArea { position:relative; }
+.game-monitor-screen #gameInfo {
+    position:absolute;
+    z-index:1;
+    top:1rem;
+    left:50%;
+    transform:translateX(-50%);
+    margin:0;
+    max-width:calc(100% - 2rem);
+    flex-wrap:wrap;
+    justify-content:center;
+}
+.game-monitor-screen #gameContainer {
+    width:100%;
+    height:max(500px, 60vh);
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+}
+.game-monitor-screen #gameCanvas { width:100%; height:100%; }
+body.game-page-playfield { overflow:auto; }
+

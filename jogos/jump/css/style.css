@@ -127,3 +127,10 @@ html, body {
 /* Shared game shell is defined in games-common.css. */
 .game-header h1 { font-size:clamp(1.5rem,4vw,2.25rem); color:inherit; margin:.25rem; }
 
+.game-monitor-screen .game-screen {
+    height: max(500px, 60vh);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+

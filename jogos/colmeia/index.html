@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito:wght@400;700&display=swap">
 
         <link rel="stylesheet" href="../../css/games-common.css">
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="../../css/game-monitor.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body class="game-page">
@@ -40,16 +40,15 @@
             </div>
 
             <main id="hiveGame" class="game-main" hidden>
-                <div id="vidas" tabindex="0" aria-label="Vidas">❤️❤️❤️</div>
-                <div id="hitZone"></div>
-                <div class="menu">
-                    <div id="feedback" tabindex="0" aria-live="polite">
-                        <h3>Palavra: <span id="typedWord"></span></h3>
-                    </div>
-                    <div id="score" tabindex="0" aria-live="polite">
-                        <h3>Pontuação: <span id="points">0</span></h3>
-                    </div>
+                <div class="stage-lights" aria-hidden="true"></div>
+                <div class="hive-hud">
+                    <div id="feedback" tabindex="0" aria-live="polite"><span class="hud-label">Palavra</span><span id="typedWord"></span></div>
+                    <div id="score" tabindex="0" aria-live="polite"><span class="hud-label">Pontos</span><strong id="points">0</strong></div>
+                    <div class="lives-group"><span class="hud-label">Vidas</span><div id="vidas" tabindex="0" aria-label="Vidas">❤️❤️❤️</div></div>
                 </div>
+                <div class="stage-center" aria-hidden="true"><span class="stage-center-mark">♫</span></div>
+                <div id="hitZone"><span>TOQUE AGORA</span></div>
+                <p class="stage-tip">Use o teclado ou clique na área do jogo</p>
             </main>
                 </div>
                 <div class="game-monitor-chin" aria-hidden="true"><span>CTA · IFRS</span><span><i class="game-monitor-light"></i></span></div>

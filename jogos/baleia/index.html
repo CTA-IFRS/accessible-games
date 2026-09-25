@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>A Baleia Faminta — Acessível</title>
+        
+        <link rel="stylesheet" href="../../css/games-common.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body class="game-page">
+        <div class="game-shell">
+            <header class="game-header">
+                <a class="game-home" href="../../index.html#jogos">← Jogos</a>
+                <h1>A Baleia Faminta</h1>
+            </header>
+
+            <div id="menuPrincipal" class="game-menu">
+                <section class="game-menu-section" data-key="difficulty">
+                    <h2>Escolha a dificuldade</h2>
+                    <div class="game-menu-options">
+                        <button class="menu-option" data-key="difficulty" data-value="easy">Fácil</button>
+                        <button class="menu-option" data-key="difficulty" data-value="medium">Médio</button>
+                        <button class="menu-option" data-key="difficulty" data-value="hard">Difícil</button>
+                    </div>
+                </section>
+            </div>
+
+            <main id="gameArea" class="game-main" hidden>
+                <div id="gameInfo">
+                    <div class="game-info-item" tabindex="0"><span>Pegue:</span><span id="targetItem">🐟</span></div>
+                    <div class="game-info-item" tabindex="0"><span>Próximo:</span><span id="nextItem">🐠</span></div>
+                    <div class="game-info-item" tabindex="0" aria-live="polite"><span>Pontos:</span><span id="score">0</span></div>
+                    <div class="game-info-item" tabindex="0" aria-live="polite"><span>Vidas:</span><span id="lives">3</span>
+                    </div>
+                </div>
+                <div id="gameContainer">
+                    <canvas id="gameCanvas" width="400" height="600" tabindex="0" aria-label="Área da baleia e dos peixes"></canvas>
+                </div>
+            </main>
+        </div>
+
+        <script src="../../js/jquery-3.7.1.min.js"></script>
+        <script src="../../js/games-common.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+
+</html>

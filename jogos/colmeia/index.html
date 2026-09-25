@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Jogo da Colmeia Acessível</title>
+
+        <link rel="stylesheet" href="../../css/games-common.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body class="game-page">
+        <div class="game-shell">
+            <header class="game-header">
+                <a class="game-home" href="../../index.html#jogos">← Jogos</a>
+                <h1>Jogo da Colmeia</h1>
+            </header>
+
+            <div id="menuContainer" class="game-menu">
+                <section class="game-menu-section" data-key="difficulty">
+                    <h2>Escolha a dificuldade</h2>
+                    <div class="game-menu-options">
+                        <button class="menu-option" data-key="difficulty" data-value="slow">Fácil</button>
+                        <button class="menu-option" data-key="difficulty" data-value="medium">Médio</button>
+                        <button class="menu-option" data-key="difficulty" data-value="fast">Difícil</button>
+                    </div>
+                </section>
+            </div>
+
+            <main id="hiveGame" class="game-main" hidden>
+                <div id="vidas" tabindex="0" aria-label="Vidas">❤️❤️❤️</div>
+                <div id="hitZone"></div>
+                <div class="menu">
+                    <div id="feedback" tabindex="0" aria-live="polite">
+                        <h3>Palavra: <span id="typedWord"></span></h3>
+                    </div>
+                    <div id="score" tabindex="0" aria-live="polite">
+                        <h3>Pontuação: <span id="points">0</span></h3>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <script src="../../js/jquery-3.7.1.min.js"></script>
+        <script src="../../js/games-common.js"></script>
+        <script src="js/scripts.js" defer></script>
+    </body>
+
+</html>

@@ -1,0 +1,66 @@
+* { box-sizing: border-box; }
+html { min-height:100%; }
+body.game-page { margin: 0; min-height: 100vh; padding: 1rem; color: #17212b; background: #f4f7fb; font: 1rem/1.5 Arial, sans-serif; }
+.game-shell { width: min(100%, 72rem); margin: 0 auto; }
+.game-header { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:1rem; }
+.game-header h1 { margin:.25rem 0; font-size:clamp(1.5rem,4vw,2.25rem); }
+.game-page > .game-shell > .game-header h1 { color:#17212b; }
+.game-home, .game-button, .menu-option, .game-over-option, .action-btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.65rem 1rem; border:1px solid #9eb8ca; border-radius:999px; background:#fff; color:#183b56; font:inherit; cursor:pointer; }
+body.game-page .game-menu { display:block;width:min(100%,48rem);max-width:48rem;margin:1rem auto;padding:1.25rem;border:1px solid #cfdeea;border-radius:1rem;background:linear-gradient(135deg,#fff,#f5faff);color:#263d50;text-align:left;box-shadow:0 8px 24px rgba(24,59,86,.09); }
+body.game-page .game-menu[hidden] { display:none!important; }
+body.game-page .game-main[hidden] { display:none!important; }
+body.game-page .game-main:not([hidden]) { display:block; }
+body.game-page #menuPrincipal { min-height:0; }
+body.game-page #start-screen .option-group { display:block;width:auto;max-width:none;margin:0;padding:1rem;border:1px solid #dce7ef;border-radius:.75rem;background:#fff;box-shadow:none;text-align:left; }
+body.game-page #start-screen .option-group h2 { margin:0 0 .75rem;color:#183b56;font-size:1.15rem; }
+body.game-page #start-screen .option-group button { margin:0; }
+body.game-page .menu-section { margin:0;padding:1rem;border:1px solid #dce7ef;border-radius:.75rem;background:#fff; }
+body.game-page .menu-section + .menu-section { margin-top:.75rem; }
+body.game-page .menu-section h2 { margin:0 0 .75rem;color:#183b56;font-size:1.15rem; }
+body.game-page .menu-option { flex:1 1 10rem;margin:0;text-align:center; }
+body.game-page #menuContainer[hidden],body.game-page #menuPrincipal[hidden],body.game-page #start-screen[hidden] { display:none!important; }
+body.game-page .menu-section[hidden] { display:none!important; }
+.menu-option.focused,.game-over-option.focused { outline:4px solid #f0a202;outline-offset:2px; }
+.game-home { text-decoration:none; }
+.game-menu h2 { margin:.5rem 0 1rem; color:#183b56; font-size:1.15rem; }
+.game-menu-section { display:block; margin:0; padding:1rem; border:1px solid #dce7ef; border-radius:.75rem; background:#fff; }
+.game-menu-section + .game-menu-section { margin-top:.75rem; }
+.game-menu-section[hidden] { display:none!important; }
+.game-menu-section h2 { margin:0 0 .75rem; color:#183b56; font-size:1.15rem; }
+.game-menu-options { display:flex; flex-wrap:wrap; gap:.5rem; }
+.menu-option { flex:1 1 10rem; margin:0; text-align:center; }
+.game-over-option { width:100%; }
+.menu-option.focused,.game-over-option.focused { outline:4px solid #f0a202; outline-offset:2px; }
+.game-button:hover,.menu-option:hover,.game-home:hover,.game-over-option:hover,.action-btn:hover { background:#e9f3ff; }
+.menu-option.selected { color:#fff; background:#1d668f; border-color:#1d668f; }
+.menu-option:focus-visible,.game-button:focus-visible,.game-home:focus-visible,.game-over-option:focus-visible,.action-btn:focus-visible,.game-scan-active { outline:4px solid #f0a202; outline-offset:2px; }
+.game-menu-help { color:#58758c; }
+.game-common-controls { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; margin-top:1rem; padding-top:1rem; border-top:1px solid #d7e0e8; }
+.game-common-controls label { display:flex; align-items:center; gap:.45rem; }
+.game-common-controls input { width:1.2rem; height:1.2rem; }
+.game-main { position:relative; margin:1rem auto; }
+.game-main[hidden] { display:none!important; }
+.game-main[tabindex="0"] { outline:none; }
+.game-status { min-height:1.5em; }
+.game-over-content { display:grid; gap:.75rem; justify-items:center; }
+#gameOverMenu { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:1rem; background:#0009; }
+.game-over-screen { position:fixed; inset:0; z-index:1000; place-items:center; padding:1rem; background:#0009; }
+.game-over-screen[hidden] { display:none!important; }
+.game-over-screen:not([hidden]) { display:grid!important; }
+#gameOverMenu .game-over-content, .game-over-screen .game-over-content, .game-over-screen .game-over-box { display:grid; gap:.75rem; justify-items:center; width:min(100%,28rem); padding:2rem; border:1px solid #cfdeea; border-radius:1rem; background:#fff; color:#263d50; box-shadow:0 8px 24px rgba(24,59,86,.18); }
+.game-over-content h1,.game-over-content h2,.game-over-content h3,.game-over-box h1,.game-over-box h2,.game-over-box h3 { margin:0; color:#183b56; font-size:1.5rem; }
+.game-over-message,.game-over-content p,.game-over-box p { margin:0; }
+.game-over-box button { width:100%; }
+.game-over-screen .game-over-option:focus-visible { outline:4px solid #f0a202; outline-offset:2px; }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+.high-contrast, .high-contrast body { color:#fff!important; background:#000!important; }
+.high-contrast .game-header, .high-contrast .game-menu, .high-contrast .game-menu-section,
+.high-contrast .game-main, .high-contrast #gameOverMenu .game-over-content,
+.high-contrast .game-over-screen .game-over-content, .high-contrast .game-over-screen .game-over-box,
+.high-contrast .modal-content, .high-contrast #settingsModal .modal-content { color:#fff!important; background:#000!important; border:2px solid #fff!important; }
+.high-contrast button, .high-contrast select, .high-contrast input, .high-contrast .game-home { color:#fff!important; background:#000!important; border:2px solid #fff!important; }
+.high-contrast .menu-option.selected, .high-contrast .menu-option:focus-visible, .high-contrast .game-scan-active { color:#000!important; background:#ff0!important; outline:4px solid #ff0!important; }
+.high-contrast .game-menu-help { color:#fff!important; }
+.high-contrast #hangmanGame, .high-contrast #hiveGame, .high-contrast #gameArea, .high-contrast .game-screen,
+.high-contrast .forca-container, .high-contrast .keyboard-container { color:#fff!important; background:#000!important; border-color:#fff!important; }
+.high-contrast .game-menu h2, .high-contrast .game-over-content h2, .high-contrast .game-over-box h2, .high-contrast .game-over-message { color:#fff!important; }

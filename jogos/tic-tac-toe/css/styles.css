@@ -1,0 +1,51 @@
+/* styles.css */
+#cellContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.cell:focus {
+  outline: 3px solid #007bff;
+  background-color: #d0eaff;
+}
+
+.cell.winner {
+  background-color: #90ee90;
+  color: #000;
+  border: 3px solid #28a745;
+}
+
+#statusText {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333;
+} 
+#statusText {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Game shell and shared menus are defined in games-common.css. */
+

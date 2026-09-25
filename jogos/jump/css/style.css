@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+/* ==== ÁREA DO JOGO ==== */
+.game-screen {
+    width: 900px;       /* largura fixa para a área de jogo */
+    height: 500px;      /* altura fixa */
+    background: linear-gradient(to top, #a0dcff 0%, #6fb7ff 30%, #87CEEB 100%);
+    border-radius: 20px; /* bordas arredondadas */
+    border: 3px solid #ccc;
+    position: relative;
+    overflow: hidden;
+    border: 4px solid #ccc;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.enemy {
+    position: absolute; 
+    bottom: 25px;
+    left: 100%; 
+    width: 100px; 
+    height: auto;
+}
+
+.hero {
+    width: 100px;
+    position: absolute;
+    bottom: 50px;
+}
+
+.cloud {
+    position: absolute;
+    top: 20px;
+    width: 300px;
+    animation: clouds-animation 20s infinite linear;
+}
+
+.score {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+/* ==== COMPONENTES DA PARTIDA ==== */
+.ranking {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 15px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    z-index: 10;
+}
+
+.ranking h3 {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.ranking ol {
+    padding-left: 20px;
+}
+
+/* Shared menus are provided by games-common.css. */
+
+.gameboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* centraliza verticalmente */
+    background-color: #f4f4f4;
+}
+
+.gameboard[hidden] { display:none!important; }
+
+.grass {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(to top, rgb(35, 160, 35) 0%, rgb(50, 200, 50) 100%);
+    border-top: 3px solid #2a8a2a;
+}
+
+.lives {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.heart {
+    width: 32px;
+    height: 32px;
+}
+/* Shared game shell is defined in games-common.css. */
+.game-header h1 { font-size:clamp(1.5rem,4vw,2.25rem); color:inherit; margin:.25rem; }
+

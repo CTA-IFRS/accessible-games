@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Jogo da Velha Acessível</title>
+
+        <link rel="stylesheet" href="../../css/games-common.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <body class="game-page">
+        <div class="game-shell">
+            <header class="game-header">
+                <a class="game-home" href="../../index.html#jogos">← Jogos</a>
+                <h1>Jogo da Velha Acessível</h1>
+                <button id="musicToggle" type="button" aria-pressed="false">Ligar música</button>
+            </header>
+            
+            <audio id="clickSound" src="assets/sounds/click.wav" preload="auto"></audio>
+            <audio id="bgMusic" src="assets/sounds/bg-music.wav" preload="none" loop></audio>
+
+            <div id="menuContainer" class="game-menu">
+                <section class="game-menu-section" data-key="difficulty">
+                    <h2>Escolha a dificuldade</h2>
+                    <div class="game-menu-options">
+                        <button class="menu-option" data-key="difficulty" data-value="easy">Fácil</button>
+                        <button class="menu-option" data-key="difficulty" data-value="medium">Médio</button>
+                        <button class="menu-option" data-key="difficulty" data-value="hard">Difícil</button>
+                    </div>
+                </section>
+
+                <section class="game-menu-section" data-key="mode">
+                    <h2>Escolha o modo de jogo</h2>
+                    <div class="game-menu-options">
+                        <button class="menu-option" data-key="mode" data-value="cpu">Humano x CPU</button>
+                        <button class="menu-option" data-key="mode" data-value="human-scan">Humano x Humano (ambos com acionador)</button>
+                        <button class="menu-option" data-key="mode" data-value="human-mixed">Humano x Humano (um com acionador)</button>
+                    </div>
+                </section>
+
+                <section class="game-menu-section" data-key="symbol">
+                    <h2>Escolha o personagem</h2>
+                    <div class="game-menu-options">
+                        <button class="menu-option" data-key="symbol" data-value="X">Jogar como X</button>
+                        <button class="menu-option" data-key="symbol" data-value="O">Jogar como O</button>
+                    </div>
+                </section>
+            </div>
+            
+            <main id="gameContainer" class="game-main" hidden>
+                <h2 id="statusText">Vez do jogador X</h2>
+                <div id="cellContainer">
+                    <button class="cell" data-index="0"></button>
+                    <button class="cell" data-index="1"></button>
+                    <button class="cell" data-index="2"></button>
+                    <button class="cell" data-index="3"></button>
+                    <button class="cell" data-index="4"></button>
+                    <button class="cell" data-index="5"></button>
+                    <button class="cell" data-index="6"></button>
+                    <button class="cell" data-index="7"></button>
+                    <button class="cell" data-index="8"></button>
+                </div>
+                
+            </main>
+        </div>
+
+        <script src="../../js/jquery-3.7.1.min.js"></script>
+        <script src="../../js/games-common.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+
+</html>

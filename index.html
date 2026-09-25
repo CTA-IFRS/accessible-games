@@ -8,9 +8,12 @@
 
     <title>Jogos Digitais Pedagógicos Acessíveis | CTA IFRS</title>
 
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito:wght@300;400;500;700&display=swap">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/main.css">
@@ -19,30 +22,41 @@
   <body>
     <nav class="skip-links" aria-label="Menu de acessibilidade">
       <div class="container skip-inner">
-        <button class="skip-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuAcessibilidade"
-          aria-controls="menuAcessibilidade" aria-expanded="false" aria-label="Expandir menu de acessibilidade"><span
-            aria-hidden="true">☰</span></button>
+        <button class="skip-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuAcessibilidade" aria-controls="menuAcessibilidade" aria-expanded="false" aria-label="Expandir menu de acessibilidade">
+          <span aria-hidden="true">☰</span>
+        </button>
+
         <div id="menuAcessibilidade" class="collapse skip-menu">
           <div class="skip-shortcuts">
             <a href="#conteudo-principal" accesskey="1">Ir para o conteúdo <span class="access-key">1</span></a>
             <a href="#menu-principal" accesskey="2">Ir para o menu <span class="access-key">2</span></a>
           </div>
-          <button type="button" id="contrast-shortcut" aria-pressed="false"><i class="bi bi-circle-half"
-              aria-hidden="true"></i> Alto contraste</button>
+
+          <button type="button" id="contrast-shortcut" aria-pressed="false">
+            <i class="bi bi-circle-half" aria-hidden="true"></i> Alto contraste
+          </button>
         </div>
       </div>
     </nav>
 
     <header id="menu-principal" class="site-header">
       <div class="container site-nav">
-        <a class="site-brand" href="#inicio"><img src="imagens/logo-jogos.svg" alt="" width="48" height="48">Jogos
-          Digitais Pedagógicos Acessíveis</a>
-        <button class="site-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#site-menu"
-          aria-controls="site-menu" aria-expanded="false" aria-label="Expandir menu principal"><span
-            aria-hidden="true">☰</span></button>
-        <nav id="site-menu" class="collapse site-menu" aria-label="Menu principal"><a href="#sobre">Sobre a plataforma</a><a
-            href="#manuais">Manuais</a><a href="#jogos">Jogos</a><a href="#feedback">Feedback</a><a
-            href="#contribua">Contribua</a><a href="#contato">Contato</a></nav>
+        <a class="site-brand" href="#inicio">
+          <img src="imagens/logo-jogos.svg" alt="" width="48" height="48" />
+          <span>Digitais Pedagógicos Acessíveis</span>
+        </a>
+
+        <button class="site-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Expandir menu principal">
+          <span aria-hidden="true">☰</span>
+        </button>
+        
+        <nav id="site-menu" class="collapse site-menu" aria-label="Menu principal">
+          <a href="#sobre">Sobre a plataforma</a>
+          <a href="#manuais">Manuais</a><a href="#jogos">Jogos</a>
+          <a href="#feedback">Feedback</a>
+          <a href="#contribua">Contribua</a>
+          <a href="#contato">Contato</a>
+        </nav>
       </div>
     </header>
 
@@ -50,83 +64,88 @@
       <section id="inicio" class="container hero">
         <div class="hero-copy">
           <h1>Jogos digitais pedagógicos acessíveis</h1>
-          <p>Uma plataforma que reúne jogos para o professor utilizar com estudantes em aulas ou em sessões de treinamento
-            com tecnologias assistivas (TAs).</p><a class="btn btn-primary" href="#jogos">Explorar os jogos <i
-              class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          <p>Uma plataforma que reúne jogos para o professor utilizar com estudantes em aulas ou em sessões de treinamento com tecnologias assistivas (TAs).</p>
+          <a class="btn btn-primary" href="#jogos">Explorar os jogos <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
         </div>
-        <img src="imagens/logo-jogos.svg"
-          alt="Logotipo dos Jogos Digitais Pedagógicos Acessíveis: controle de jogo com elementos de acessibilidade">
+
+        <img src="imagens/logo-jogos.svg" alt="Logotipo dos Jogos Digitais Pedagógicos Acessíveis: controle de jogo com elementos de acessibilidade" />
       </section>
+
       <section id="sobre" class="container about-section">
         <h2>Conheça a plataforma de jogos</h2>
         <p class="subtitle">Jogar, aprender e participar</p>
+
         <div class="about-intro">
           <div class="about-copy">
-          <p>O hub reúne diferentes jogos pedagógicos em um único lugar. O professor pode escolher uma atividade,
-            consultar as instruções e iniciar o jogo de acordo com os objetivos da aula ou da sessão de treinamento com
-            TAs.</p>
-          <p>Os jogos compartilham recursos de acessibilidade e alguns oferecem opções para preparar conteúdos
-            específicos. Assim, cada atividade pode apoiar diferentes formas de participação e aprendizagem.</p>
-        </div>
+            <p>O hub reúne diferentes jogos pedagógicos em um único lugar. O professor pode escolher uma atividade, consultar as instruções e iniciar o jogo de acordo com os objetivos da aula ou da sessão de treinamento com TAs.</p>
+            <p>Os jogos compartilham recursos de acessibilidade e alguns oferecem opções para preparar conteúdos específicos. Assim, cada atividade pode apoiar diferentes formas de participação e aprendizagem.</p>
+          </div>
+
           <img class="about-mosaic" src="imagens/mosaico-jogos.svg" alt="Mosaico ilustrado dos jogos: velha, saltos, forca, baleia e colmeia" width="560" height="420">
         </div>
+
         <h3>Principais características</h3>
         <ul class="feature-list">
-          <li class="feature-item"><img src="imagens/icone-jogos.svg" alt="" width="95" height="95">
+          <li class="feature-item">
+            <img src="imagens/icone-jogos.svg" alt="" width="95" height="95" />
             <div>
               <h4>Jogos em um só lugar</h4>
               <p>Encontre diferentes atividades pedagógicas em uma única plataforma.</p>
             </div>
           </li>
-          <li class="feature-item"><img src="imagens/icone-varredura.svg" alt="" width="95" height="95">
+          <li class="feature-item"><img src="imagens/icone-varredura.svg" alt="" width="95" height="95" />
             <div>
               <h4>Varredura</h4>
               <p>A navegação por varredura facilita o uso com um acionador ou uma única tecla.</p>
             </div>
           </li>
-          <li class="feature-item"><img src="imagens/icone-controles.svg" alt="" width="95" height="95">
+          <li class="feature-item"><img src="imagens/icone-controles.svg" alt="" width="95" height="95" />
             <div>
               <h4>Uso com teclado / mouse ou acionador</h4>
               <p>Explore as atividades em diversas formas de interação e controle.</p>
             </div>
           </li>
-          <li class="feature-item"><img src="imagens/icone-contraste.svg" alt="" width="95" height="95">
+          <li class="feature-item"><img src="imagens/icone-contraste.svg" alt="" width="95" height="95" />
             <div>
               <h4>Alto contraste</h4>
               <p>Alterne para uma apresentação de maior contraste quando necessário.</p>
             </div>
           </li>
-          <li class="feature-item"><img src="imagens/icone-acessibilidade.svg" alt="" width="95" height="95">
+          <li class="feature-item"><img src="imagens/icone-acessibilidade.svg" alt="" width="95" height="95" />
             <div>
               <h4>Apoio à acessibilidade</h4>
               <p>Instruções e controles identificados ajudam a orientar o uso dos jogos.</p>
             </div>
           </li>
-          <li class="feature-item"><img src="imagens/icone-pedagogia.svg" alt="" width="95" height="95">
+          <li class="feature-item"><img src="imagens/icone-pedagogia.svg" alt="" width="95" height="95" />
             <div>
               <h4>Uso pedagógico</h4>
               <p>Selecione jogos para aulas e sessões de treinamento com tecnologias assistivas.</p>
             </div>
           </li>
         </ul>
-
       </section>
+
       <section id="manuais" class="manuals-section">
         <div class="container">
           <h2>Aproveite ao máximo este App</h2>
           <div class="row g-4">
             <div class="col-sm-8">
-              <p>Disponibilizamos materiais para ajudar você a conhecer os jogos, suas funcionalidades e as possibilidades
-                de uso em aula.</p>
+              <p>Disponibilizamos materiais para ajudar você a conhecer os jogos, suas funcionalidades e as possibilidades de uso em aula.</p>
             </div>
-            <div class="col-sm-4 manuals-actions"><a href="#" class="btn btn-dark">Manual de uso</a></div>
+
+            <div class="col-sm-4 manuals-actions">
+              <a href="#" class="btn btn-dark">Manual de uso</a>
+            </div>
           </div>
         </div>
       </section>
+
       <section id="jogos" class="games-section">
         <div class="container">
           <h2>Explore os jogos</h2>
           <p>Escolha uma atividade, leia as instruções ou abra as opções do professor.</p>
+
           <section id="acessibilidade" class="accessibility-panel" aria-labelledby="accessibility-title" tabindex="-1">
             <div class="accessibility-heading"><span class="accessibility-icon" aria-hidden="true">✦</span>
               <div>
@@ -134,33 +153,44 @@
                 <h2 id="accessibility-title">Acessibilidade</h2>
               </div>
             </div>
-            <label class="accessibility-control"><input type="checkbox" id="hub-auto-scan"><span><strong>Varredura
-                  automática</strong><small>Percorre os controles para facilitar a navegação</small></span></label>
-            <label class="accessibility-control scan-speed">Velocidade da varredura<select id="hub-scan-speed"
-                class="form-select">
+
+            <label class="accessibility-control">
+              <input type="checkbox" id="hub-auto-scan" />
+              <span>
+                <strong>Varredura automática</strong>
+                <small>Percorre os controles para facilitar a navegação</small>
+              </span>
+            </label>
+
+            <label class="accessibility-control scan-speed">
+              <span>Velocidade da varredura</span>
+              <select id="hub-scan-speed" class="form-select">
                 <option value="2000">Lenta</option>
                 <option value="1000" selected>Média</option>
                 <option value="500">Rápida</option>
-              </select></label>
-            <label class="accessibility-control"><input type="checkbox" id="hub-high-contrast"><span><strong>Alto
-                  contraste</strong><small>Aumenta o contraste entre texto e fundo</small></span></label>
-          </section>
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+              </select>
+            </label>
 
+            <label class="accessibility-control">
+              <input type="checkbox" id="hub-high-contrast">
+              <span>
+                <strong>Alto contraste</strong>
+                <small>Aumenta o contraste entre texto e fundo</small>
+              </span>
+            </label>
+          </section>
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <div class="col">
               <div class="card h-100">
                 <img src="imagens/jogo da velha.png" class="card-img-top" alt="Ícone do jogo da velha" />
+                
                 <div class="card-body">
                   <h2 class="card-title">Jogo da Velha</h2>
                   <p class="card-text">Clássico jogo de estratégia! Acessível para leitores de tela e teclado.</p>
                   <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="jogos/tic-tac-toe/index.html" class="btn btn-primary">Iniciar</a>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                      data-bs-target="#modalInstrucoesVelha">
-                      Instruções
-                    </button>
-                    <!-- <button type="button" class="btn btn-outline-secondary game-options-button"
-                      data-game-options="tic-tac-toe">Opções</button> -->
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesVelha">Instruções</button>
                   </div>
                 </div>
               </div>
@@ -168,19 +198,14 @@
 
             <div class="col">
               <div class="card h-100">
-                <img src="imagens/jump.png" class="card-img-top"
-                  alt="Imagem do Jogo dos Saltos (Pedro pulando obstáculos)" />
+                <img src="imagens/jump.png" class="card-img-top" alt="Imagem do Jogo dos Saltos (Pedro pulando obstáculos)" />
+               
                 <div class="card-body">
                   <h2 class="card-title">Jogo dos Saltos</h2>
                   <p class="card-text">Ajude Pedro a saltar obstáculos em diferentes modos e dificuldades!</p>
                   <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="jogos/jump/index.html" class="btn btn-primary">Iniciar</a>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                      data-bs-target="#modalInstrucoesSaltos">
-                      Instruções
-                    </button>
-                    <!-- <button type="button" class="btn btn-outline-secondary game-options-button"
-                      data-game-options="jump">Opções</button> -->
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesSaltos">Instruções</button>
                   </div>
                 </div>
               </div>
@@ -189,17 +214,14 @@
             <div class="col">
               <div class="card h-100">
                 <img src="imagens/forca.png" class="card-img-top" alt="Ícone do jogo da Forca" />
+
                 <div class="card-body">
                   <h2 class="card-title">Jogo da Forca</h2>
                   <p class="card-text">Descubra a palavra antes de esgotar suas tentativas.</p>
                   <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="jogos/forca/index.html" class="btn btn-primary">Iniciar</a>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                      data-bs-target="#modalInstrucoesForca">
-                      Instruções
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary game-options-button"
-                      data-game-options="forca">Opções do professor</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesForca">Instruções</button>
+                    <button type="button" class="btn btn-outline-secondary game-options-button" data-game-options="forca">Opções do professor</button>
                   </div>
                 </div>
               </div>
@@ -208,17 +230,13 @@
             <div class="col">
               <div class="card h-100">
                 <img src="imagens/baleia.png" class="card-img-top" alt="Ilustração de uma baleia azul" />
+
                 <div class="card-body">
                   <h2 class="card-title">A Baleia Faminta</h2>
                   <p class="card-text">Ajude a baleia a pegar os peixes certos e evitar os errados!</p>
                   <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="jogos/baleia/index.html" class="btn btn-primary">Iniciar</a>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                      data-bs-target="#modalInstrucoesBaleia">
-                      Instruções
-                    </button>
-                    <!-- <button type="button" class="btn btn-outline-secondary game-options-button"
-                      data-game-options="baleia">Opções</button> -->
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesBaleia">Instruções</button>
                   </div>
                 </div>
               </div>
@@ -227,87 +245,92 @@
             <div class="col">
               <div class="card h-100">
                 <img src="imagens/colmeia.png" class="card-img-top" alt="Ilustração de uma abelha em frente à colmeia" />
+
                 <div class="card-body">
                   <h2 class="card-title">Colmeia</h2>
                   <p class="card-text">Forme palavras e ganhe pontos no estilo Rock Band.</p>
                   <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="jogos/colmeia/index.html" class="btn btn-primary">Iniciar</a>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                      data-bs-target="#modalInstrucoesColmeia">
-                      Instruções
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary game-options-button"
-                      data-game-options="colmeia">Opções do professor</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalInstrucoesColmeia">Instruções</button>
+                    <button type="button" class="btn btn-outline-secondary game-options-button" data-game-options="colmeia">Opções do professor</button>
                   </div>
-
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
+
       <section id="feedback" class="feedback-section">
         <div class="container">
           <h2>Ajude-nos a melhorar</h2>
-          <p>Seu feedback é muito importante. Envie um e-mail para nós contando sua experiência para identificarmos o que
-            podemos melhorar, assim como os pontos positivos.</p><a class="btn btn-dark"
-            href="mailto:cta@ifrs.edu.br">E-mail: cta@ifrs.edu.br</a>
+          <p>Seu feedback é muito importante. Envie um e-mail para nós contando sua experiência para identificarmos o que podemos melhorar, assim como os pontos positivos.</p>
+          <a class="btn btn-dark" href="mailto:cta@ifrs.edu.br">E-mail: cta@ifrs.edu.br</a>
         </div>
       </section>
+
       <section id="contribua" class="contribute-section">
         <div class="container row align-items-center g-4">
           <div class="col-sm-8">
             <h2>Contribua com o projeto</h2>
-            <p>O projeto está hospedado no GitHub para que você, desenvolvedor ou empresa, contribua com melhorias ou
-              correções caso encontre algum problema.</p><a class="btn btn-dark"
-              href="https://github.com/CTA-IFRS/accessible-games">GitHub do projeto</a>
+            <p>O projeto está hospedado no GitHub para que você, desenvolvedor ou empresa, contribua com melhorias ou correções caso encontre algum problema.</p>
+            <a class="btn btn-dark" href="https://github.com/CTA-IFRS/accessible-games">GitHub do projeto</a>
           </div>
-          <div class="col-sm-4"><img src="imagens/beluga-contribute.png" alt="" class="img-fluid"></div>
+
+          <div class="col-sm-4">
+            <img src="imagens/beluga-contribute.png" alt="" class="img-fluid" />
+          </div>
         </div>
       </section>
+
       <section id="contato" class="contact-section">
         <div class="container row g-4">
           <div class="col-lg-6">
             <h2>Entre em contato</h2>
-            <p>Para conhecer mais sobre os trabalhos e projetos desenvolvidos pelo CTA, acesse nosso site ou redes sociais
-              disponíveis na lista abaixo.</p>
+            <p>Para conhecer mais sobre os trabalhos e projetos desenvolvidos pelo CTA, acesse nosso site ou redes sociais disponíveis na lista abaixo.</p>
             <ul class="contact-list">
-              <li><a href="mailto:cta@ifrs.edu.br"><i class="bi bi-envelope" aria-hidden="true"></i> cta@ifrs.edu.br</a>
-              </li>
-              <li><a href="https://cta.ifrs.edu.br"><i class="bi bi-cursor" aria-hidden="true"></i> cta.ifrs.edu.br</a>
-              </li>
-              <li><a href="https://instagram.com/ctaifrs"><i class="bi bi-instagram" aria-hidden="true"></i>
-                  instagram.com/ctaifrs</a></li>
-              <li><a href="https://youtube.com/cta-ifrs"><i class="bi bi-youtube" aria-hidden="true"></i>
-                  youtube.com/cta-ifrs</a></li>
-              <li><a href="https://facebook.com/cta-ifrs"><i class="bi bi-facebook" aria-hidden="true"></i>
-                  facebook.com/cta-ifrs</a></li>
+              <li><a href="mailto:cta@ifrs.edu.br"><i class="bi bi-envelope" aria-hidden="true"></i> cta@ifrs.edu.br</a></li>
+              <li><a href="https://cta.ifrs.edu.br"><i class="bi bi-cursor" aria-hidden="true"></i> cta.ifrs.edu.br</a></li>
+              <li><a href="https://instagram.com/ctaifrs"><i class="bi bi-instagram" aria-hidden="true"></i>instagram.com/ctaifrs</a></li>
+              <li><a href="https://youtube.com/cta-ifrs"><i class="bi bi-youtube" aria-hidden="true"></i>youtube.com/cta-ifrs</a></li>
+              <li><a href="https://facebook.com/cta-ifrs"><i class="bi bi-facebook" aria-hidden="true"></i>facebook.com/cta-ifrs</a></li>
             </ul>
           </div>
-          <div class="col-lg-6 partner-logos"><img src="imagens/beluga-logo-cta.png" alt="Logotipo do CTA">
-            <div><img src="imagens/beluga-logo-proen.png" alt="Logotipo da PROEN"><img src="imagens/beluga-logo-ifrs.png"
-                alt="Logotipo do IFRS"></div>
+
+          <div class="col-lg-6 partner-logos">
+            <img src="imagens/beluga-logo-cta.png" alt="Logotipo do CTA" />
+
+            <div>
+              <img src="imagens/beluga-logo-proen.png" alt="Logotipo da PROEN" />
+              <img src="imagens/beluga-logo-ifrs.png" alt="Logotipo do IFRS" />
+            </div>
           </div>
         </div>
       </section>
     </main>
+
     <footer id="rodape" tabindex="-1">
-      <div class="container">Desenvolvido por CTA - IFRS. Aplicativo sob a licença GPLv3 e Creative Commons
-        NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</div>
+      <div class="container">Desenvolvido por CTA - IFRS. Aplicativo sob a licença GPLv3 e Creative Commons NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</div>
     </footer>
-    <a class="back-to-top btn btn-primary" href="#inicio" aria-label="Voltar para o início do site"><i
-        class="bi bi-arrow-up-short" aria-hidden="true"></i></a>
-    <div class="modal fade" id="modalInstrucoesVelha" tabindex="-1" aria-labelledby="modalInstrucoesVelhaLabel"
-      aria-hidden="true">
+
+    <a class="back-to-top btn btn-primary" href="#inicio" aria-label="Voltar para o início do site">
+      <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+    </a>
+
+    <!-- Modais -->
+    <div class="modal fade" id="modalInstrucoesVelha" tabindex="-1" aria-labelledby="modalInstrucoesVelhaLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalInstrucoesVelhaLabel">Instruções - Jogo da Velha</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
+
           <div class="modal-body">
-            Marque três símbolos iguais em linha, coluna ou diagonal para vencer o jogo da velha!
+            <p>Marque três símbolos iguais em linha, coluna ou diagonal para vencer o jogo da velha!</p>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
@@ -315,17 +338,18 @@
       </div>
     </div>
 
-    <div class="modal fade" id="modalInstrucoesSaltos" tabindex="-1" aria-labelledby="modalInstrucoesSaltosLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="modalInstrucoesSaltos" tabindex="-1" aria-labelledby="modalInstrucoesSaltosLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalInstrucoesSaltosLabel">Instruções - Jogo dos Saltos</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
+
           <div class="modal-body">
-            Use a tecla de espaço ou clique do mouse/acionador para saltar obstáculos e ajude Pedro a completar o percurso.
+            <p>Use a tecla de espaço ou clique do mouse/acionador para saltar obstáculos e ajude Pedro a completar o percurso.</p>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
@@ -333,17 +357,18 @@
       </div>
     </div>
 
-    <div class="modal fade" id="modalInstrucoesForca" tabindex="-1" aria-labelledby="modalInstrucoesForcaLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="modalInstrucoesForca" tabindex="-1" aria-labelledby="modalInstrucoesForcaLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalInstrucoesForcaLabel">Instruções - Jogo da Forca</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
+
           <div class="modal-body">
-            Tente adivinhar a palavra antes que o boneco da forca seja completo.
+            <p>Tente adivinhar a palavra antes que o boneco da forca seja completo.</p>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
@@ -351,17 +376,18 @@
       </div>
     </div>
 
-    <div class="modal fade" id="modalInstrucoesBaleia" tabindex="-1" aria-labelledby="modalInstrucoesBaleiaLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="modalInstrucoesBaleia" tabindex="-1" aria-labelledby="modalInstrucoesBaleiaLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalInstrucoesBaleiaLabel">Instruções - A Baleia Faminta</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
+
           <div class="modal-body">
-            Ajude a baleia a pegar os peixes corretos e evite os obstáculos para ganhar pontos.
+            <p>Ajude a baleia a pegar os peixes corretos e evite os obstáculos para ganhar pontos.</p>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
@@ -369,17 +395,18 @@
       </div>
     </div>
 
-    <div class="modal fade" id="modalInstrucoesColmeia" tabindex="-1" aria-labelledby="modalInstrucoesColmeiaLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="modalInstrucoesColmeia" tabindex="-1" aria-labelledby="modalInstrucoesColmeiaLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalInstrucoesColmeiaLabel">Instruções - Colméia</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
+
           <div class="modal-body">
-            Quando a letra estiver na faixa azul, digite a letra ou clique na área do jogo para ganhar pontos. Fora da faixa, a tentativa conta como erro.
+            <p>Quando a letra estiver na faixa azul, digite a letra ou clique na área do jogo para ganhar pontos. Fora da faixa, a tentativa conta como erro.</p>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
@@ -387,19 +414,28 @@
       </div>
     </div>
 
-    <div id="gameOptionsDialog" class="hub-options-dialog" role="dialog" aria-modal="true"
-      aria-labelledby="gameOptionsTitle" hidden>
+    <div id="gameOptionsDialog" class="hub-options-dialog" role="dialog" aria-modal="true" aria-labelledby="gameOptionsTitle" hidden>
       <div id="gameOptionsForm" class="hub-options-card">
         <div class="hub-options-header">
-          <div><span class="hub-options-eyebrow"><i class="bi bi-sliders" aria-hidden="true"></i> Personalização</span><h2 id="gameOptionsTitle">Opções do jogo</h2><p>Organize o conteúdo usado nas atividades.</p></div>
+          <div>
+            <span class="hub-options-eyebrow"><i class="bi bi-sliders" aria-hidden="true"></i> Personalização</span>
+            <h2 id="gameOptionsTitle">Opções do jogo</h2>
+            <p>Organize o conteúdo usado nas atividades.</p>
+          </div>
+
           <button type="button" class="hub-options-close" data-close-options aria-label="Fechar opções"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
         </div>
+
         <div id="gameOptionsFields"></div>
-        <div class="hub-options-actions"><span><i class="bi bi-check-circle" aria-hidden="true"></i> Alterações salvas automaticamente</span><button
-            type="button" class="btn btn-primary" data-close-options>Concluir</button></div>
+
+        <div class="hub-options-actions">
+          <span><i class="bi bi-check-circle" aria-hidden="true"></i> Alterações salvas automaticamente</span>
+          <button type="button" class="btn btn-primary" data-close-options>Concluir</button>
+        </div>
       </div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
